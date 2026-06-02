@@ -13,8 +13,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(124,106,247,.12),transparent 60%),radial-gradient(ellipse 60% 50% at 80% 110%,rgba(240,98,146,.08),transparent 60%);pointer-events:none}
+body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(124,106,247,.12),transparent 60%),radial-gradient(ellipse 60% 50% at 80% 110%,rgba(240,98,146,.08),transparent 60%);pointer-events:none}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 header{background:rgba(8,8,15,.88);border-bottom:1px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:200;backdrop-filter:blur(20px)}
 nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;height:62px;flex-wrap:wrap}
@@ -32,7 +32,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .disc-btn{background:linear-gradient(135deg,#5865f2,#4752c4);color:#fff!important;padding:.4rem 1rem;border-radius:8px;font-size:.82rem;font-weight:600;white-space:nowrap}
 #home-page{display:none}#home-page.v{display:block}
 .hero{padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 0%,rgba(124,106,247,.15),transparent 70%);pointer-events:none}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 0%,rgba(124,106,247,.15),transparent 70%);pointer-events:none}
 .hero-inner{position:relative;z-index:1}
 .hero h1{font-size:clamp(2.8rem,7vw,5rem);font-weight:900;letter-spacing:-2px;background:linear-gradient(135deg,#fff 0%,var(--accent) 45%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.25rem;line-height:1}
 .hero-rune{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
@@ -42,7 +42,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .ucard:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 60px rgba(124,106,247,.25),0 0 0 1px rgba(124,106,247,.3)}
 .cbanner{height:130px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
 .cbanner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
-.cbanner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--surface) 100%);pointer-events:none}
+.cbanner::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--surface) 100%);pointer-events:none}
 .cicon{position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.9))}
 .cbody{padding:1.1rem 1.25rem 1.25rem}
 .cname{font-weight:800;font-size:1.05rem;margin-bottom:.3rem}
@@ -86,23 +86,19 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .fbt.a{background:rgba(124,106,247,.2);border-color:var(--accent);color:#c4baff;font-weight:600}
 
 /* SACRED TIMELINE */
-.tl-wrapper{display:flex;gap:0;position:relative}
-.tl-spine{width:36px;min-width:36px;position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:center}
-.tl-spine-line{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:3px;background:linear-gradient(180deg,transparent,var(--tl-color) 3%,var(--tl-color) 97%,transparent);border-radius:2px;box-shadow:0 0 10px rgba(124,106,247,.4),0 0 30px rgba(124,106,247,.15)}
-.tl-spine-line.sw-style{background:linear-gradient(180deg,transparent,rgba(255,232,31,.85) 3%,rgba(255,232,31,.9) 97%,transparent);box-shadow:0 0 10px rgba(255,232,31,.6),0 0 30px rgba(255,232,31,.2)}
-.tl-entries{flex:1;min-width:0}
+.tl-wrapper{position:relative;padding-left:32px}
+.tl-svg{position:absolute;left:0;top:0;width:32px;pointer-events:none;z-index:0;overflow:visible}
+.tl-entries{position:relative;z-index:1}
+
 .era-node{display:flex;align-items:flex-start;margin:2.5rem 0 .6rem;position:relative}
-.era-node-dot{width:14px;height:14px;border-radius:50%;background:var(--tl-color);box-shadow:0 0 0 3px rgba(124,106,247,.2),0 0 12px rgba(124,106,247,.5);flex-shrink:0;margin-top:2px;position:relative;z-index:1}
-.era-node-dot.sv{background:#90caf9;box-shadow:0 0 0 3px rgba(144,202,249,.2),0 0 12px rgba(144,202,249,.5)}
-.era-node-dot.fox{background:#ffb74d;box-shadow:0 0 0 3px rgba(255,183,77,.2),0 0 12px rgba(255,183,77,.5)}
-.era-node-dot.sw-style{background:#ffe81f;box-shadow:0 0 0 3px rgba(255,232,31,.2),0 0 12px rgba(255,232,31,.6)}
-.era-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tl-color);padding-left:.7rem;padding-top:1px;line-height:1.3}
-.era-label.sw-style{color:#ffe81f}
+.era-node-dot{width:12px;height:12px;border-radius:50%;background:var(--tl-color);flex-shrink:0;margin-top:3px;position:relative;z-index:2;margin-left:-22px;margin-right:10px;transition:box-shadow .3s}
+.era-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tl-color);line-height:1.3}
 .era-label.sv{color:#90caf9}
 .era-label.fox{color:#ffb74d}
 
-/* Segments Spider-Verse / Fox */
-.segment-box{margin:.4rem 0 1rem;border:1px solid var(--border2);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,var(--surface),var(--surface2))}
+/* Entrées déviantes */
+.en.deviate{margin-left:20px}
+.segment-box{margin:.4rem 0 1rem;border:1px solid var(--border2);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,var(--surface),var(--surface2));margin-left:20px}
 .segment-header{padding:.7rem 1rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid var(--border2)}
 .segment-header.sv{background:linear-gradient(135deg,rgba(144,202,249,.08),rgba(206,147,216,.05))}
 .segment-header.fox{background:linear-gradient(135deg,rgba(255,183,77,.08),rgba(224,85,85,.05))}
@@ -125,8 +121,6 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .checkmark{width:20px;height:20px;border-radius:6px;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;transition:all .25s;font-size:.75rem;color:#fff;font-weight:700}
 .en-check:hover .checkmark{border-color:var(--accent)}
 .en.done .checkmark{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}
-
-/* Date badge avec level icon dessus */
 .en-datebadge{width:82px;min-width:82px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--border);flex-shrink:0;padding:.35rem .3rem;background:rgba(124,106,247,.04);gap:.1rem}
 .en-level-icon{font-size:.85rem;line-height:1;min-height:.85rem}
 .date-main{font-size:.72rem;font-weight:800;color:var(--text);text-align:center;line-height:1.25}
@@ -143,8 +137,6 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .esub{padding-left:.5rem;border-left:2px solid var(--border2);margin-top:.25rem}
 .si{font-size:.76rem;color:var(--muted2);padding:.07rem 0 .07rem .45rem;line-height:1.4}
 .si strong{color:var(--muted2)}
-
-/* Expand */
 .en-expand{display:none;border-top:1px solid var(--border);background:rgba(0,0,0,.25)}
 .en.open .en-expand{display:block}
 .expand-inner{display:flex;gap:0;min-height:150px}
@@ -170,7 +162,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .cs h2{font-size:2rem;margin-bottom:1rem;color:var(--text)}
 @media(max-width:700px){
   .tl-page{padding:1.25rem .75rem}
-  .tl-spine{width:26px;min-width:26px}
+  .tl-wrapper{padding-left:24px}
   .en-datebadge{width:62px;min-width:62px}
   .ep{width:52px;min-width:52px}
   .expand-poster{width:80px;min-width:80px}
@@ -198,39 +190,39 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
     <a href="#" class="disc-btn">Discord</a>
   </nav>
 </header>
-<div class="pm" id="pm" onclick="closePM()"><span class="pm-x">✕</span><img id="pmi" src="" alt=""/></div>
+<div class="pm" id="pm" onclick="closePM()"><span class="pm-x">&#x2715;</span><img id="pmi" src="" alt=""/></div>
 <div id="home-page">
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-rune">✦ La référence française des timelines ✦</div>
+      <div class="hero-rune">&#x2726; La r&#xe9;f&#xe9;rence fran&#xe7;aise des timelines &#x2726;</div>
       <h1>Chronologeek</h1>
-      <p class="hero-tagline">Les timelines complètes de tes univers préférés — tous supports, ordre chronologique, 100% canon. Enfin à jour.</p>
+      <p class="hero-tagline">Les timelines compl&#xe8;tes de tes univers pr&#xe9;f&#xe9;r&#xe9;s &mdash; tous supports, ordre chronologique, 100% canon. Enfin &#xe0; jour.</p>
       <div class="ugrid" id="ugrid"></div>
     </div>
   </section>
 </div>
 <div class="tl-page" id="tl-page">
-  <div class="bc" onclick="showHome()">← Accueil</div>
+  <div class="bc" onclick="showHome()">&#x2190; Accueil</div>
   <div class="page-title" id="tl-title"></div>
   <div class="page-sub" id="tl-sub"></div>
   <div class="progress-block">
     <div class="pb-info">
       <div class="pb-label">Ma progression</div>
       <div class="pb-track"><div class="pb-fill" id="pb-fill" style="width:0%"></div></div>
-      <div class="pb-counts" id="pb-counts">Coche les entrées que tu as vues</div>
+      <div class="pb-counts" id="pb-counts">Coche les entr&#xe9;es que tu as vues</div>
     </div>
-    <button class="pb-reset" onclick="resetProgress()">Réinitialiser</button>
+    <button class="pb-reset" onclick="resetProgress()">R&#xe9;initialiser</button>
   </div>
   <div class="nb" id="tl-notes"></div>
   <div class="leg" id="tl-legend"></div>
   <div class="filter-bar" id="filter-bar"></div>
-  <div class="tl-wrapper">
-    <div class="tl-spine"><div class="tl-spine-line" id="tl-spine-line"></div></div>
+  <div class="tl-wrapper" id="tl-wrapper">
+    <svg class="tl-svg" id="tl-svg" xmlns="http://www.w3.org/2000/svg" style="height:100px"><defs><filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><path id="tl-path" fill="none" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/></svg>
     <div class="tl-entries" id="tl-content"></div>
   </div>
 </div>
 <div class="cs" id="cs-page">
-  <h2>🌿 Bientôt disponible</h2>
+  <h2>&#x1F33F; Bient&#xf4;t disponible</h2>
   <p>Cette section est en cours de construction.<br>Rejoins le Discord pour suivre l'avancement !</p>
 </div>
 <script>
@@ -334,23 +326,23 @@ const DATA_MCU={
   eras:[
     {title:"PHASE I — Saga de l'Infini",entries:[
       {id:"mcu-cap1",type:"film",level:"must",tmdb:"1771",media:"movie",title:"Captain America : First Avenger",date:"1942–1945",note:"Prologue et épilogue se passent en 2011–2012 mais important à regarder en premier. Ne pas regarder la scène post-crédits."},
-      {id:"mcu-ac-os",type:"special",level:"bonus",tmdb:"0",media:"special",title:"One Shot : Agent Carter",date:"1946"},
+      {id:"mcu-ac-os",type:"special",level:"bonus",tmdb:"0",img:"images/Agent Carter.png",media:"special",title:"One Shot : Agent Carter",date:"1946"},
       {id:"mcu-ac-serie",type:"serie",level:"bonus",tmdb:"61550",media:"tv",season:1,title:"Agent Carter",date:"1946–1947",tags:["nc"],subitems:["Saison 1","Saison 2"]},
       {id:"mcu-cm",type:"film",level:"must",tmdb:"299537",media:"movie",title:"Captain Marvel",date:"1995",note:"Ne pas regarder les scènes post-crédits."},
       {id:"mcu-im1",type:"film",level:"must",tmdb:"1726",media:"movie",title:"Iron Man",date:"2008"},
       {id:"mcu-im2",type:"film",level:"must",tmdb:"10138",media:"movie",title:"Iron Man 2",date:"2010"},
       {id:"mcu-hulk",type:"film",level:"must",tmdb:"1724",media:"movie",title:"L'Incroyable Hulk",date:"2010"},
-      {id:"mcu-consultant",type:"special",level:"important",tmdb:"0",media:"special",title:"One Shot : Le Consultant",date:"2010"},
+      {id:"mcu-consultant",type:"special",level:"important",tmdb:"0",img:"images/Le Consultant.png",media:"special",title:"One Shot : Le Consultant",date:"2010"},
       {id:"mcu-thor1",type:"film",level:"must",tmdb:"10195",media:"movie",title:"Thor",date:"2010"},
       {id:"mcu-av1",type:"film",level:"must",tmdb:"24428",media:"movie",title:"Avengers",date:"2012"},
-      {id:"mcu-item47",type:"special",level:"bonus",tmdb:"0",media:"special",title:"One Shot : Item 47",date:"2012"}
+      {id:"mcu-item47",type:"special",level:"bonus",tmdb:"0",img:"images/item47.jpg",media:"special",title:"One Shot : Item 47",date:"2012"}
     ]},
     {title:"PHASE II — Saga de l'Infini",entries:[
       {id:"mcu-aos-s1a",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2013",tags:["nc"],subitems:["Saison 1 Épisodes 1-7"]},
       {id:"mcu-thor2",type:"film",level:"must",tmdb:"76338",media:"movie",title:"Thor : Le Monde des Ténèbres",date:"2013"},
       {id:"mcu-aos-s1b",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2013–2014",tags:["nc"],subitems:["Saison 1 Épisodes 8-15"]},
       {id:"mcu-im3",type:"film",level:"must",tmdb:"68721",media:"movie",title:"Iron Man 3",date:"2013"},
-      {id:"mcu-roi",type:"special",level:"must",tmdb:"0",media:"special",title:"One Shot : Longue Vie au Roi",date:"2014"},
+      {id:"mcu-roi",type:"special",level:"must",tmdb:"0",img:"images/All Hail the King.png",media:"special",title:"One Shot : Longue Vie au Roi",date:"2014"},
       {id:"mcu-cap2",type:"film",level:"must",tmdb:"100402",media:"movie",title:"Captain America : Le Soldat de l'Hiver",date:"2014"},
       {id:"mcu-aos-s1c",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2014",tags:["nc"],subitems:["Saison 1 Épisodes 16-22"]},
       {id:"mcu-gotg1",type:"film",level:"must",tmdb:"118340",media:"movie",title:"Les Gardiens de la Galaxie",date:"2014"},
@@ -413,7 +405,7 @@ const DATA_MCU={
       {id:"mcu-tasm2",type:"film",level:"important",tmdb:"102382",media:"movie",title:"The Amazing Spider-Man 2 : Le Destin d'un Héros",date:"2014",dim:"TERRE-120703"},
       {id:"mcu-itsv",type:"filmanim",level:"bonus",tmdb:"569094",media:"movie",title:"Spider-Man : Into the Spider-Verse",date:"2023",dim:"TERRE-1610"},
       {id:"mcu-venom1",type:"film",level:"bonus",tmdb:"580489",media:"movie",title:"Venom",date:"2023",dim:"TERRE-688"},
-      {id:"mcu-venom2",type:"film",level:"bonus",tmdb:"580489",media:"movie",title:"Venom : Let There Be Carnage",date:"2024",dim:"TERRE-688"}
+      {id:"mcu-venom2",type:"film",level:"bonus",tmdb:"651567",media:"movie",title:"Venom : Let There Be Carnage",date:"2024",dim:"TERRE-688"}
     ]},
     {title:"No Way Home & suite (Phase IV suite)",entries:[
       {id:"mcu-nwh",type:"film",level:"must",tmdb:"634649",media:"movie",title:"Spider-Man : No Way Home",date:"2024"},
@@ -429,7 +421,7 @@ const DATA_MCU={
       {id:"mcu-shehulk",type:"serie",level:"bonus",tmdb:"92783",media:"tv",season:1,title:"She-Hulk : Attorney at Law",date:"2025",subitems:["Saison 1"]},
       {id:"mcu-mm",type:"serie",level:"must",tmdb:"92782",media:"tv",season:1,title:"Miss Marvel",date:"2025",subitems:["Saison 1"]},
       {id:"mcu-thor4",type:"film",level:"must",tmdb:"616037",media:"movie",title:"Thor : Love and Thunder",date:"2025"},
-      {id:"mcu-atsv",type:"filmanim",level:"bonus",tmdb:"569094",media:"movie",title:"Spider-Man : Across the Spider-Verse",date:"2025",dim:"TERRE-1610"},
+      {id:"mcu-atsv",type:"filmanim",level:"bonus",tmdb:"869626",media:"movie",title:"Spider-Man : Across the Spider-Verse",date:"2025",dim:"TERRE-1610"},
       {id:"mcu-ironheart",type:"serie",level:"bonus",tmdb:"114471",media:"tv",season:1,title:"Ironheart",date:"2025",subitems:["Saison 1"]},
       {id:"mcu-wwbn",type:"special",level:"bonus",tmdb:"894205",media:"movie",title:"Werewolf by Night",date:"2025"},
       {id:"mcu-gotgxmas",type:"special",level:"must",tmdb:"774752",media:"movie",title:"Les Gardiens de la Galaxie : Joyeuses Fêtes",date:"2025"},
@@ -438,7 +430,8 @@ const DATA_MCU={
       {id:"mcu-si",type:"serie",level:"bonus",tmdb:"114472",media:"tv",season:1,title:"Secret Invasion",date:"2026",subitems:["Saison 1"]},
       {id:"mcu-marvels",type:"film",level:"must",tmdb:"609681",media:"movie",title:"The Marvels",date:"2026",note:"Ne pas regarder la scène post-crédits."},
       {id:"mcu-loki2",type:"serie",level:"must",tmdb:"84958",media:"tv",season:2,title:"Loki",dim:"HORS DU TEMPS",subitems:["Saison 2"]},
-      {id:"mcu-wi2",type:"anime",level:"important",tmdb:"91363",media:"tv",season:2,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 2"]}
+      {id:"mcu-wi2",type:"anime",level:"important",tmdb:"91363",media:"tv",season:2,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 2"]},
+      {id:"mcu-dpw",type:"film",level:"must",tmdb:"533535",media:"movie",title:"Deadpool & Wolverine",date:"2024",dim:"TERRE-10005"}
     ]},
     {title:"SEGMENT FOX — avant Deadpool & Wolverine",special:"fox",entries:[
       {id:"mcu-xfc",type:"film",level:"bonus",tmdb:"49538",media:"movie",title:"X-Men : Le Commencement",date:"1962",dim:"TERRE-10005A"},
@@ -454,44 +447,40 @@ const DATA_MCU={
       {id:"mcu-dp1",type:"film",level:"important",tmdb:"293660",media:"movie",title:"Deadpool",date:"2016",dim:"TERRE-10005B",tags:["flashback"]},
       {id:"mcu-dp2",type:"film",level:"important",tmdb:"383498",media:"movie",title:"Deadpool 2",date:"2018",dim:"TERRE-10005B",tags:["flashback"]}
     ]},
-    {title:"PHASE VI — Saga du Multivers (en cours)",entries:[
-      {id:"mcu-dpw",type:"film",level:"must",tmdb:"533535",media:"movie",title:"Deadpool & Wolverine",date:"2024",dim:"TERRE-10005"},
+    {title:"PHASE V — Suite (Saga du Multivers)",entries:[
       {id:"mcu-marvelspc",type:"film",level:"important",tmdb:"609681",media:"movie",title:"Scène post-crédits The Marvels",date:"2026"},
       {id:"mcu-agatha",type:"serie",level:"bonus",tmdb:"138501",media:"tv",season:1,title:"Agatha All Along",date:"2026",subitems:["Saison 1"]},
       {id:"mcu-wi3",type:"anime",level:"important",tmdb:"91363",media:"tv",season:3,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 3"]},
       {id:"mcu-vfsm",type:"film",level:"bonus",tmdb:"0",media:"movie",title:"Votre fidèle serviteur Spider-Man",date:"2016",dim:"TERRE-86445"},
       {id:"mcu-dba1",type:"serie",level:"important",tmdb:"202555",media:"tv",season:1,title:"Daredevil : Born Again",date:"2027",subitems:["Saison 1"]},
       {id:"mcu-cabf",type:"film",level:"must",tmdb:"822119",media:"movie",title:"Captain America : Brave New World",date:"2027"},
-      {id:"mcu-tb",type:"film",level:"must",tmdb:"986056",media:"movie",title:"Thunderbolts*",date:"2027"},
+      {id:"mcu-tb",type:"film",level:"must",tmdb:"986056",media:"movie",title:"Thunderbolts*",date:"2027"}
+    ]},
+    {title:"PHASE VI — Saga du Multivers (en cours)",entries:[
       {id:"mcu-mz",type:"serie",level:"bonus",tmdb:"138505",media:"tv",season:1,title:"Marvel Zombies",date:"2022",dim:"TERRE-89521",note:"Suite de l'épisode 5 de la saison 1 de What If…?",subitems:["Saison 1"]},
       {id:"mcu-ff",type:"film",level:"must",tmdb:"617126",media:"movie",title:"Les 4 Fantastiques : Premiers Pas",dim:"TERRE-828 ~1964"},
       {id:"mcu-wm",type:"serie",level:"bonus",tmdb:"198178",media:"tv",season:1,title:"Wonder Man",date:"2027",subitems:["Saison 1"]},
       {id:"mcu-dba2",type:"serie",level:"important",tmdb:"202555",media:"tv",season:2,title:"Daredevil : Born Again",date:"2027",subitems:["Saison 2"]},
-      {id:"mcu-pun-olk",type:"serie",level:"important",tmdb:"63082",media:"tv",title:"The Punisher : One Last Kill",date:"2027"}
+      {id:"mcu-pun-olk",type:"serie",level:"important",tmdb:"0",media:"tv",title:"The Punisher : One Last Kill",date:"2027"}
     ]}
-  ]
 };
+
+
 
 const UNIVERSES=[
-  {data:DATA_SW,icon:"⚔️"},
-  {data:DATA_MCU,icon:"🦸"},
-  {data:null,id:"soon",icon:"🌙",title:"Bientôt…",description:"D'autres univers arrivent",color:"#7c6af7",soon:true}
+  {data:DATA_SW,icon:"\u2694\uFE0F"},
+  {data:DATA_MCU,icon:"\uD83E\uDDB8"},
+  {data:null,id:"soon",icon:"\uD83C\uDF19",title:"Bient\xF4t\u2026",description:"D'autres univers arrivent",color:"#7c6af7",soon:true}
 ];
-
-const TMDB_KEY='6257b37bf29ab31357853fce00232314';
-const IMG='https://image.tmdb.org/t/p/';
-const BADGES={
-  film:['bf','FILM'],filmanim:['bfa','FILM ANIMÉ'],serie:['bs','SÉRIE'],
-  anime:['ba','SÉRIE ANIMÉE'],jeu:['bj','JEU VIDÉO'],special:['bsp','SPÉCIAL']
-};
-const BADGE_LABELS={film:'Films',filmanim:'Films animés',serie:'Séries',anime:'Animés',jeu:'Jeux',special:'Spéciaux'};
-
+const TMDB_KEY="6257b37bf29ab31357853fce00232314";
+const IMG="https://image.tmdb.org/t/p/";
+const BADGES={film:["bf","FILM"],filmanim:["bfa","FILM ANIM\xC9"],serie:["bs","S\xC9RIE"],anime:["ba","S\xC9RIE ANIM\xC9E"],jeu:["bj","JEU VID\xC9O"],special:["bsp","SP\xC9CIAL"]};
+const BADGE_LABELS={film:"Films",filmanim:"Films anim\xE9s",serie:"S\xE9ries",anime:"Anim\xE9s",jeu:"Jeux",special:"Sp\xE9ciaux"};
 let currentData=null;
 const posterCache={},detailCache={};
 
-function getProgress(uid){try{return JSON.parse(localStorage.getItem('cg_'+uid)||'{}')}catch{return{}}}
-function saveProgress(uid,obj){localStorage.setItem('cg_'+uid,JSON.stringify(obj))}
-
+function getProgress(uid){try{return JSON.parse(localStorage.getItem("cg_"+uid)||"{}")}catch{return{}}}
+function saveProgress(uid,obj){localStorage.setItem("cg_"+uid,JSON.stringify(obj))}
 function toggleEntry(id,ev){
   ev.stopPropagation();
   if(!currentData)return;
@@ -501,8 +490,8 @@ function toggleEntry(id,ev){
   renderProgress();
 }
 function resetProgress(){
-  if(!currentData||!confirm('Réinitialiser ta progression ?'))return;
-  localStorage.removeItem('cg_'+currentData.id);
+  if(!currentData||!confirm("R\xE9initialiser ta progression ?"))return;
+  localStorage.removeItem("cg_"+currentData.id);
   renderProgress();
 }
 function renderProgress(){
@@ -511,31 +500,31 @@ function renderProgress(){
   let total=0,done=0;
   currentData.eras.forEach(era=>era.entries.forEach(e=>{
     total++;
-    const el=document.querySelector('.en[data-id="'+e.id+'"]');
+    const el=document.querySelector(".en[data-id=\""+e.id+"\"]");
     if(!el)return;
     const checked=!!prog[e.id];
-    el.classList.toggle('done',checked);
-    el.querySelector('.checkmark').textContent=checked?'✓':'';
+    el.classList.toggle("done",checked);
+    el.querySelector(".checkmark").textContent=checked?"\u2713":"";
     if(checked)done++;
   }));
   const pct=total?Math.round(done/total*100):0;
-  const grad=pct===100?'linear-gradient(90deg,#56c27a,#7c6af7)':'linear-gradient(90deg,var(--accent),var(--accent2))';
-  document.getElementById('pb-fill').style.cssText='width:'+pct+'%;background:'+grad;
-  document.getElementById('pb-counts').innerHTML='<strong>'+done+'</strong> / '+total+' vus &nbsp;·&nbsp; <strong>'+pct+'%</strong>';
-  const pbn=document.getElementById('pbn');
-  pbn.classList.toggle('show',total>0);
-  document.getElementById('pbn-label').textContent=done+'/'+total;
-  document.getElementById('pbn-fill').style.cssText='width:'+pct+'%;background:'+grad;
+  const grad=pct===100?"linear-gradient(90deg,#56c27a,#7c6af7)":"linear-gradient(90deg,var(--accent),var(--accent2))";
+  document.getElementById("pb-fill").style.cssText="width:"+pct+"%;background:"+grad;
+  document.getElementById("pb-counts").innerHTML="<strong>"+done+"</strong> / "+total+" vus &nbsp;\xB7&nbsp; <strong>"+pct+"%</strong>";
+  const pbn=document.getElementById("pbn");
+  pbn.classList.toggle("show",total>0);
+  document.getElementById("pbn-label").textContent=done+"/"+total;
+  document.getElementById("pbn-fill").style.cssText="width:"+pct+"%;background:"+grad;
 }
 
 async function fetchPoster(id,type,season){
-  if(!id||id==='0')return null;
-  const k=type+'-'+id+(season?'-s'+season:'');
+  if(!id||id==="0")return null;
+  const k=type+"-"+id+(season?"-s"+season:"");
   if(posterCache[k]!==undefined)return posterCache[k];
   try{
-    const url=season&&type==='tv'
-      ?'https://api.themoviedb.org/3/tv/'+id+'/season/'+season+'?api_key='+TMDB_KEY
-      :'https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+TMDB_KEY;
+    const url=season&&type==="tv"
+      ?"https://api.themoviedb.org/3/tv/"+id+"/season/"+season+"?api_key="+TMDB_KEY
+      :"https://api.themoviedb.org/3/"+type+"/"+id+"?api_key="+TMDB_KEY;
     const r=await fetch(url);
     if(!r.ok){posterCache[k]=null;return null}
     const d=await r.json();
@@ -543,259 +532,290 @@ async function fetchPoster(id,type,season){
     return posterCache[k];
   }catch{posterCache[k]=null;return null}
 }
-
 function applyPoster(div,path){
-  if(div.querySelector('img'))return;
-  const img=document.createElement('img');
-  img.src=IMG+'w92'+path;
-  img.dataset.full=IMG+'w500'+path;
-  img.loading='lazy';
+  if(div.querySelector("img"))return;
+  const img=document.createElement("img");
+  img.src=IMG+"w92"+path;
+  img.dataset.full=IMG+"w500"+path;
+  img.loading="lazy";
   img.onerror=()=>img.remove();
-  div.querySelector('.pp').style.display='none';
+  div.querySelector(".pp").style.display="none";
   div.appendChild(img);
 }
-
 async function loadPosters(){
-  const entries=[...document.querySelectorAll('#tl-content .en[data-tmdb]')];
+  document.querySelectorAll("#tl-content .ep[data-img]").forEach(ep=>{
+    if(ep.querySelector("img"))return;
+    const img=document.createElement("img");
+    img.src=ep.dataset.img;img.loading="lazy";
+    img.onerror=()=>img.remove();
+    ep.querySelector(".pp").style.display="none";
+    ep.appendChild(img);
+  });
+  const entries=[...document.querySelectorAll("#tl-content .en[data-tmdb]")];
   const seen=new Set();
   const tasks=entries.filter(e=>{
-    const k=e.dataset.media+'-'+e.dataset.tmdb+(e.dataset.season?'-s'+e.dataset.season:'');
-    if(seen.has(k)){if(posterCache[k])applyPoster(e.querySelector('.ep'),posterCache[k]);return false}
+    if(e.querySelector(".ep[data-img]"))return false;
+    const k=e.dataset.media+"-"+e.dataset.tmdb+(e.dataset.season?"-s"+e.dataset.season:"");
+    if(seen.has(k)){if(posterCache[k])applyPoster(e.querySelector(".ep"),posterCache[k]);return false}
     seen.add(k);return true;
   });
   for(let i=0;i<tasks.length;i+=5){
     await Promise.all(tasks.slice(i,i+5).map(async e=>{
       const id=e.dataset.tmdb,season=e.dataset.season||null;
-      const mt=e.dataset.media==='movie'?'movie':'tv';
-      if(!id||id==='0')return;
+      const mt=e.dataset.media==="movie"?"movie":"tv";
+      if(!id||id==="0")return;
       const path=await fetchPoster(id,mt,season);
-      if(path)applyPoster(e.querySelector('.ep'),path);
+      if(path)applyPoster(e.querySelector(".ep"),path);
     }));
     await new Promise(r=>setTimeout(r,120));
   }
 }
 
 async function toggleExpand(el,ev){
-  if(ev.target.closest('.en-check'))return;
-  const wasOpen=el.classList.contains('open');
-  document.querySelectorAll('.en.open').forEach(x=>x.classList.remove('open'));
+  if(ev.target.closest(".en-check"))return;
+  const wasOpen=el.classList.contains("open");
+  document.querySelectorAll(".en.open").forEach(x=>x.classList.remove("open"));
   if(wasOpen)return;
-  el.classList.add('open');
-  const panel=el.querySelector('.en-expand');
+  el.classList.add("open");
+  const panel=el.querySelector(".en-expand");
   if(panel.dataset.loaded)return;
-  panel.dataset.loaded='1';
+  panel.dataset.loaded="1";
   const id=el.dataset.tmdb,media=el.dataset.media;
-  if(!id||id==='0'){
-    panel.innerHTML='<div class="expand-no-data">Pas d\'informations TMDB pour cette entrée.</div>';
-    return;
-  }
-  panel.innerHTML='<div class="expand-loading">Chargement…</div>';
-  const type=media==='movie'?'movie':'tv';
+  if(!id||id==="0"){panel.innerHTML="<div class=\"expand-no-data\">Pas d'informations TMDB pour cette entr\xE9e.</div>";return}
+  panel.innerHTML="<div class=\"expand-loading\">Chargement\u2026</div>";
+  const type=media==="movie"?"movie":"tv";
   const k=type+id;
   let d=detailCache[k];
   if(!d){
     try{
-      const rFr=await fetch('https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+TMDB_KEY+'&language=fr-FR&append_to_response=videos');
+      const rFr=await fetch("https://api.themoviedb.org/3/"+type+"/"+id+"?api_key="+TMDB_KEY+"&language=fr-FR&append_to_response=videos");
       d=await rFr.json();
-      if(!d.videos||!d.videos.results||!d.videos.results.find(v=>v.type==='Trailer'&&v.site==='YouTube')){
-        const rEn=await fetch('https://api.themoviedb.org/3/'+type+'/'+id+'/videos?api_key='+TMDB_KEY+'&language=en-US');
+      if(!d.videos||!d.videos.results||!d.videos.results.find(v=>v.type==="Trailer"&&v.site==="YouTube")){
+        const rEn=await fetch("https://api.themoviedb.org/3/"+type+"/"+id+"/videos?api_key="+TMDB_KEY+"&language=en-US");
         const enV=await rEn.json();
         if(enV.results)d.videos={results:[...((d.videos&&d.videos.results)||[]),...enV.results]};
       }
       detailCache[k]=d;
-    }catch{panel.innerHTML='<div class="expand-loading">Erreur de chargement.</div>';return}
+    }catch{panel.innerHTML="<div class=\"expand-loading\">Erreur de chargement.</div>";return}
   }
-  const synopsis=d.overview||'Pas de synopsis disponible.';
-  const runtime=d.runtime?(d.runtime+' min'):(d.episode_run_time&&d.episode_run_time[0]?(d.episode_run_time[0]+' min/ép'):null);
-  const genres=(d.genres||[]).map(g=>g.name).join(', ')||null;
-  const year=(d.release_date||d.first_air_date||'').substring(0,4)||null;
+  const synopsis=d.overview||"Pas de synopsis disponible.";
+  const runtime=d.runtime?(d.runtime+" min"):(d.episode_run_time&&d.episode_run_time[0]?(d.episode_run_time[0]+" min/\xE9p"):null);
+  const genres=(d.genres||[]).map(g=>g.name).join(", ")||null;
+  const year=(d.release_date||d.first_air_date||"").substring(0,4)||null;
   const rating=d.vote_average?d.vote_average.toFixed(1):null;
-  const poster=d.poster_path?IMG+'w300'+d.poster_path:null;
-  const trailer=(d.videos&&d.videos.results||[]).find(v=>v.type==='Trailer'&&v.site==='YouTube');
-  const ytUrl=trailer?'https://www.youtube.com/watch?v='+trailer.key:null;
-  let meta='';
-  if(year)meta+='<span><strong>Année</strong> '+year+'</span>';
-  if(runtime)meta+='<span><strong>Durée</strong> '+runtime+'</span>';
-  if(genres)meta+='<span><strong>Genre</strong> '+genres+'</span>';
-  if(rating)meta+='<span><strong>Note</strong> ⭐ '+rating+'/10</span>';
-  panel.innerHTML='<div class="expand-inner">'
-    +(poster?'<div class="expand-poster" onclick="openPMurl(\''+IMG+'w500'+d.poster_path+'\')"><img src="'+poster+'" loading="lazy"/><div class="expand-poster-ov">🔍</div></div>':'')
-    +'<div class="expand-info"><div class="expand-synopsis">'+synopsis+'</div>'
-    +(meta?'<div class="expand-meta">'+meta+'</div>':'')
-    +(ytUrl?'<a class="expand-trailer-link" href="'+ytUrl+'" target="_blank" rel="noopener">▶ Bande-annonce YouTube</a>':'')
-    +'</div></div>';
+  const poster=d.poster_path?IMG+"w300"+d.poster_path:null;
+  const trailer=(d.videos&&d.videos.results||[]).find(v=>v.type==="Trailer"&&v.site==="YouTube");
+  const ytUrl=trailer?"https://www.youtube.com/watch?v="+trailer.key:null;
+  let meta="";
+  if(year)meta+="<span><strong>Ann\xE9e</strong> "+year+"</span>";
+  if(runtime)meta+="<span><strong>Dur\xE9e</strong> "+runtime+"</span>";
+  if(genres)meta+="<span><strong>Genre</strong> "+genres+"</span>";
+  if(rating)meta+="<span><strong>Note</strong> \u2B50 "+rating+"/10</span>";
+  panel.innerHTML="<div class=\"expand-inner\">"
+    +(poster?"<div class=\"expand-poster\" onclick=\"openPMurl('"+IMG+"w500"+d.poster_path+"')\" ><img src=\""+poster+"\" loading=\"lazy\"/><div class=\"expand-poster-ov\">\uD83D\uDD0D</div></div>":"")
+    +"<div class=\"expand-info\"><div class=\"expand-synopsis\">"+synopsis+"</div>"
+    +(meta?"<div class=\"expand-meta\">"+meta+"</div>":"")
+    +(ytUrl?"<a class=\"expand-trailer-link\" href=\""+ytUrl+"\" target=\"_blank\" rel=\"noopener\">&#x25B6; Bande-annonce YouTube</a>":"")
+    +"</div></div>";
 }
+function openPMurl(url){document.getElementById("pmi").src=url;document.getElementById("pm").classList.add("o")}
+function closePM(){document.getElementById("pm").classList.remove("o")}
 
-function openPMurl(url){document.getElementById('pmi').src=url;document.getElementById('pm').classList.add('o')}
-function closePM(){document.getElementById('pm').classList.remove('o')}
-
-function buildEntry(e,showLevel){
-  const [cls,label]=BADGES[e.type]||['bsp','?'];
-  const levelClass=e.level==='must'?'must':e.level==='important'?'imp':'';
+function buildEntry(e,showLevel,inSegment){
+  const [cls,label]=BADGES[e.type]||["bsp","?"];
+  const levelClass=e.level==="must"?"must":e.level==="important"?"imp":"";
   const prog=getProgress(currentData.id);
   const isDone=!!prog[e.id];
-  const levelIcon=showLevel?(e.level==='must'?'⭐':e.level==='important'?'🚨':''):'';
-  const isGame=e.media==='game';
-  const mediaAttr=isGame?'game':(e.media==='movie'?'movie':'tv');
-  const seasonAttr=e.season?' data-season="'+e.season+'"':'';
-
-  // Tags — CANONICITÉ NON CONFIRMÉE et FLASHBACK en premier
-  let prefixTags='';
-  let suffixTags='';
-  if(e.tags&&e.tags.includes('nc'))prefixTags+='<span class="nt">CANONICITÉ NON CONFIRMÉE</span>';
-  if(e.tags&&e.tags.includes('flashback'))prefixTags+='<span class="ft">FLASHBACK</span>';
-  if(e.dim)suffixTags+='<div class="dim-badge">'+e.dim+'</div>';
-
-  const ppIcon=isGame?'🎮':e.type==='special'?'📋':e.type==='film'||e.type==='filmanim'?'🎬':'📺';
-  let sub='';
-  if(e.subitems&&e.subitems.length)sub='<div class="esub">'+e.subitems.map(s=>'<div class="si">'+s+'</div>').join('')+'</div>';
-  const note=e.note?'<div class="enote">'+e.note+'</div>':'';
-  const details=e.details?'<div class="edetails">'+e.details+'</div>':'';
-
-  return '<div class="en '+levelClass+(isDone?' done':'')+'" data-id="'+e.id+'" data-type="'+e.type+'" data-level="'+e.level+'" data-tmdb="'+(e.tmdb||'0')+'" data-media="'+mediaAttr+'"'+seasonAttr+' onclick="toggleExpand(this,event)">'+
-    '<div class="en-top">'+
-    '<div class="en-check" onclick="toggleEntry(\''+e.id+'\',event)"><div class="checkmark">'+(isDone?'✓':'')+'</div></div>'+
-    '<div class="en-datebadge"><div class="en-level-icon">'+levelIcon+'</div><div class="date-main">'+(e.date||'—')+'</div>'+suffixTags+'</div>'+
-    '<div class="ep"><div class="pp">'+ppIcon+'</div></div>'+
-    '<div class="em">'+
-    '<div class="tr">'+prefixTags+'<span class="b '+cls+'">'+label+'</span><span class="en-name">'+e.title+'</span></div>'+
-    note+details+sub+
-    '</div>'+
-    '</div>'+
-    '<div class="en-expand"></div></div>';
+  const levelIcon=showLevel?(e.level==="must"?"\u2B50":e.level==="important"?"\uD83D\uDEA8":""):"";
+  const isGame=e.media==="game";
+  const mediaAttr=isGame?"game":(e.media==="movie"?"movie":"tv");
+  const seasonAttr=e.season?" data-season=\""+e.season+"\"":"";
+  const imgAttr=e.img?" data-img=\""+e.img+"\"":"";
+  const deviateClass=(e.dim&&!inSegment)?" deviate":"";
+  let prefixTags="";
+  if(e.tags&&e.tags.includes("nc"))prefixTags+="<span class=\"nt\">CANONICIT\xC9 NON CONFIRM\xC9E</span>";
+  if(e.tags&&e.tags.includes("flashback"))prefixTags+="<span class=\"ft\">FLASHBACK</span>";
+  const dimBadge=e.dim?"<div class=\"dim-badge\">"+e.dim+"</div>":"";
+  const ppIcon=isGame?"\uD83C\uDFAE":e.type==="special"?"\uD83D\uDCCB":e.type==="film"||e.type==="filmanim"?"\uD83C\uDFAC":"\uD83D\uDCFA";
+  let sub="";
+  if(e.subitems&&e.subitems.length)sub="<div class=\"esub\">"+e.subitems.map(s=>"<div class=\"si\">"+s+"</div>").join("")+"</div>";
+  const note=e.note?"<div class=\"enote\">"+e.note+"</div>":"";
+  const details=e.details?"<div class=\"edetails\">"+e.details+"</div>":"";
+  return "<div class=\"en "+levelClass+deviateClass+(isDone?" done":"")+"\" data-id=\""+e.id+"\" data-type=\""+e.type+"\" data-level=\""+e.level+"\" data-tmdb=\""+(e.tmdb||"0")+"\" data-media=\""+mediaAttr+"\""+seasonAttr+" onclick=\"toggleExpand(this,event)\">"
+    +"<div class=\"en-top\">"
+    +"<div class=\"en-check\" onclick=\"toggleEntry('"+e.id+"',event)\"><div class=\"checkmark\">"+(isDone?"\u2713":"")+"</div></div>"
+    +"<div class=\"en-datebadge\"><div class=\"en-level-icon\">"+levelIcon+"</div><div class=\"date-main\">"+(e.date||"\u2014")+"</div>"+dimBadge+"</div>"
+    +"<div class=\"ep\""+imgAttr+"><div class=\"pp\">"+ppIcon+"</div></div>"
+    +"<div class=\"em\"><div class=\"tr\">"+prefixTags+"<span class=\"b "+cls+"\">"+label+"</span><span class=\"en-name\">"+e.title+"</span></div>"+note+details+sub+"</div>"
+    +"</div>"
+    +"<div class=\"en-expand\"></div></div>";
 }
 
 function buildTimeline(data){
-  const showLevel=data.id!=='sw';
-  const spine=data.spineStyle||'';
-  document.getElementById('tl-spine-line').className='tl-spine-line'+(spine?' '+spine:'');
-  document.documentElement.style.setProperty('--tl-color',data.color||'var(--accent)');
-
+  const showLevel=data.id!=="sw";
+  document.documentElement.style.setProperty("--tl-color",data.color||"var(--accent)");
   const types=[...new Set(data.eras.flatMap(era=>era.entries.map(e=>e.type)))];
-  const hasNC=data.eras.some(era=>era.entries.some(e=>e.tags&&e.tags.includes('nc')));
+  const hasNC=data.eras.some(era=>era.entries.some(e=>e.tags&&e.tags.includes("nc")));
   const hasDim=data.eras.some(era=>era.entries.some(e=>e.dim));
-  const hasFB=data.eras.some(era=>era.entries.some(e=>e.tags&&e.tags.includes('flashback')));
-
-  let leg='<div class="leg-title">Légende</div>';
-  types.forEach(t=>{const[c,l]=BADGES[t]||[];if(c)leg+='<span class="b '+c+'">'+l+'</span>'});
-  leg+='<div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;width:100%;margin-top:.15rem">';
-  if(showLevel)leg+='<span>⭐ Obligatoire</span><span>🚨 Important</span>';
-  if(hasFB)leg+='<span class="ft">FLASHBACK</span>';
-  if(hasNC)leg+='<span class="nt">CANONICITÉ NON CONFIRMÉE</span>';
-  if(hasDim)leg+='<span class="dt">TERRE-XXXX</span>';
-  leg+='</div>';
-  document.getElementById('tl-legend').innerHTML=leg;
-
-  let filters='<button class="fbt a" onclick="filterTL(\'all\',this)">Tout</button>';
-  if(showLevel)filters+='<button class="fbt" onclick="filterTL(\'must\',this)">⭐ Obligatoire</button><button class="fbt" onclick="filterTL(\'important\',this)">🚨 Important</button>';
-  types.forEach(t=>{filters+='<button class="fbt" onclick="filterTL(\''+t+'\',this)">'+(BADGE_LABELS[t]||t)+'</button>';});
-  document.getElementById('filter-bar').innerHTML=filters;
-
-  let html='';
+  const hasFB=data.eras.some(era=>era.entries.some(e=>e.tags&&e.tags.includes("flashback")));
+  let leg="<div class=\"leg-title\">L\xE9gende</div>";
+  types.forEach(t=>{const[c,l]=BADGES[t]||[];if(c)leg+="<span class=\"b "+c+"\">"+l+"</span>"});
+  leg+="<div style=\"display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;width:100%;margin-top:.15rem\">";
+  if(showLevel)leg+="<span>\u2B50 Obligatoire</span><span>\uD83D\uDEA8 Important</span>";
+  if(hasFB)leg+="<span class=\"ft\">FLASHBACK</span>";
+  if(hasNC)leg+="<span class=\"nt\">CANONICIT\xC9 NON CONFIRM\xC9E</span>";
+  if(hasDim)leg+="<span class=\"dt\">TERRE-XXXX</span>";
+  leg+="</div>";
+  document.getElementById("tl-legend").innerHTML=leg;
+  let filters="<button class=\"fbt a\" onclick=\"filterTL('all',this)\">Tout</button>";
+  if(showLevel)filters+="<button class=\"fbt\" onclick=\"filterTL('must',this)\">\u2B50 Obligatoire</button><button class=\"fbt\" onclick=\"filterTL('important',this)\">\uD83D\uDEA8 Important</button>";
+  types.forEach(t=>{filters+="<button class=\"fbt\" onclick=\"filterTL('"+t+"',this)\">"+(BADGE_LABELS[t]||t)+"</button>";});
+  document.getElementById("filter-bar").innerHTML=filters;
+  let html="";
   data.eras.forEach(era=>{
-    const isSV=era.special==='sv',isFox=era.special==='fox';
-    const nodeClass=isSV?'sv':isFox?'fox':(spine?spine:'');
-    const labelClass=isSV?'sv':isFox?'fox':(spine?spine:'');
-    html+='<div class="era-node" data-era><div class="era-node-dot '+nodeClass+'"></div><div class="era-label '+labelClass+'">'+era.title+'</div></div>';
+    const isSV=era.special==="sv",isFox=era.special==="fox";
+    const nodeClass=isSV?"sv":isFox?"fox":"";
+    const labelClass=isSV?"sv":isFox?"fox":"";
+    html+="<div class=\"era-node\" data-era><div class=\"era-node-dot "+nodeClass+"\"></div><div class=\"era-label "+labelClass+"\">"+era.title+"</div></div>";
     if(isSV||isFox){
-      const segIcon=isSV?'🕷️':'🦾';
-      const segTitle=isSV?'Segment Spider-Verse':isFox?'Segment Fox — X-Men & Deadpool':'';
-      const segSub=isSV?'Univers alternatifs — avant No Way Home':'Terre-10005 — avant Deadpool & Wolverine';
-      const segClass=isSV?'sv':'fox';
-      html+='<div class="segment-box"><div class="segment-header '+segClass+'"><span class="segment-icon">'+segIcon+'</span><span class="segment-title">'+segTitle+'</span><span class="segment-sub">'+segSub+'</span></div><div class="segment-body">';
-      era.entries.forEach(e=>{html+=buildEntry(e,showLevel)});
-      html+='</div></div>';
+      const segIcon=isSV?"\uD83D\uDD77\uFE0F":"\uD83E\uDDBE";
+      const segTitle=isSV?"Segment Spider-Verse":"Segment Fox \u2014 X-Men & Deadpool";
+      const segSub=isSV?"Univers alternatifs \u2014 avant No Way Home":"Terre-10005 \u2014 avant Deadpool & Wolverine";
+      const segClass=isSV?"sv":"fox";
+      html+="<div class=\"segment-box\"><div class=\"segment-header "+segClass+"\"><span class=\"segment-icon\">"+segIcon+"</span><span class=\"segment-title\">"+segTitle+"</span><span class=\"segment-sub\">"+segSub+"</span></div><div class=\"segment-body\">";
+      era.entries.forEach(e=>{html+=buildEntry(e,showLevel,true)});
+      html+="</div></div>";
     } else {
-      era.entries.forEach(e=>{html+=buildEntry(e,showLevel)});
+      era.entries.forEach(e=>{html+=buildEntry(e,showLevel,false)});
     }
   });
-  document.getElementById('tl-content').innerHTML=html;
+  document.getElementById("tl-content").innerHTML=html;
+  requestAnimationFrame(()=>drawSacredTimeline(data));
 }
 
-function filterTL(type,btn){
-  document.querySelectorAll('#filter-bar .fbt').forEach(b=>b.classList.remove('a'));
-  btn.classList.add('a');
-  document.querySelectorAll('#tl-content .en').forEach(e=>{
-    const show=type==='all'||(type==='must'&&e.dataset.level==='must')||(type==='important'&&(e.dataset.level==='must'||e.dataset.level==='important'))||(type!=='all'&&type!=='must'&&type!=='important'&&e.dataset.type===type);
-    e.style.display=show?'':'none';
+function drawSacredTimeline(data){
+  const wrapper=document.getElementById("tl-wrapper");
+  const svg=document.getElementById("tl-svg");
+  const path=document.getElementById("tl-path");
+  if(!svg||!path||!wrapper)return;
+  const color=data.color||"#7c6af7";
+  const isSW=data.id==="sw";
+  path.setAttribute("stroke",color);
+  const totalH=wrapper.scrollHeight;
+  svg.style.height=totalH+"px";
+  svg.setAttribute("viewBox","0 0 32 "+totalH);
+  const cx=12;
+  const segCx=24;
+  let pathD="M "+cx+" 0 ";
+  let prevX=cx,prevY=0;
+  const wRect=wrapper.getBoundingClientRect();
+  const scrollTop=window.pageYOffset||document.documentElement.scrollTop;
+  const wTop=wRect.top+scrollTop;
+  const nodes=[...document.querySelectorAll("#tl-content > .era-node, #tl-content > .en, #tl-content > .segment-box")];
+  nodes.forEach(node=>{
+    const nRect=node.getBoundingClientRect();
+    const y=nRect.top+scrollTop-wTop+nRect.height/2;
+    let x=cx;
+    if(node.classList.contains("segment-box"))x=segCx;
+    else if(node.classList.contains("en")&&node.classList.contains("deviate"))x=segCx;
+    if(x!==prevX){
+      const midY=(prevY+y)/2;
+      pathD+="C "+prevX+" "+midY+" "+x+" "+midY+" "+x+" "+y+" ";
+    } else {
+      pathD+="L "+x+" "+y+" ";
+    }
+    prevX=x;prevY=y;
   });
-  document.querySelectorAll('#tl-content .era-node').forEach(h=>{
+  pathD+="L "+cx+" "+totalH;
+  path.setAttribute("d",pathD);
+}
+window.addEventListener("resize",()=>{if(currentData)requestAnimationFrame(()=>drawSacredTimeline(currentData))});
+
+function filterTL(type,btn){
+  document.querySelectorAll("#filter-bar .fbt").forEach(b=>b.classList.remove("a"));
+  btn.classList.add("a");
+  document.querySelectorAll("#tl-content .en").forEach(e=>{
+    const show=type==="all"||(type==="must"&&e.dataset.level==="must")||(type==="important"&&(e.dataset.level==="must"||e.dataset.level==="important"))||(type!=="all"&&type!=="must"&&type!=="important"&&e.dataset.type===type);
+    e.style.display=show?"":"none";
+  });
+  document.querySelectorAll("#tl-content .era-node").forEach(h=>{
     let n=h.nextElementSibling,vis=false;
     while(n&&!n.dataset.era){
-      if(n.classList.contains('en')&&n.style.display!=='none')vis=true;
-      if(n.classList.contains('segment-box'))vis=true;
+      if(n.classList.contains("en")&&n.style.display!=="none")vis=true;
+      if(n.classList.contains("segment-box"))vis=true;
       n=n.nextElementSibling;
     }
-    h.style.display=vis?'':'none';
+    h.style.display=vis?"":"none";
   });
-  document.querySelectorAll('#tl-content .segment-box').forEach(box=>{
-    const hasVisible=[...box.querySelectorAll('.en')].some(e=>e.style.display!=='none');
-    box.style.display=hasVisible?'':'none';
+  document.querySelectorAll("#tl-content .segment-box").forEach(box=>{
+    const hasVisible=[...box.querySelectorAll(".en")].some(e=>e.style.display!=="none");
+    box.style.display=hasVisible?"":"none";
   });
+  requestAnimationFrame(()=>{if(currentData)drawSacredTimeline(currentData)});
 }
 
 function buildHomeCards(){
-  const grid=document.getElementById('ugrid');
-  grid.innerHTML='';
+  const grid=document.getElementById("ugrid");
+  grid.innerHTML="";
   const now=new Date();
-  const months=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-  const dateLabel='À jour — '+months[now.getMonth()]+' '+now.getFullYear();
+  const months=["janvier","f\xE9vrier","mars","avril","mai","juin","juillet","ao\xFBt","septembre","octobre","novembre","d\xE9cembre"];
+  const dateLabel="\xC0 jour \u2014 "+months[now.getMonth()]+" "+now.getFullYear();
   UNIVERSES.forEach(u=>{
     const d=u.data||u;
     const prog=u.data?getProgress(u.data.id):{};
     const total=u.data?u.data.eras.reduce((a,e)=>a+e.entries.length,0):0;
     const done=u.data?u.data.eras.reduce((a,era)=>a+era.entries.filter(e=>!!prog[e.id]).length,0):0;
     const pct=total?Math.round(done/total*100):0;
-    const card=document.createElement('div');
-    card.className='ucard'+(u.soon?' soon':'');
-    card.id='card-'+(u.data?u.data.id:u.id);
+    const card=document.createElement("div");
+    card.className="ucard"+(u.soon?" soon":"");
+    card.id="card-"+(u.data?u.data.id:u.id);
     card.onclick=u.soon?showCS:()=>showUniverse(u.data.id);
-    card.innerHTML='<div class="cbanner"><img id="banner-'+(u.data?u.data.id:u.id)+'" src="" alt=""/><span class="cicon">'+u.icon+'</span></div>'+
-      '<div class="cbody"><div class="cname" style="color:'+(d.color||'var(--text)')+'">'+d.title+'</div>'+
-      '<div class="csub">'+(d.description||d.subtitle||'')+'</div>'+
-      (u.soon
-        ?'<span class="cnew" style="background:rgba(124,106,247,.12);color:var(--accent);border:1px solid rgba(124,106,247,.25)">BIENTÔT</span>'
-        :'<div class="cprogress"><div class="cp-track"><div class="cp-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+(d.color||'var(--accent)')+',var(--accent2))"></div></div><span>'+done+' / '+total+' vus</span></div><span class="cnew" style="background:rgba(86,194,122,.12);color:var(--green);border:1px solid rgba(86,194,122,.28)">'+dateLabel+'</span>'
-      )+'</div>';
+    card.innerHTML="<div class=\"cbanner\"><img id=\"banner-"+(u.data?u.data.id:u.id)+"\" src=\"\" alt=\"\"/><span class=\"cicon\">"+u.icon+"</span></div>"
+      +"<div class=\"cbody\"><div class=\"cname\" style=\"color:"+(d.color||"var(--text)")+"\">"+d.title+"</div>"
+      +"<div class=\"csub\">"+(d.description||d.subtitle||"")+"</div>"
+      +(u.soon
+        ?"<span class=\"cnew\" style=\"background:rgba(124,106,247,.12);color:var(--accent);border:1px solid rgba(124,106,247,.25)\">BIENT\xD4T</span>"
+        :"<div class=\"cprogress\"><div class=\"cp-track\"><div class=\"cp-fill\" style=\"width:"+pct+"%;background:linear-gradient(90deg,"+(d.color||"var(--accent)")+",var(--accent2))\"></div></div><span>"+done+" / "+total+" vus</span></div><span class=\"cnew\" style=\"background:rgba(86,194,122,.12);color:var(--green);border:1px solid rgba(86,194,122,.28)\">"+dateLabel+"</span>"
+      )+"</div>";
     grid.appendChild(card);
     if(u.data&&u.data.tmdb_banner){
       const{type,id}=u.data.tmdb_banner;
-      fetch('https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+TMDB_KEY)
+      fetch("https://api.themoviedb.org/3/"+type+"/"+id+"?api_key="+TMDB_KEY)
         .then(r=>r.json()).then(dd=>{
-          if(dd.backdrop_path){const img=document.getElementById('banner-'+u.data.id);if(img)img.src=IMG+'w780'+dd.backdrop_path}
+          if(dd.backdrop_path){const img=document.getElementById("banner-"+u.data.id);if(img)img.src=IMG+"w780"+dd.backdrop_path}
         }).catch(()=>{});
     }
   });
 }
 
 function showHome(){
-  document.getElementById('home-page').classList.add('v');
-  document.getElementById('tl-page').classList.remove('v');
-  document.getElementById('cs-page').classList.remove('v');
-  document.getElementById('pbn').classList.remove('show');
+  document.getElementById("home-page").classList.add("v");
+  document.getElementById("tl-page").classList.remove("v");
+  document.getElementById("cs-page").classList.remove("v");
+  document.getElementById("pbn").classList.remove("show");
   currentData=null;window.scrollTo(0,0);buildHomeCards();
 }
 function showUniverse(uid){
   const u=UNIVERSES.find(x=>x.data&&x.data.id===uid);
   if(!u){showCS();return}
   currentData=u.data;
-  document.getElementById('tl-title').textContent=currentData.title+' — '+currentData.subtitle;
-  document.getElementById('tl-title').style.color=currentData.color||'var(--text)';
-  document.getElementById('tl-title').style.textShadow='0 0 40px '+(currentData.glow||'transparent');
-  document.getElementById('tl-sub').textContent=currentData.description||'';
-  document.getElementById('tl-notes').innerHTML=currentData.notes||'';
-  document.getElementById('pb-fill').style.background='linear-gradient(90deg,'+(currentData.color||'var(--accent)')+',var(--accent2))';
+  document.getElementById("tl-title").textContent=currentData.title+" \u2014 "+currentData.subtitle;
+  document.getElementById("tl-title").style.color=currentData.color||"var(--text)";
+  document.getElementById("tl-title").style.textShadow="0 0 40px "+(currentData.glow||"transparent");
+  document.getElementById("tl-sub").textContent=currentData.description||"";
+  document.getElementById("tl-notes").innerHTML=currentData.notes||"";
+  document.getElementById("pb-fill").style.background="linear-gradient(90deg,"+(currentData.color||"var(--accent)")+",var(--accent2))";
   buildTimeline(currentData);renderProgress();
-  document.getElementById('home-page').classList.remove('v');
-  document.getElementById('tl-page').classList.add('v');
-  document.getElementById('cs-page').classList.remove('v');
+  document.getElementById("home-page").classList.remove("v");
+  document.getElementById("tl-page").classList.add("v");
+  document.getElementById("cs-page").classList.remove("v");
   window.scrollTo(0,0);loadPosters();
 }
 function showCS(){
-  document.getElementById('home-page').classList.remove('v');
-  document.getElementById('tl-page').classList.remove('v');
-  document.getElementById('cs-page').classList.add('v');
-  document.getElementById('pbn').classList.remove('show');
+  document.getElementById("home-page").classList.remove("v");
+  document.getElementById("tl-page").classList.remove("v");
+  document.getElementById("cs-page").classList.add("v");
+  document.getElementById("pbn").classList.remove("show");
   window.scrollTo(0,0);
 }
 showHome();
