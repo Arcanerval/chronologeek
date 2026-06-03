@@ -5,8 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Chronologeek</title>
 <style>
-:root{--bg:#08080f;--surface:#0f0f1a;--surface2:#161625;--border:#1e1e35;--border2:#2a2a48;--accent:#7c6af7;--accent2:#f06292;--gold:#f5c842;--text:#e2e2f0;--muted:#686880;--muted2:#9090b0;--green:#56c27a;--orange:#f09642;--red:#e05555;--radius:12px;--tl-color:#7c6af7}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+:root{
+  --bg:#08080f;--surface:#0f0f1a;--surface2:#161625;--border:#1e1e35;--border2:#2a2a48;
+  --accent:#7c6af7;--accent2:#f06292;--gold:#f5c842;--text:#e2e2f0;--muted:#686880;
+  --muted2:#9090b0;--green:#56c27a;--orange:#f09642;--red:#e05555;--radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(124,106,247,.12),transparent 60%),radial-gradient(ellipse 60% 50% at 80% 110%,rgba(240,98,146,.08),transparent 60%);pointer-events:none}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
@@ -17,11 +22,13 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .logo-text{font-size:1.35rem;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-links{display:flex;gap:1.25rem;align-items:center}
 .nav-links a{color:var(--muted2);font-size:.88rem;text-decoration:none;cursor:pointer;transition:color .2s;white-space:nowrap}
-.nav-links a:hover{color:var(--text)}.nav-sp{flex:1}
+.nav-links a:hover{color:var(--text)}
+.nav-sp{flex:1}
 .pbn{display:none;align-items:center;gap:.6rem;font-size:.78rem;color:var(--muted2)}.pbn.show{display:flex}
 .pbn-track{width:100px;height:4px;background:var(--border2);border-radius:2px;overflow:hidden}
 .pbn-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .4s}
 .disc-btn{background:linear-gradient(135deg,#5865f2,#4752c4);color:#fff!important;padding:.4rem 1rem;border-radius:8px;font-size:.82rem;font-weight:600;white-space:nowrap}
+/* HOME */
 #home-page{display:none}#home-page.v{display:block}
 .hero{padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 0%,rgba(124,106,247,.15),transparent 70%);pointer-events:none}
@@ -43,6 +50,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .cp-track{flex:1;height:4px;background:var(--border2);border-radius:2px;overflow:hidden}
 .cp-fill{height:100%;border-radius:2px;transition:width .5s}
 .cnew{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:.6rem}
+/* TIMELINE PAGE */
 .tl-page{display:none;max-width:1020px;margin:0 auto;padding:2.5rem 2rem}.tl-page.v{display:block}
 .bc{font-size:.78rem;color:var(--muted2);margin-bottom:1.25rem;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:color .2s}
 .bc:hover{color:var(--accent)}
@@ -59,50 +67,58 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .nb strong{color:var(--text)}
 .leg{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;font-size:.82rem}
 .leg-title{width:100%;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.1rem}
+/* BADGES */
 .b{display:inline-flex;align-items:center;padding:2px 8px;border-radius:6px;font-size:.69rem;font-weight:700;white-space:nowrap}
 .bf{background:rgba(100,181,246,.12);color:#64b5f6;border:1px solid rgba(100,181,246,.25)}
 .bfa{background:rgba(144,202,249,.10);color:#90caf9;border:1px solid rgba(144,202,249,.2)}
 .bs{background:rgba(129,199,132,.12);color:#81c784;border:1px solid rgba(129,199,132,.25)}
 .ba{background:rgba(206,147,216,.12);color:#ce93d8;border:1px solid rgba(206,147,216,.25)}
 .bj{background:rgba(255,183,77,.12);color:#ffb74d;border:1px solid rgba(255,183,77,.25)}
-.bsp{background:rgba(144,164,174,.10);color:#90a4ae;border:1px solid rgba(144,164,174,.2)}
+.bsp{background:rgba(255,167,38,.12);color:#ffa726;border:1px solid rgba(255,167,38,.25)}
+.bv{background:rgba(239,83,80,.12);color:#ef5350;border:1px solid rgba(239,83,80,.25)}
 .nt{display:inline-flex;font-size:.65rem;padding:2px 7px;border-radius:5px;font-weight:700;white-space:nowrap;background:rgba(224,85,85,.12);color:var(--red);border:1px solid rgba(224,85,85,.25)}
 .ft{display:inline-flex;font-size:.65rem;padding:2px 7px;border-radius:5px;white-space:nowrap;background:rgba(240,150,66,.12);color:var(--orange);border:1px solid rgba(240,150,66,.25)}
 .dt{display:inline-flex;font-size:.65rem;padding:2px 7px;border-radius:5px;white-space:nowrap;background:rgba(124,106,247,.12);color:#a99fff;border:1px solid rgba(124,106,247,.25)}
-.filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
-.fbt{background:var(--surface);border:1px solid var(--border2);color:var(--muted2);padding:.38rem .9rem;border-radius:20px;cursor:pointer;font-size:.79rem;transition:all .2s}
-.fbt:hover{border-color:var(--accent);color:var(--text)}.fbt.a{background:rgba(124,106,247,.2);border-color:var(--accent);color:#c4baff;font-weight:600}
-.tl-wrapper{position:relative;padding-left:32px}
-.tl-svg{position:absolute;left:0;top:0;width:32px;pointer-events:none;z-index:0;overflow:visible}
-.tl-entries{position:relative;z-index:1}
+/* FILTRES */
+.filter-bar{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}
+.filter-group{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.filter-label{font-size:.72rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.06em;font-weight:600;white-space:nowrap;min-width:56px}
+.fbt{background:var(--surface2);border:1px solid var(--border2);color:var(--muted2);padding:.35rem .85rem;border-radius:20px;cursor:pointer;font-size:.79rem;transition:all .2s;user-select:none}
+.fbt:hover{border-color:var(--accent);color:var(--text)}
+.fbt.active{background:rgba(124,106,247,.2);border-color:var(--accent);color:#c4baff;font-weight:600}
+/* ERA */
 .era-node{display:flex;align-items:flex-start;margin:2.5rem 0 .6rem;position:relative}
-.era-node-dot{width:12px;height:12px;border-radius:50%;background:var(--tl-color);flex-shrink:0;margin-top:3px;z-index:2;margin-left:-22px;margin-right:10px}
+.era-node-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:3px;z-index:2;margin-right:10px}
 .era-node-dot.sv{background:#90caf9}.era-node-dot.fox{background:#ffb74d}
-.era-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tl-color);line-height:1.3}
+.era-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);line-height:1.3}
 .era-label.sv{color:#90caf9}.era-label.fox{color:#ffb74d}
-.segment-box{margin:.4rem 0 1rem;border:1px solid var(--border2);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,var(--surface),var(--surface2));margin-left:20px}
+/* SEGMENTS */
+.segment-box{margin:.4rem 0 1rem;border:1px solid var(--border2);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,var(--surface),var(--surface2));margin-left:40px}
 .segment-header{padding:.7rem 1rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid var(--border2)}
 .segment-header.sv{background:linear-gradient(135deg,rgba(144,202,249,.08),rgba(206,147,216,.05))}
 .segment-header.fox{background:linear-gradient(135deg,rgba(255,183,77,.08),rgba(224,85,85,.05))}
 .segment-icon{font-size:1.2rem}.segment-title{font-weight:800;font-size:.88rem}
 .segment-header.sv .segment-title{color:#90caf9}.segment-header.fox .segment-title{color:#ffb74d}
 .segment-sub{font-size:.72rem;color:var(--muted2);margin-left:auto}.segment-body{padding:.5rem .65rem}
+/* ENTRY */
 .en{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.5rem;display:flex;flex-direction:column;overflow:hidden;transition:border-color .2s,background .2s,box-shadow .2s;cursor:pointer}
 .en:hover{border-color:var(--border2);background:var(--surface2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
 .en.must{border-left:3px solid var(--gold)}.en.imp{border-left:3px solid var(--orange)}
 .en.done{opacity:.5}.en.done .en-name{text-decoration:line-through;text-decoration-color:var(--muted)}
 .en.open{border-color:var(--accent);box-shadow:0 0 0 1px rgba(124,106,247,.2),0 8px 30px rgba(0,0,0,.4)}
-.en.deviate{margin-left:20px}
-.en-top{display:flex;overflow:hidden;min-height:82px}
+/* Décalage droite pour les non-616 — amplifié */
+.en.deviate{margin-left:40px;border-left-style:dashed}
+.en-top{display:flex;overflow:hidden;min-height:86px}
 .en-check{width:40px;min-width:40px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border);flex-shrink:0;transition:background .2s;cursor:pointer}
 .en-check:hover{background:rgba(124,106,247,.08)}
 .checkmark{width:20px;height:20px;border-radius:6px;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;transition:all .25s;font-size:.75rem;color:#fff;font-weight:700}
 .en-check:hover .checkmark{border-color:var(--accent)}
 .en.done .checkmark{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}
-.en-datebadge{width:82px;min-width:82px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--border);flex-shrink:0;padding:.35rem .3rem;background:rgba(124,106,247,.04);gap:.1rem}
-.en-level-icon{font-size:.85rem;line-height:1;min-height:.85rem}
-.date-main{font-size:.72rem;font-weight:800;color:var(--text);text-align:center;line-height:1.25}
-.dim-badge{font-size:.52rem;font-weight:700;color:#a99fff;background:rgba(124,106,247,.15);border:1px solid rgba(124,106,247,.25);border-radius:4px;padding:1px 4px;text-align:center;line-height:1.4;margin-top:.1rem;max-width:78px;word-break:break-word}
+/* Date badge — grande */
+.en-datebadge{width:100px;min-width:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--border);flex-shrink:0;padding:.4rem .35rem;background:rgba(124,106,247,.04);gap:.12rem}
+.en-level-icon{font-size:1rem;line-height:1;min-height:1rem}
+.date-main{font-size:.82rem;font-weight:900;color:var(--text);text-align:center;line-height:1.2}
+.dim-badge{font-size:.52rem;font-weight:700;color:#a99fff;background:rgba(124,106,247,.15);border:1px solid rgba(124,106,247,.25);border-radius:4px;padding:1px 4px;text-align:center;line-height:1.4;margin-top:.1rem;max-width:92px;word-break:break-word}
 .ep{width:64px;min-width:64px;background:var(--surface2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border-right:1px solid var(--border);cursor:pointer}
 .ep img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
 .ep:hover img{transform:scale(1.06)}.pp{font-size:1.5rem;opacity:.15}
@@ -114,6 +130,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .esub{padding-left:.5rem;border-left:2px solid var(--border2);margin-top:.25rem}
 .si{font-size:.76rem;color:var(--muted2);padding:.07rem 0 .07rem .45rem;line-height:1.4}
 .si strong{color:var(--muted2)}
+/* EXPAND */
 .en-expand{display:none;border-top:1px solid var(--border);background:rgba(0,0,0,.25)}
 .en.open .en-expand{display:block}
 .expand-inner{display:flex;min-height:150px}
@@ -130,12 +147,22 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .expand-trailer-link:hover{background:rgba(255,0,0,.2)}
 .expand-loading{padding:1.5rem;color:var(--muted);font-size:.8rem;text-align:center}
 .expand-no-data{padding:1rem;color:var(--muted);font-size:.8rem}
+/* MODAL */
 .pm{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.92);align-items:center;justify-content:center;backdrop-filter:blur(8px);cursor:pointer}
 .pm.o{display:flex}.pm img{max-height:88vh;max-width:88vw;border-radius:14px;box-shadow:0 30px 100px rgba(0,0,0,.9)}
 .pm-x{position:absolute;top:1.25rem;right:1.75rem;color:#fff;font-size:1.8rem;cursor:pointer;opacity:.6}
+/* CS */
 .cs{display:none;text-align:center;padding:6rem 2rem;color:var(--muted2)}.cs.v{display:block}
 .cs h2{font-size:2rem;margin-bottom:1rem;color:var(--text)}
-@media(max-width:700px){.tl-page{padding:1.25rem .75rem}.tl-wrapper{padding-left:24px}.en-datebadge{width:62px;min-width:62px}.ep{width:52px;min-width:52px}.expand-poster{width:80px;min-width:80px}nav{gap:.75rem}.nav-links a{font-size:.8rem}}
+@media(max-width:700px){
+  .tl-page{padding:1.25rem .75rem}
+  .en-datebadge{width:76px;min-width:76px}
+  .ep{width:52px;min-width:52px}
+  .expand-poster{width:80px;min-width:80px}
+  nav{gap:.75rem}.nav-links a{font-size:.8rem}
+  .en.deviate{margin-left:20px}
+  .segment-box{margin-left:20px}
+}
 </style>
 </head>
 <body>
@@ -183,13 +210,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
   <div class="nb" id="tl-notes"></div>
   <div class="leg" id="tl-legend"></div>
   <div class="filter-bar" id="filter-bar"></div>
-  <div class="tl-wrapper" id="tl-wrapper">
-    <svg class="tl-svg" id="tl-svg" xmlns="http://www.w3.org/2000/svg" style="height:100px">
-      <defs><filter id="tl-glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-      <path id="tl-path" fill="none" stroke-width="2.5" stroke-linecap="round" filter="url(#tl-glow)"/>
-    </svg>
-    <div class="tl-entries" id="tl-content"></div>
-  </div>
+  <div id="tl-content"></div>
 </div>
 <div class="cs" id="cs-page">
   <h2>🌿 Bientôt disponible</h2>
@@ -286,33 +307,32 @@ const DATA_SW={
       {id:"sw-ep9",type:"film",level:"must",tmdb:"181812",media:"movie",title:"Épisode IX : L'Ascension de Skywalker",date:"35 ABY"}
     ]}
   ]
-};
-
-const DATA_MCU={
-  id:"mcu",title:"Marvel",subtitle:"Timeline Canonique",description:"Films · Séries · Spider-Verse · Fox",
-  color:"#e23636",glow:"rgba(226,54,54,.3)",spineStyle:"mcu-style",
+};const DATA_MCU={
+  id:"mcu",title:"Marvel",subtitle:"Timeline Canonique",
+  description:"Films · Séries · Spider-Verse · Fox",
+  color:"#e23636",glow:"rgba(226,54,54,.3)",
   tmdb_banner:{type:"movie",id:"299534"},
   notes:`Il manque des choses mais elles ne sont <strong>pas du tout importantes</strong> pour la compréhension (<strong>les vieux films Punisher, la trilogie Blade, Daredevil et Elektra, Les Nouveaux Mutants, les anciens 4 Fantastiques, Spider-Noir, I Am Groot, les films du SSU hors Venom, beaucoup de dessins animés sans lien direct, les comics préludes…</strong>)<br><br>La chronologie principale de l'univers se passe sur la <strong>Terre-616</strong>. Si rien n'est précisé c'est la timeline principale.<br><br>Deux séries sont dans la catégorie <strong>"Canonicité non confirmée"</strong> et n'ont donc pas été officiellement déclarées comme faisant partie de la timeline principale de la Terre-616 par Marvel Studios. Je conseille seulement <strong>Agent Carter</strong> et <strong>Les Agents du S.H.I.E.L.D.</strong> (Cloak & Dagger, Inhumans, The Runaways sont dans le même cas mais il ne se passe rien de bien important). Toute production audiovisuelle Marvel existante fait bien partie du multivers global donc vous pouvez skip les séries si vous voulez (mais c'est cool, ça ajoute beaucoup de lore et ne contredit rien du canon officiel).<br><br>Certains événements sont mieux à voir en tant que <strong>FLASHBACK</strong> pour comprendre et sont donc indiqués comme tel.<br><br>En regardant dans l'ordre chronologique certaines scènes post-crédits spoilent des éléments plus tard donc j'indique s'il ne faut <strong>pas</strong> les regarder à ce moment et aussi à quel moment on doit les voir.`,
   eras:[
     {title:"PHASE I — Saga de l'Infini",entries:[
       {id:"mcu-cap1",type:"film",level:"must",tmdb:"1771",media:"movie",title:"Captain America : First Avenger",date:"1942–1945",note:"Prologue et épilogue se passent en 2011–2012 mais important à regarder en premier. Ne pas regarder la scène post-crédits."},
-      {id:"mcu-ac-os",type:"special",level:"bonus",tmdb:"0",img:"images/Agent Carter.png",media:"special",title:"One Shot : Agent Carter",date:"1946"},
+      {id:"mcu-ac-os",type:"video",level:"bonus",tmdb:"0",img:"images/Agent Carter.png",media:"video",title:"One Shot : Agent Carter",date:"1946"},
       {id:"mcu-ac-serie",type:"serie",level:"bonus",tmdb:"61550",media:"tv",season:1,title:"Agent Carter",date:"1946–1947",tags:["nc"],subitems:["Saison 1","Saison 2"]},
       {id:"mcu-cm",type:"film",level:"must",tmdb:"299537",media:"movie",title:"Captain Marvel",date:"1995",note:"Ne pas regarder les scènes post-crédits."},
       {id:"mcu-im1",type:"film",level:"must",tmdb:"1726",media:"movie",title:"Iron Man",date:"2008"},
       {id:"mcu-im2",type:"film",level:"must",tmdb:"10138",media:"movie",title:"Iron Man 2",date:"2010"},
       {id:"mcu-hulk",type:"film",level:"must",tmdb:"1724",media:"movie",title:"L'Incroyable Hulk",date:"2010"},
-      {id:"mcu-consultant",type:"special",level:"important",tmdb:"0",img:"images/Le Consultant.png",media:"special",title:"One Shot : Le Consultant",date:"2010"},
+      {id:"mcu-consultant",type:"video",level:"important",tmdb:"0",img:"images/Le Consultant.png",media:"video",title:"One Shot : Le Consultant",date:"2010"},
       {id:"mcu-thor1",type:"film",level:"must",tmdb:"10195",media:"movie",title:"Thor",date:"2010"},
       {id:"mcu-av1",type:"film",level:"must",tmdb:"24428",media:"movie",title:"Avengers",date:"2012"},
-      {id:"mcu-item47",type:"special",level:"bonus",tmdb:"0",img:"images/item47.jpg",media:"special",title:"One Shot : Item 47",date:"2012"}
+      {id:"mcu-item47",type:"video",level:"bonus",tmdb:"0",img:"images/item47.jpg",media:"video",title:"One Shot : Article 47",date:"2012"}
     ]},
     {title:"PHASE II — Saga de l'Infini",entries:[
       {id:"mcu-aos-s1a",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2013",tags:["nc"],subitems:["Saison 1 Épisodes 1-7"]},
       {id:"mcu-thor2",type:"film",level:"must",tmdb:"76338",media:"movie",title:"Thor : Le Monde des Ténèbres",date:"2013"},
       {id:"mcu-aos-s1b",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2013–2014",tags:["nc"],subitems:["Saison 1 Épisodes 8-15"]},
       {id:"mcu-im3",type:"film",level:"must",tmdb:"68721",media:"movie",title:"Iron Man 3",date:"2013"},
-      {id:"mcu-roi",type:"special",level:"must",tmdb:"0",img:"images/All Hail the King.png",media:"special",title:"One Shot : Longue Vie au Roi",date:"2014"},
+      {id:"mcu-roi",type:"video",level:"must",tmdb:"0",img:"images/All Hail the King.png",media:"video",title:"One Shot : Longue Vie au Roi",date:"2014"},
       {id:"mcu-cap2",type:"film",level:"must",tmdb:"100402",media:"movie",title:"Captain America : Le Soldat de l'Hiver",date:"2014"},
       {id:"mcu-aos-s1c",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2014",tags:["nc"],subitems:["Saison 1 Épisodes 16-22"]},
       {id:"mcu-gotg1",type:"film",level:"must",tmdb:"118340",media:"movie",title:"Les Gardiens de la Galaxie",date:"2014"},
@@ -334,7 +354,7 @@ const DATA_MCU={
       {id:"mcu-aos-s3b",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:3,title:"Les Agents du S.H.I.E.L.D.",date:"2016",tags:["nc"],subitems:["Saison 3 Épisodes 19-22"]},
       {id:"mcu-bw",type:"film",level:"must",tmdb:"497698",media:"movie",title:"Black Widow",date:"2016",note:"Ne pas regarder la scène post-crédits."},
       {id:"mcu-bp1",type:"film",level:"must",tmdb:"284054",media:"movie",title:"Black Panther",date:"2016"},
-      {id:"mcu-eow",type:"serie",level:"bonus",tmdb:"241388",media:"tv",title:"Eyes of Wakanda",date:"1260 BC – 1896",tags:["flashback"]},
+      {id:"mcu-eow",type:"anime",level:"bonus",tmdb:"241388",media:"tv",title:"Eyes of Wakanda",date:"1260 BC – 1896",tags:["flashback"]},
       {id:"mcu-sm1",type:"film",level:"must",tmdb:"315635",media:"movie",title:"Spider-Man : Homecoming",date:"2016"},
       {id:"mcu-pun1",type:"serie",level:"bonus",tmdb:"67178",media:"tv",season:1,title:"The Punisher",date:"2016",subitems:["Saison 1"]},
       {id:"mcu-ds1",type:"film",level:"must",tmdb:"284052",media:"movie",title:"Doctor Strange",date:"2016–2017",note:"Ne pas regarder les scènes post-crédits."},
@@ -349,13 +369,13 @@ const DATA_MCU={
       {id:"mcu-jj3",type:"serie",level:"bonus",tmdb:"38472",media:"tv",season:3,title:"Jessica Jones",date:"2018",subitems:["Saison 3"]},
       {id:"mcu-antman2",type:"film",level:"must",tmdb:"363088",media:"movie",title:"Ant-Man et la Guêpe",date:"2018",note:"Ne pas regarder les scènes post-crédits."},
       {id:"mcu-aos-s5b",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:5,title:"Les Agents du S.H.I.E.L.D.",date:"2018",tags:["nc"],subitems:["Saison 5 Épisodes 14-18"]},
-      {id:"mcu-thor3pc",type:"film",level:"must",tmdb:"284053",media:"movie",title:"Première scène post-crédits Thor : Ragnarok",date:"2018"},
+      {id:"mcu-thor3pc",type:"video",level:"must",tmdb:"284053",media:"video",title:"Première scène post-crédits Thor : Ragnarok",date:"2018"},
       {id:"mcu-iw",type:"film",level:"must",tmdb:"299536",media:"movie",title:"Avengers : Infinity War",date:"2018"},
-      {id:"mcu-antman2pc",type:"film",level:"must",tmdb:"363088",media:"movie",title:"Première scène post-crédits Ant-Man et la Guêpe",date:"2018"},
+      {id:"mcu-antman2pc",type:"video",level:"must",tmdb:"363088",media:"video",title:"Première scène post-crédits Ant-Man et la Guêpe",date:"2018"},
       {id:"mcu-aos-s5c",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:5,title:"Les Agents du S.H.I.E.L.D.",date:"2018",tags:["nc"],subitems:["Saison 5 Épisodes 19-22"]},
       {id:"mcu-aos-s6",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:6,title:"Les Agents du S.H.I.E.L.D.",date:"2019",tags:["nc"],subitems:["Saison 6"]},
       {id:"mcu-aos-s7",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:7,title:"Les Agents du S.H.I.E.L.D.",date:"2020",tags:["nc"],subitems:["Saison 7"]},
-      {id:"mcu-cmpc",type:"film",level:"must",tmdb:"299537",media:"movie",title:"Première scène post-crédits Captain Marvel",date:"2018"},
+      {id:"mcu-cmpc",type:"video",level:"must",tmdb:"299537",media:"video",title:"Première scène post-crédits Captain Marvel",date:"2018"},
       {id:"mcu-eg",type:"film",level:"must",tmdb:"299534",media:"movie",title:"Avengers : Endgame",date:"2023"}
     ]},
     {title:"PHASE IV — Saga du Multivers",entries:[
@@ -374,24 +394,24 @@ const DATA_MCU={
       {id:"mcu-tasm1",type:"film",level:"important",tmdb:"1930",media:"movie",title:"The Amazing Spider-Man",date:"2013",dim:"TERRE-120703"},
       {id:"mcu-tasm2",type:"film",level:"important",tmdb:"102382",media:"movie",title:"The Amazing Spider-Man 2 : Le Destin d'un Héros",date:"2014",dim:"TERRE-120703"},
       {id:"mcu-itsv",type:"filmanim",level:"bonus",tmdb:"569094",media:"movie",title:"Spider-Man : Into the Spider-Verse",date:"2023",dim:"TERRE-1610"},
-      {id:"mcu-venom1",type:"film",level:"bonus",tmdb:"580489",media:"movie",title:"Venom",date:"2023",dim:"TERRE-688"},
-      {id:"mcu-venom2",type:"film",level:"bonus",tmdb:"651567",media:"movie",title:"Venom : Let There Be Carnage",date:"2024",dim:"TERRE-688"}
+      {id:"mcu-venom1",type:"film",level:"bonus",tmdb:"335983",media:"movie",title:"Venom",date:"2023",dim:"TERRE-688"},
+      {id:"mcu-venom2",type:"film",level:"bonus",tmdb:"580489",media:"movie",title:"Venom : Let There Be Carnage",date:"2024",dim:"TERRE-688"}
     ]},
-    {title:"No Way Home & suite (Phase IV suite)",entries:[
+    {title:"SUITE PHASE IV — Saga du Multivers",entries:[
       {id:"mcu-nwh",type:"film",level:"must",tmdb:"634649",media:"movie",title:"Spider-Man : No Way Home",date:"2024"},
       {id:"mcu-venom3",type:"film",level:"bonus",tmdb:"912649",media:"movie",title:"Venom : The Last Dance",date:"2024",dim:"TERRE-688"},
       {id:"mcu-mom",type:"film",level:"must",tmdb:"453395",media:"movie",title:"Doctor Strange in the Multiverse of Madness",date:"2024"},
-      {id:"mcu-bwpc",type:"film",level:"important",tmdb:"497698",media:"movie",title:"Scène post-crédits Black Widow",date:"2024"},
+      {id:"mcu-bwpc",type:"video",level:"important",tmdb:"497698",media:"video",title:"Scène post-crédits Black Widow",date:"2024"},
       {id:"mcu-hawkeye",type:"serie",level:"important",tmdb:"88329",media:"tv",season:1,title:"Hawkeye",date:"2024",subitems:["Saison 1"]},
       {id:"mcu-mk",type:"serie",level:"bonus",tmdb:"92749",media:"tv",season:1,title:"Moon Knight",date:"2025",subitems:["Saison 1"]},
       {id:"mcu-bp2",type:"film",level:"must",tmdb:"505642",media:"movie",title:"Black Panther : Wakanda Forever",date:"2025"}
     ]},
     {title:"PHASE V — Saga du Multivers",entries:[
       {id:"mcu-echo",type:"serie",level:"important",tmdb:"122226",media:"tv",season:1,title:"Echo",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-shehulk",type:"serie",level:"bonus",tmdb:"92783",media:"tv",season:1,title:"She-Hulk : Attorney at Law",date:"2025",subitems:["Saison 1"]},
+      {id:"mcu-shehulk",type:"serie",level:"bonus",tmdb:"92783",media:"tv",season:1,title:"She-Hulk : Avocate",date:"2025",subitems:["Saison 1"]},
       {id:"mcu-mm",type:"serie",level:"must",tmdb:"92782",media:"tv",season:1,title:"Miss Marvel",date:"2025",subitems:["Saison 1"]},
       {id:"mcu-thor4",type:"film",level:"must",tmdb:"616037",media:"movie",title:"Thor : Love and Thunder",date:"2025"},
-      {id:"mcu-atsv",type:"filmanim",level:"bonus",tmdb:"869626",media:"movie",title:"Spider-Man : Across the Spider-Verse",date:"2025",dim:"TERRE-1610"},
+      {id:"mcu-atsv",type:"filmanim",level:"bonus",tmdb:"569094",media:"movie",title:"Spider-Man : Across the Spider-Verse",date:"2025",dim:"TERRE-1610"},
       {id:"mcu-ironheart",type:"serie",level:"bonus",tmdb:"114471",media:"tv",season:1,title:"Ironheart",date:"2025",subitems:["Saison 1"]},
       {id:"mcu-wwbn",type:"special",level:"bonus",tmdb:"894205",media:"movie",title:"Werewolf by Night",date:"2025"},
       {id:"mcu-gotgxmas",type:"special",level:"must",tmdb:"774752",media:"movie",title:"Les Gardiens de la Galaxie : Joyeuses Fêtes",date:"2025"},
@@ -400,8 +420,7 @@ const DATA_MCU={
       {id:"mcu-si",type:"serie",level:"bonus",tmdb:"114472",media:"tv",season:1,title:"Secret Invasion",date:"2026",subitems:["Saison 1"]},
       {id:"mcu-marvels",type:"film",level:"must",tmdb:"609681",media:"movie",title:"The Marvels",date:"2026",note:"Ne pas regarder la scène post-crédits."},
       {id:"mcu-loki2",type:"serie",level:"must",tmdb:"84958",media:"tv",season:2,title:"Loki",dim:"HORS DU TEMPS",subitems:["Saison 2"]},
-      {id:"mcu-wi2",type:"anime",level:"important",tmdb:"91363",media:"tv",season:2,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 2"]},
-      {id:"mcu-dpw",type:"film",level:"must",tmdb:"533535",media:"movie",title:"Deadpool & Wolverine",date:"2024",dim:"TERRE-10005"}
+      {id:"mcu-wi2",type:"anime",level:"important",tmdb:"91363",media:"tv",season:2,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 2"]}
     ]},
     {title:"SEGMENT FOX — avant Deadpool & Wolverine",special:"fox",entries:[
       {id:"mcu-xfc",type:"film",level:"bonus",tmdb:"49538",media:"movie",title:"X-Men : Le Commencement",date:"1962",dim:"TERRE-10005A"},
@@ -418,14 +437,21 @@ const DATA_MCU={
       {id:"mcu-dp2",type:"film",level:"important",tmdb:"383498",media:"movie",title:"Deadpool 2",date:"2018",dim:"TERRE-10005B",tags:["flashback"]}
     ]},
     {title:"PHASE V — Suite (Saga du Multivers)",entries:[
-      {id:"mcu-mz",type:"serie",level:"bonus",tmdb:"138505",media:"tv",season:1,title:"Marvel Zombies",date:"2022",dim:"TERRE-89521",note:"Suite de l'épisode 5 de la saison 1 de What If…?",subitems:["Saison 1"]},
+      {id:"mcu-dpw",type:"film",level:"must",tmdb:"533535",media:"movie",title:"Deadpool & Wolverine",date:"2024",dim:"TERRE-10005"},
+      {id:"mcu-marvelspc",type:"video",level:"important",tmdb:"609681",media:"video",title:"Scène post-crédits The Marvels",date:"2026"},
+      {id:"mcu-agatha",type:"serie",level:"bonus",tmdb:"138501",media:"tv",season:1,title:"Agatha All Along",date:"2026",subitems:["Saison 1"]},
+      {id:"mcu-wi3",type:"anime",level:"important",tmdb:"91363",media:"tv",season:3,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 3"]},
+      {id:"mcu-vfsm",type:"film",level:"bonus",tmdb:"0",media:"movie",title:"Votre fidèle serviteur Spider-Man",date:"2016",dim:"TERRE-86445"},
+      {id:"mcu-dba1",type:"serie",level:"important",tmdb:"202555",media:"tv",season:1,title:"Daredevil : Born Again",date:"2027",subitems:["Saison 1"]},
+      {id:"mcu-cabf",type:"film",level:"must",tmdb:"822119",media:"movie",title:"Captain America : Brave New World",date:"2027"},
+      {id:"mcu-tb",type:"film",level:"must",tmdb:"986056",media:"movie",title:"Thunderbolts*",date:"2027"}
+    ]},
+    {title:"PHASE VI — Saga du Multivers (en cours)",entries:[
+      {id:"mcu-mz",type:"anime",level:"bonus",tmdb:"138505",media:"tv",season:1,title:"Marvel Zombies",date:"2022",dim:"TERRE-89521",note:"Suite de l'épisode 5 de la saison 1 de What If…?",subitems:["Saison 1"]},
       {id:"mcu-ff",type:"film",level:"must",tmdb:"617126",media:"movie",title:"Les 4 Fantastiques : Premiers Pas",dim:"TERRE-828 ~1964"},
       {id:"mcu-wm",type:"serie",level:"bonus",tmdb:"198178",media:"tv",season:1,title:"Wonder Man",date:"2027",subitems:["Saison 1"]},
       {id:"mcu-dba2",type:"serie",level:"important",tmdb:"202555",media:"tv",season:2,title:"Daredevil : Born Again",date:"2027",subitems:["Saison 2"]},
-      {id:"mcu-pun-olk",type:"serie",level:"important",tmdb:"0",media:"tv",title:"The Punisher : One Last Kill",date:"2027"}
-    ]},
-    {title:"PHASE VI — Saga du Multivers (en cours)",entries:[
-      
+      {id:"mcu-pun-olk",type:"special",level:"important",tmdb:"1439930",media:"movie",title:"The Punisher : One Last Kill",date:"2027"}
     ]}
   ]
 };
@@ -436,9 +462,19 @@ const UNIVERSES=[
 ];
 const TMDB_KEY='6257b37bf29ab31357853fce00232314';
 const IMG='https://image.tmdb.org/t/p/';
-const BADGES={film:['bf','FILM'],filmanim:['bfa','FILM ANIMÉ'],serie:['bs','SÉRIE'],anime:['ba','SÉRIE ANIMÉE'],jeu:['bj','JEU VIDÉO'],special:['bsp','SPÉCIAL']};
-const BADGE_LABELS={film:'Films',filmanim:'Films animés',serie:'Séries',anime:'Animés',jeu:'Jeux',special:'Spéciaux'};
+const BADGES={
+  film:['bf','FILM'],filmanim:['bfa','FILM ANIMÉ'],
+  serie:['bs','SÉRIE'],anime:['ba','SÉRIE ANIMÉE'],
+  jeu:['bj','JEU VIDÉO'],special:['bsp','SPÉCIAL'],
+  video:['bv','VIDÉO']
+};
+const BADGE_LABELS={
+  film:'Films',filmanim:'Films animés',serie:'Séries',
+  anime:'Séries animées',jeu:'Jeux',special:'Spéciaux',video:'Vidéos'
+};
 let currentData=null;
+let activeFilters=new Set(['film','filmanim','serie','anime','jeu','special','video','must','important','bonus']);
+let showNC=true;
 const posterCache={},detailCache={};
 
 function getProgress(uid){try{return JSON.parse(localStorage.getItem('cg_'+uid)||'{}')}catch{return{}}}
@@ -478,6 +514,7 @@ function renderProgress(){
   document.getElementById('pbn-label').textContent=done+'/'+total;
   document.getElementById('pbn-fill').style.cssText='width:'+pct+'%;background:'+grad;
 }
+
 async function fetchPoster(id,type,season){
   if(!id||id==='0')return null;
   const k=type+'-'+id+(season?'-s'+season:'');
@@ -531,6 +568,7 @@ async function loadPosters(){
     await new Promise(r=>setTimeout(r,120));
   }
 }
+
 async function toggleExpand(el,ev){
   if(ev.target.closest('.en-check'))return;
   const wasOpen=el.classList.contains('open');
@@ -543,7 +581,7 @@ async function toggleExpand(el,ev){
   const id=el.dataset.tmdb,media=el.dataset.media;
   if(!id||id==='0'){panel.innerHTML='<div class="expand-no-data">Pas d\'informations TMDB pour cette entrée.</div>';return}
   panel.innerHTML='<div class="expand-loading">Chargement…</div>';
-  const type=media==='movie'?'movie':'tv';
+  const type=(media==='movie'||media==='video')?'movie':'tv';
   const k=type+id;
   let d=detailCache[k];
   if(!d){
@@ -588,20 +626,23 @@ function buildEntry(e,showLevel,inSeg){
   const isDone=!!prog[e.id];
   const levelIcon=showLevel?(e.level==='must'?'⭐':e.level==='important'?'🚨':''):'';
   const isGame=e.media==='game';
-  const mediaAttr=isGame?'game':(e.media==='movie'?'movie':'tv');
+  const isVideo=e.media==='video';
+  const mediaAttr=isGame?'game':isVideo?'video':(e.media==='movie'?'movie':'tv');
   const seasonAttr=e.season?' data-season="'+e.season+'"':'';
   const imgAttr=e.img?' data-img="'+e.img+'"':'';
+  const isNC=e.tags&&e.tags.includes('nc');
   const devClass=(e.dim&&!inSeg)?' deviate':'';
+  const ncClass=isNC?' nc-entry':'';
   let pre='';
-  if(e.tags&&e.tags.includes('nc'))pre+='<span class="nt">CANONICITÉ NON CONFIRMÉE</span>';
+  if(isNC)pre+='<span class="nt">CANONICITÉ NON CONFIRMÉE</span>';
   if(e.tags&&e.tags.includes('flashback'))pre+='<span class="ft">FLASHBACK</span>';
   const dimBadge=e.dim?'<div class="dim-badge">'+e.dim+'</div>':'';
-  const ppIcon=isGame?'🎮':e.type==='special'?'📋':e.type==='film'||e.type==='filmanim'?'🎬':'📺';
+  const ppIcon=isGame?'🎮':e.type==='video'?'📹':e.type==='special'?'🎊':e.type==='film'||e.type==='filmanim'?'🎬':'📺';
   let sub='';
   if(e.subitems&&e.subitems.length)sub='<div class="esub">'+e.subitems.map(s=>'<div class="si">'+s+'</div>').join('')+'</div>';
   const note=e.note?'<div class="enote">'+e.note+'</div>':'';
   const details=e.details?'<div class="edetails">'+e.details+'</div>':'';
-  return '<div class="en '+levelClass+devClass+(isDone?' done':'')+'" data-id="'+e.id+'" data-type="'+e.type+'" data-level="'+e.level+'" data-tmdb="'+(e.tmdb||'0')+'" data-media="'+mediaAttr+'"'+seasonAttr+' onclick="toggleExpand(this,event)">'
+  return '<div class="en '+levelClass+devClass+ncClass+(isDone?' done':'')+'" data-id="'+e.id+'" data-type="'+e.type+'" data-level="'+e.level+'" data-tmdb="'+(e.tmdb||'0')+'" data-media="'+mediaAttr+'" data-nc="'+(isNC?'1':'0')+'"'+seasonAttr+' onclick="toggleExpand(this,event)">'
     +'<div class="en-top">'
     +'<div class="en-check" onclick="toggleEntry(\''+e.id+'\',event)"><div class="checkmark">'+(isDone?'✓':'')+'</div></div>'
     +'<div class="en-datebadge"><div class="en-level-icon">'+levelIcon+'</div><div class="date-main">'+(e.date||'—')+'</div>'+dimBadge+'</div>'
@@ -611,6 +652,52 @@ function buildEntry(e,showLevel,inSeg){
     +'<div class="en-expand"></div></div>';
 }
 
+// Filtrage avancé
+function applyFilters(){
+  const showTypes=new Set();
+  document.querySelectorAll('.type-filter-btn.active').forEach(b=>showTypes.add(b.dataset.type));
+  const showMust=document.getElementById('lvl-must').classList.contains('active');
+  const showImp=document.getElementById('lvl-imp').classList.contains('active');
+  const showBonus=document.getElementById('lvl-bonus').classList.contains('active');
+  const hideNC=document.getElementById('btn-nc').classList.contains('active');
+
+  document.querySelectorAll('#tl-content .en').forEach(e=>{
+    const type=e.dataset.type;
+    const level=e.dataset.level;
+    const nc=e.dataset.nc==='1';
+    const typeOK=showTypes.has(type)||showTypes.size===0;
+    const levelOK=(level==='must'&&showMust)||(level==='important'&&showImp)||(level==='bonus'&&showBonus);
+    const ncOK=!(hideNC&&nc);
+    e.style.display=(typeOK&&levelOK&&ncOK)?'':'none';
+  });
+  document.querySelectorAll('#tl-content .era-node').forEach(h=>{
+    let n=h.nextElementSibling,vis=false;
+    while(n&&!n.dataset.era){
+      if(n.classList.contains('en')&&n.style.display!=='none')vis=true;
+      if(n.classList.contains('segment-box'))vis=true;
+      n=n.nextElementSibling;
+    }
+    h.style.display=vis?'':'none';
+  });
+  document.querySelectorAll('#tl-content .segment-box').forEach(box=>{
+    const ok=[...box.querySelectorAll('.en')].some(e=>e.style.display!=='none');
+    box.style.display=ok?'':'none';
+  });
+}
+
+function toggleTypeFilter(btn){
+  btn.classList.toggle('active');
+  applyFilters();
+}
+function toggleLevelFilter(btn){
+  btn.classList.toggle('active');
+  applyFilters();
+}
+function toggleNCFilter(btn){
+  btn.classList.toggle('active');
+  applyFilters();
+}
+
 function buildTimeline(data){
   const showLevel=data.id!=='sw';
   document.documentElement.style.setProperty('--tl-color',data.color||'var(--accent)');
@@ -618,6 +705,8 @@ function buildTimeline(data){
   const hasNC=data.eras.some(era=>era.entries.some(e=>e.tags&&e.tags.includes('nc')));
   const hasDim=data.eras.some(era=>era.entries.some(e=>e.dim));
   const hasFB=data.eras.some(era=>era.entries.some(e=>e.tags&&e.tags.includes('flashback')));
+
+  // Légende
   let leg='<div class="leg-title">Légende</div>';
   types.forEach(t=>{const[c,l]=BADGES[t]||[];if(c)leg+='<span class="b '+c+'">'+l+'</span>'});
   leg+='<div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;width:100%;margin-top:.15rem">';
@@ -627,10 +716,29 @@ function buildTimeline(data){
   if(hasDim)leg+='<span class="dt">TERRE-XXXX</span>';
   leg+='</div>';
   document.getElementById('tl-legend').innerHTML=leg;
-  let f='<button class="fbt a" onclick="filterTL(\'all\',this)">Tout</button>';
-  if(showLevel)f+='<button class="fbt" onclick="filterTL(\'must\',this)">⭐ Obligatoire</button><button class="fbt" onclick="filterTL(\'important\',this)">🚨 Important</button>';
-  types.forEach(t=>{f+='<button class="fbt" onclick="filterTL(\''+t+'\',this)">'+(BADGE_LABELS[t]||t)+'</button>';});
+
+  // Filtres — style décocher
+  let f='<div class="filter-group"><span class="filter-label">Types :</span>';
+  types.forEach(t=>{
+    const[,l]=BADGES[t]||['','?'];
+    f+='<button class="fbt type-filter-btn active" data-type="'+t+'" onclick="toggleTypeFilter(this)">'+l+'</button>';
+  });
+  f+='</div>';
+  if(showLevel){
+    f+='<div class="filter-group"><span class="filter-label">Niveau :</span>';
+    f+='<button class="fbt active" id="lvl-must" onclick="toggleLevelFilter(this)">⭐ Obligatoire</button>';
+    f+='<button class="fbt active" id="lvl-imp" onclick="toggleLevelFilter(this)">🚨 Important</button>';
+    f+='<button class="fbt active" id="lvl-bonus" onclick="toggleLevelFilter(this)">Tout</button>';
+    f+='</div>';
+  }
+  if(hasNC){
+    f+='<div class="filter-group">';
+    f+='<button class="fbt" id="btn-nc" onclick="toggleNCFilter(this)">Masquer non-confirmés</button>';
+    f+='</div>';
+  }
   document.getElementById('filter-bar').innerHTML=f;
+
+  // Contenu
   let html='';
   data.eras.forEach(era=>{
     const isSV=era.special==='sv',isFox=era.special==='fox';
@@ -648,64 +756,6 @@ function buildTimeline(data){
     }
   });
   document.getElementById('tl-content').innerHTML=html;
-  requestAnimationFrame(()=>drawSacredTimeline(data));
-}
-
-function drawSacredTimeline(data){
-  const wrapper=document.getElementById('tl-wrapper');
-  const svg=document.getElementById('tl-svg');
-  const path=document.getElementById('tl-path');
-  if(!svg||!path||!wrapper)return;
-  path.setAttribute('stroke',data.color||'#7c6af7');
-  const totalH=wrapper.scrollHeight;
-  svg.style.height=totalH+'px';
-  svg.setAttribute('viewBox','0 0 32 '+totalH);
-  const cx=12,segCx=24;
-  const wRect=wrapper.getBoundingClientRect();
-  const scrollTop=window.pageYOffset||document.documentElement.scrollTop;
-  const wTop=wRect.top+scrollTop;
-  let pathD='M '+cx+' 0 ';
-  let prevX=cx,prevY=0;
-  const nodes=[...document.querySelectorAll('#tl-content > .era-node, #tl-content > .en, #tl-content > .segment-box')];
-  nodes.forEach(node=>{
-    const nr=node.getBoundingClientRect();
-    const y=nr.top+scrollTop-wTop+nr.height/2;
-    let x=cx;
-    if(node.classList.contains('segment-box')||node.classList.contains('deviate'))x=segCx;
-    if(x!==prevX){
-      const mid=(prevY+y)/2;
-      pathD+='C '+prevX+' '+mid+' '+x+' '+mid+' '+x+' '+y+' ';
-    } else {
-      pathD+='L '+x+' '+y+' ';
-    }
-    prevX=x;prevY=y;
-  });
-  pathD+='L '+cx+' '+totalH;
-  path.setAttribute('d',pathD);
-}
-window.addEventListener('resize',()=>{if(currentData)requestAnimationFrame(()=>drawSacredTimeline(currentData))});
-
-function filterTL(type,btn){
-  document.querySelectorAll('#filter-bar .fbt').forEach(b=>b.classList.remove('a'));
-  btn.classList.add('a');
-  document.querySelectorAll('#tl-content .en').forEach(e=>{
-    const show=type==='all'||(type==='must'&&e.dataset.level==='must')||(type==='important'&&(e.dataset.level==='must'||e.dataset.level==='important'))||(type!=='all'&&type!=='must'&&type!=='important'&&e.dataset.type===type);
-    e.style.display=show?'':'none';
-  });
-  document.querySelectorAll('#tl-content .era-node').forEach(h=>{
-    let n=h.nextElementSibling,vis=false;
-    while(n&&!n.dataset.era){
-      if(n.classList.contains('en')&&n.style.display!=='none')vis=true;
-      if(n.classList.contains('segment-box'))vis=true;
-      n=n.nextElementSibling;
-    }
-    h.style.display=vis?'':'none';
-  });
-  document.querySelectorAll('#tl-content .segment-box').forEach(box=>{
-    const ok=[...box.querySelectorAll('.en')].some(e=>e.style.display!=='none');
-    box.style.display=ok?'':'none';
-  });
-  requestAnimationFrame(()=>{if(currentData)drawSacredTimeline(currentData)});
 }
 
 function buildHomeCards(){
