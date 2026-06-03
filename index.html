@@ -520,13 +520,13 @@ async function fetchPoster(id,type,season){
   const k=type+'-'+id+(season?'-s'+season:'');
   if(posterCache[k]!==undefined)return posterCache[k];
   try{
-    const url=season&&type==='tv'
-      ?'https://api.themoviedb.org/3/tv/'+id+'/season/'+season+'?api_key='+TMDB_KEY
-      :'https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+TMDB_KEY;
-    const r=await fetch(url);
+    // Toujours chercher le backdrop sur l'endpoint principal (film ou série)
+    // pour avoir des images horizontales cohérentes
+    const mainType=type==='video'?'movie':type;
+    const r=await fetch('https://api.themoviedb.org/3/'+mainType+'/'+id+'?api_key='+TMDB_KEY);
     if(!r.ok){posterCache[k]=null;return null}
     const d=await r.json();
-    posterCache[k]=d.backdrop_path||d.poster_path||null;
+    posterCache[k]=d.backdrop_path||null;
     return posterCache[k];
   }catch{posterCache[k]=null;return null}
 }
