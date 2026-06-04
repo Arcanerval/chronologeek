@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Chronologeek</title>
+<title>Marvel — Chronologeek</title>
 <style>
 :root{
   --bg:#08080f;--surface:#0f0f1a;--surface2:#161625;--border:#1e1e35;--border2:#2a2a48;
@@ -29,7 +29,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .pbn-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .4s}
 .disc-btn{background:linear-gradient(135deg,#5865f2,#4752c4);color:#fff!important;padding:.4rem 1rem;border-radius:8px;font-size:.82rem;font-weight:600;white-space:nowrap}
 /* HOME */
-#home-page{display:none}#home-page.v{display:block}
+
 .hero{padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 0%,rgba(124,106,247,.15),transparent 70%);pointer-events:none}
 .hero-inner{position:relative;z-index:1}
@@ -51,7 +51,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .cp-fill{height:100%;border-radius:2px;transition:width .5s}
 .cnew{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:.6rem}
 /* TIMELINE PAGE */
-.tl-page{display:none;max-width:1200px;margin:0 auto;padding:2.5rem 2rem}.tl-page.v{display:block}
+.tl-page{display:block;max-width:1200px;margin:0 auto;padding:2.5rem 2rem}
 .bc{font-size:.78rem;color:var(--muted2);margin-bottom:1.25rem;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:color .2s}
 .bc:hover{color:var(--accent)}
 .page-title{font-size:2.1rem;font-weight:900;letter-spacing:-.5px;margin-bottom:.4rem}
@@ -198,41 +198,42 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .faq-q::after{content:'›';font-size:1.2rem;transition:transform .2s;color:var(--muted2)}
 details[open] .faq-q::after{transform:rotate(90deg)}
 .faq-a{padding:.5rem .85rem .65rem;font-size:.81rem;color:var(--muted2);line-height:1.65;border-top:1px solid var(--border)}
+
+#miss-minute{position:fixed;bottom:2rem;right:2rem;z-index:300;width:88px;height:88px;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1);filter:drop-shadow(0 4px 16px rgba(0,0,0,.6));display:none}
+#miss-minute.visible{display:block}
+#miss-minute img{width:100%;height:100%;object-fit:contain}
+#miss-minute:hover{transform:scale(1.15) rotate(-8deg)}
+.mm-normal{display:block}.mm-hover{display:none}
+#miss-minute:hover .mm-normal{display:none}
+#miss-minute:hover .mm-hover{display:block}
 </style>
 </head>
 <body>
-
 <header>
   <nav>
-    <div class="logo" onclick="showHome()">
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer">
       <img id="site-logo" alt="Chronologeek" onload="this.classList.add('loaded');document.getElementById('logo-text').style.display='none'"/>
       <span class="logo-text" id="logo-text">Chronologeek</span>
     </div>
     <div class="nav-links">
-      <a onclick="showHome()">Accueil</a>
+      <a onclick="window.location.href='index.html'">Accueil</a>
       <a onclick="window.location.href='starwars.html'">Star Wars</a>
-      <a onclick="window.location.href='marvel.html'">Marvel</a>
-      <a onclick="showCS()">Dossiers</a>
-      <a onclick="showCS()">Communauté</a>
+      <a onclick="window.location.href='marvel.html'" style="color:var(--text);font-weight:700">Marvel</a>
+      <a href="#">Dossiers</a>
+      <a href="#">Communauté</a>
     </div>
     <div class="nav-sp"></div>
     <div class="pbn" id="pbn"><span id="pbn-label">0/0</span><div class="pbn-track"><div class="pbn-fill" id="pbn-fill" style="width:0%"></div></div></div>
     <a href="#" class="disc-btn">Discord</a>
   </nav>
 </header>
-<div class="pm" id="pm" onclick="closePM()"><span class="pm-x">✕</span><img id="pmi" src="" alt=""/></div>
-<div id="home-page">
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-rune">✦ La référence française des timelines ✦</div>
-      <h1>Chronologeek</h1>
-      <p class="hero-tagline">Les timelines complètes de tes univers préférés — tous supports, ordre chronologique, 100% canon. Enfin à jour.</p>
-      <div class="ugrid" id="ugrid"></div>
-    </div>
-  </section>
+<div id="miss-minute" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Remonter en haut">
+  <img class="mm-normal" src="images/miss-minutes.png" alt=""/>
+  <img class="mm-hover" src="images/miss-minutes-overclick.png" alt=""/>
 </div>
+<div class="pm" id="pm" onclick="closePM()"><span class="pm-x">✕</span><img id="pmi" src="" alt=""/></div>
 <div class="tl-page" id="tl-page">
-  <div class="bc" onclick="showHome()">← Accueil</div>
+  <div class="bc" onclick="window.location.href='index.html'">← Accueil</div>
   <div class="page-title" id="tl-title"></div>
   <div class="page-sub" id="tl-sub"></div>
   <div class="progress-block">
@@ -248,102 +249,8 @@ details[open] .faq-q::after{transform:rotate(90deg)}
   <div class="filter-bar" id="filter-bar"></div>
   <div id="tl-content"></div>
 </div>
-<div class="cs" id="cs-page">
-  <h2>🌿 Bientôt disponible</h2>
-  <p>Cette section est en cours de construction.<br>Rejoins le Discord pour suivre l'avancement !</p>
-</div>
 <script>
-const DATA_SW={
-  id:"sw",title:"Star Wars",subtitle:"Timeline Canonique",description:"Films · Séries · Animés · Jeux vidéo",
-  color:"#ffe81f",glow:"rgba(255,232,31,.3)",spineStyle:"sw-style",
-  tmdb_banner:{type:"tv",id:"82856"},
-  notes:`Il manque des choses mais elles ne sont <strong>pas importantes</strong> pour la compréhension de la saga (<strong>The Acolyte, certains épisodes de The Clone Wars, Résistance, les séries d'animations pour enfants… et bien sûr tous les jeux mobiles, romans et comics</strong>).<br><br>L'an 0 du calendrier est la <strong>Bataille de Yavin</strong> (Star Wars Épisode IV) donc <strong>BBY</strong> = Before Battle of Yavin / <strong>ABY</strong> = After Battle of Yavin<br><br>Certains événements sont mieux à voir en tant que <strong>FLASHBACK</strong> pour comprendre et sont donc indiqués comme tel.<br><br>Si vous ne voulez pas faire les jeux tapez <em>"Nom du jeu film complet"</em> sur YouTube.`,
-  eras:[
-    {title:"Prélogie (32–19 BBY)",entries:[
-      {id:"sw-ep1",type:"film",level:"must",tmdb:"1895",media:"movie",title:"Épisode I : La Menace Fantôme",date:"32 BBY"},
-      {id:"sw-ep2",type:"film",level:"must",tmdb:"1894",media:"movie",title:"Épisode II : L'Attaque des Clones",date:"22 BBY"},
-      {id:"sw-toj2",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 2",date:"~60 BBY",tags:["flashback"]},
-      {id:"sw-toj3",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 3",date:"~50 BBY",tags:["flashback"]},
-      {id:"sw-toj4",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 4",date:"32 BBY",tags:["flashback"]}
-    ]},
-    {title:"The Clone Wars (22–19 BBY)",entries:[
-      {id:"sw-tcw-pre",type:"anime",level:"bonus",tmdb:"4194",media:"tv",title:"The Clone Wars",date:"22 BBY",
-        note:"Les épisodes regroupés sont des arcs narratifs. Regarder dans cet ordre :",
-        subitems:["S2E16 · S1E16 → Tales of the Jedi E1 (FLASHBACK 36-35 BBY)"]},
-      {id:"sw-toj1",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 1",date:"36–35 BBY",tags:["flashback"]},
-      {id:"sw-tcwfilm",type:"filmanim",level:"important",tmdb:"12180",media:"movie",title:"Star Wars : The Clone Wars",date:"22 BBY"},
-      {id:"sw-tcw",type:"anime",level:"bonus",tmdb:"4194",media:"tv",title:"The Clone Wars (suite)",date:"22–19 BBY",
-        subitems:[
-          "<strong>22 BBY :</strong> S3E1 · S3E3 · S1E1-5 · S1E9-10",
-          "<strong>21 BBY :</strong> S1E11-12 · S1E15 · S1E19-21 · S2E1-3 · S2E17 · S2E18-19 · S2E4-8 · S2E9-10 · S2E12-14 · S2E20-22 · S3E5-6 · S3E7 · S3E2 · S3E8 · S1E22 · S3E9-10 · S3E12-14",
-          "<strong>20 BBY :</strong> S3E15-17 · S3E18-20 · S3E21-22 · S4E7-10 · S4E14 · S4E15-18 · S4E19-22 · S5E2-5 · S5E6-9 · S5E12",
-          "<strong>19 BBY :</strong> S5E1 · S5E14-16 · S5E17-20 · S6E1-4 · S6E5-7 · S6E10-13 · S7E5-8 · S7E1-4"
-        ]},
-      {id:"sw-ep3",type:"film",level:"must",tmdb:"1893",media:"movie",title:"Épisode III : La Revanche des Sith",date:"19 BBY"},
-      {id:"sw-tcw-s7",type:"anime",level:"bonus",tmdb:"4194",media:"tv",season:7,title:"The Clone Wars — Saison 7 E9-12",date:"19 BBY",note:"L'épilogue (vers 17 BBY) ne spoile rien d'important."},
-      {id:"sw-toj5",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 5",date:"~22–19 BBY",tags:["flashback"]},
-      {id:"sw-toe4",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 4",date:"19 BBY",note:"Pendant La Revanche des Sith."},
-      {id:"sw-toe5",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 5",date:"19 BBY"}
-    ]},
-    {title:"Ère de l'Empire (19–5 BBY)",entries:[
-      {id:"sw-badbatch1",type:"serie",level:"bonus",tmdb:"105971",media:"tv",season:1,title:"The Bad Batch",date:"19 BBY",note:"Épisode 1 pendant La Revanche des Sith.",subitems:["Saison 1"]},
-      {id:"sw-badbatch23",type:"serie",level:"bonus",tmdb:"105971",media:"tv",season:2,title:"The Bad Batch",date:"18 BBY",subitems:["Saison 2","Saison 3"]},
-      {id:"sw-tou1",type:"anime",level:"bonus",tmdb:"0",media:"tv",title:"Tales of the Underworld — Épisode 1",date:"~17–16 BBY",note:"Prologue avant La Revanche des Sith. La mort du personnage se passe dans le livre Dark Disciple (lisez un résumé si ça vous intéresse)."},
-      {id:"sw-tou23",type:"anime",level:"bonus",tmdb:"0",media:"tv",title:"Tales of the Underworld — Épisodes 2–3",date:"~17–16 BBY"},
-      {id:"sw-toj6",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 6",date:"~16–15 BBY",note:"Prologue pendant La Revanche des Sith."},
-      {id:"sw-jfo",type:"jeu",level:"important",tmdb:"0",media:"game",title:"Star Wars Jedi : Fallen Order",date:"14 BBY"},
-      {id:"sw-solo",type:"film",level:"important",tmdb:"348350",media:"movie",title:"Solo : A Star Wars Story",date:"10 BBY"},
-      {id:"sw-obiwan",type:"serie",level:"must",tmdb:"92830",media:"tv",season:1,title:"Obi-Wan Kenobi",date:"9 BBY",subitems:["Saison 1"]},
-      {id:"sw-toe6",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 6",date:"~9–6 BBY"},
-      {id:"sw-jsurvivr",type:"jeu",level:"important",tmdb:"0",media:"game",title:"Star Wars Jedi : Survivor",date:"9 BBY"}
-    ]},
-    {title:"Rébellion — Andor & Rebels (5–1 BBY)",entries:[
-      {id:"sw-andor-s1",type:"serie",level:"must",tmdb:"83867",media:"tv",season:1,title:"Andor",date:"5 BBY",note:"On va alterner entre Andor et Rebels pas mal de fois. Si le changement de ton vous dérange, regardez Rebels d'abord puis Andor. Mais en vrai, ça vaut le coup en termes de narration.",subitems:["Saison 1"]},
-      {id:"sw-rebels-1",type:"anime",level:"must",tmdb:"60554",media:"tv",season:1,title:"Rebels",date:"5–4 BBY",subitems:["Courts-métrages 1–4","Saison 1","Saison 2 épisodes 1-9"]},
-      {id:"sw-andor-s2a",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"4 BBY",subitems:["Saison 2 épisodes 1-2-3"]},
-      {id:"sw-rebels-2",type:"anime",level:"must",tmdb:"60554",media:"tv",season:2,title:"Rebels",date:"4 BBY",subitems:["Saison 2 épisode 10"]},
-      {id:"sw-andor-s2b",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"3 BBY",subitems:["Saison 2 épisodes 4-5-6"]},
-      {id:"sw-rebels-3",type:"anime",level:"must",tmdb:"60554",media:"tv",season:2,title:"Rebels",date:"3–2 BBY",subitems:["Saison 2 épisodes 11-22","Saison 3 épisodes 1-16"]},
-      {id:"sw-andor-s2c",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"2 BBY",subitems:["Saison 2 épisodes 7-8"]},
-      {id:"sw-rebels-4",type:"anime",level:"must",tmdb:"60554",media:"tv",season:3,title:"Rebels",date:"2 BBY",subitems:["Saison 3 épisode 17"]},
-      {id:"sw-andor-s2d",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"2 BBY",subitems:["Saison 2 épisode 9"]},
-      {id:"sw-rebels-5",type:"anime",level:"must",tmdb:"60554",media:"tv",season:3,title:"Rebels",date:"2 BBY",subitems:["Saison 3 épisodes 18-22"]},
-      {id:"sw-rebels-6",type:"anime",level:"must",tmdb:"60554",media:"tv",season:4,title:"Rebels",date:"1 BBY",note:"Arrêtez l'épisode final à 42 min si vous n'avez jamais vu SW IV–V–VI (gros spoil). L'épilogue se passe au début de la série Ahsoka.",subitems:["Saison 4"]},
-      {id:"sw-andor-s2e",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"1 BBY",subitems:["Saison 2 épisodes 10-11-12"]},
-      {id:"sw-r1",type:"film",level:"must",tmdb:"330459",media:"movie",title:"Rogue One : A Star Wars Story",date:"1 BBY"}
-    ]},
-    {title:"Trilogie Originale (0–5 ABY)",entries:[
-      {id:"sw-ep4",type:"film",level:"must",tmdb:"11",media:"movie",title:"Épisode IV : Un Nouvel Espoir",date:"1 BBY–0 ABY"},
-      {id:"sw-ep5",type:"film",level:"must",tmdb:"1891",media:"movie",title:"Épisode V : L'Empire Contre-Attaque",date:"3 ABY"},
-      {id:"sw-outlaws",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Outlaws + DLC Wild Card + DLC A Pirate's Fortune",date:"3 ABY"},
-      {id:"sw-bf2pro",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Prologue : The Cleaner",date:"4 ABY"},
-      {id:"sw-ep6",type:"film",level:"must",tmdb:"1892",media:"movie",title:"Épisode VI : Le Retour du Jedi",date:"4 ABY"},
-      {id:"sw-bf2c1",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Missions 1–6",date:"4 ABY"},
-      {id:"sw-squadrons",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Squadrons",date:"4 ABY"},
-      {id:"sw-bf2c2",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Missions 7–11",date:"5 ABY"}
-    ]},
-    {title:"Le Mandalorien & Nouvel Empire (9 ABY)",entries:[
-      {id:"sw-mando1",type:"serie",level:"must",tmdb:"82856",media:"tv",season:1,title:"The Mandalorian",date:"9 ABY",subitems:["Saison 1","Saison 2 épisodes 1-5"]},
-      {id:"sw-toe1",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 1",date:"20 BBY",tags:["flashback"],note:"Pendant The Clone Wars."},
-      {id:"sw-toe2",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 2",date:"~9–5 BBY",tags:["flashback"]},
-      {id:"sw-toe3",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 3",date:"~8–9 ABY",tags:["flashback"]},
-      {id:"sw-mando2",type:"serie",level:"must",tmdb:"82856",media:"tv",season:2,title:"The Mandalorian",date:"9 ABY",subitems:["Saison 2 épisodes 6-8"]},
-      {id:"sw-boba",type:"serie",level:"must",tmdb:"115036",media:"tv",season:1,title:"The Book of Boba Fett",date:"9 ABY",subitems:["Saison 1"]},
-      {id:"sw-mando3",type:"serie",level:"must",tmdb:"82856",media:"tv",season:3,title:"The Mandalorian",date:"9 ABY",subitems:["Saison 3"]},
-      {id:"sw-mandogrogu",type:"film",level:"must",tmdb:"774752",media:"movie",title:"The Mandalorian and Grogu",date:"9 ABY"},
-      {id:"sw-rebels-ep",type:"anime",level:"bonus",tmdb:"60554",media:"tv",title:"Épilogue de l'épisode final de Rebels",date:"9 ABY"},
-      {id:"sw-ahsoka",type:"serie",level:"must",tmdb:"114461",media:"tv",season:1,title:"Ahsoka",date:"9 ABY",subitems:["Saison 1"]},
-      {id:"sw-skeleton",type:"serie",level:"bonus",tmdb:"202555",media:"tv",season:1,title:"Skeleton Crew",date:"9 ABY",subitems:["Saison 1"]}
-    ]},
-    {title:"Trilogie Sequel (34–35 ABY)",entries:[
-      {id:"sw-bf2c3",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Mission 12",date:"~34 ABY"},
-      {id:"sw-ep7",type:"film",level:"must",tmdb:"140607",media:"movie",title:"Épisode VII : Le Réveil de la Force",date:"34 ABY"},
-      {id:"sw-bf2res",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Résurrection",date:"34 ABY"},
-      {id:"sw-ep8",type:"film",level:"must",tmdb:"181808",media:"movie",title:"Épisode VIII : Les Derniers Jedi",date:"34 ABY"},
-      {id:"sw-ep9",type:"film",level:"must",tmdb:"181812",media:"movie",title:"Épisode IX : L'Ascension de Skywalker",date:"35 ABY"}
-    ]}
-  ]
-};const DATA_MCU={
+const DATA_MCU={
   id:"mcu",title:"Marvel",subtitle:"Timeline Canonique",
   description:"Films · Séries · Spider-Verse · Fox",
   color:"#e23636",glow:"rgba(226,54,54,.3)",
@@ -492,11 +399,7 @@ const DATA_SW={
     ]}
   ]
 };
-const UNIVERSES=[
-  {data:DATA_SW,icon:'⚔️'},
-  {data:DATA_MCU,icon:'🦸'},
-  {data:null,id:'soon',icon:'🌙',title:'Bientôt…',description:"D'autres univers arrivent",color:'#7c6af7',soon:true}
-];
+const UNIVERSES=[{data:DATA_MCU,icon:'x'}];
 const TMDB_KEY='6257b37bf29ab31357853fce00232314';
 const IMG='https://image.tmdb.org/t/p/';
 const BADGES={
@@ -547,9 +450,7 @@ function renderProgress(){
   document.getElementById('pb-fill').style.cssText='width:'+pct+'%;background:'+grad;
   document.getElementById('pb-counts').innerHTML='<strong>'+done+'</strong> / '+total+' vus · <strong>'+pct+'%</strong>';
   const pbn=document.getElementById('pbn');
-  pbn.classList.toggle('show',total>0);
-  document.getElementById('pbn-label').textContent=done+'/'+total;
-  document.getElementById('pbn-fill').style.cssText='width:'+pct+'%;background:'+grad;
+  if(pbn){pbn.classList.toggle('show',total>0);document.getElementById('pbn-label').textContent=done+'/'+total;document.getElementById('pbn-fill').style.cssText='width:'+pct+'%;background:'+grad;}
 }
 
 async function fetchPoster(id,type,season){
@@ -794,81 +695,31 @@ function buildTimeline(data){
   document.getElementById('tl-content').innerHTML=html;
 }
 
-function buildHomeCards(){
-  const grid=document.getElementById('ugrid');
-  grid.innerHTML='';
-  const now=new Date();
-  const months=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-  const dl='À jour — '+months[now.getMonth()]+' '+now.getFullYear();
-  UNIVERSES.forEach(u=>{
-    const d=u.data||u;
-    const prog=u.data?getProgress(u.data.id):{};
-    const total=u.data?u.data.eras.reduce((a,e)=>a+e.entries.length,0):0;
-    const done=u.data?u.data.eras.reduce((a,era)=>a+era.entries.filter(e=>!!prog[e.id]).length,0):0;
-    const pct=total?Math.round(done/total*100):0;
-    const card=document.createElement('div');
-    card.className='ucard'+(u.soon?' soon':'');
-    card.id='card-'+(u.data?u.data.id:u.id);
-    card.onclick=u.soon?showCS:()=>window.location.href=(u.data.id==='mcu'?'marvel.html':'starwars.html');
-    card.innerHTML='<div class="cbanner"><img id="banner-'+(u.data?u.data.id:u.id)+'" src="" alt=""/><span class="cicon">'+u.icon+'</span></div>'
-      +'<div class="cbody"><div class="cname" style="color:'+(d.color||'var(--text)')+'">'+d.title+'</div>'
-      +'<div class="csub">'+(d.description||d.subtitle||'')+'</div>'
-      +(u.soon
-        ?'<span class="cnew" style="background:rgba(124,106,247,.12);color:var(--accent);border:1px solid rgba(124,106,247,.25)">BIENTÔT</span>'
-        :'<div class="cprogress"><div class="cp-track"><div class="cp-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+(d.color||'var(--accent)')+',var(--accent2))"></div></div><span>'+done+' / '+total+' vus</span></div><span class="cnew" style="background:rgba(86,194,122,.12);color:var(--green);border:1px solid rgba(86,194,122,.28)">'+dl+'</span>'
-      )+'</div>';
-    grid.appendChild(card);
-    if(u.data&&u.data.tmdb_banner){
-      const{type,id}=u.data.tmdb_banner;
-      fetch('https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+TMDB_KEY)
-        .then(r=>r.json()).then(dd=>{
-          if(dd.backdrop_path){const img=document.getElementById('banner-'+u.data.id);if(img)img.src=IMG+'w780'+dd.backdrop_path}
-        }).catch(()=>{});
-    }
-  });
-}
 
-function showHome(){
-  document.getElementById('home-page').classList.add('v');
-  document.getElementById('tl-page').classList.remove('v');
-  document.getElementById('cs-page').classList.remove('v');
-  document.getElementById('pbn').classList.remove('show');
-  currentData=null;window.scrollTo(0,0);buildHomeCards();
-}
+
+function showHome(){window.location.href='index.html';}
 function showUniverse(uid){
   const u=UNIVERSES.find(x=>x.data&&x.data.id===uid);
   if(!u){showCS();return}
   currentData=u.data;
-  window._currentUID=uid;
-  document.getElementById('tl-title').textContent=currentData.title+' — '+currentData.subtitle;
+  const tlTitle=document.getElementById('tl-title');if(tlTitle)tlTitle.textContent=currentData.title+' — '+currentData.subtitle;
   document.getElementById('tl-title').style.color=currentData.color||'var(--text)';
   document.getElementById('tl-title').style.textShadow='0 0 40px '+(currentData.glow||'transparent');
   document.getElementById('tl-sub').textContent=currentData.description||'';
   document.getElementById('tl-notes').innerHTML=currentData.notes||'';
   document.getElementById('pb-fill').style.background='linear-gradient(90deg,'+(currentData.color||'var(--accent)')+',var(--accent2))';
   buildTimeline(currentData);renderProgress();
-  document.getElementById('home-page').classList.remove('v');
-  document.getElementById('tl-page').classList.add('v');
-  document.getElementById('cs-page').classList.remove('v');
   window.scrollTo(0,0);loadPosters();
 }
-function showCS(){
-  document.getElementById('home-page').classList.remove('v');
-  document.getElementById('tl-page').classList.remove('v');
-  document.getElementById('cs-page').classList.add('v');
-  document.getElementById('pbn').classList.remove('show');
-  window.scrollTo(0,0);
-}
+function showCS(){window.location.href='index.html';}
+
+
 
 window.addEventListener('scroll',()=>{
   const mm=document.getElementById('miss-minute');
-  if(!mm)return;
-  const tlActive=document.getElementById('tl-page').classList.contains('v');
-  const isMCU=window._currentUID==='mcu';
-  mm.classList.toggle('visible',tlActive&&isMCU&&window.scrollY>400);
+  if(mm)mm.classList.toggle('visible',window.scrollY>400);
 });
-
-showHome();
+showUniverse('mcu');
 </script>
 </body>
 </html>

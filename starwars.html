@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Chronologeek</title>
+<title>Star Wars — Chronologeek</title>
 <style>
 :root{
   --bg:#08080f;--surface:#0f0f1a;--surface2:#161625;--border:#1e1e35;--border2:#2a2a48;
@@ -29,7 +29,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .pbn-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .4s}
 .disc-btn{background:linear-gradient(135deg,#5865f2,#4752c4);color:#fff!important;padding:.4rem 1rem;border-radius:8px;font-size:.82rem;font-weight:600;white-space:nowrap}
 /* HOME */
-#home-page{display:none}#home-page.v{display:block}
+
 .hero{padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 0%,rgba(124,106,247,.15),transparent 70%);pointer-events:none}
 .hero-inner{position:relative;z-index:1}
@@ -51,7 +51,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .cp-fill{height:100%;border-radius:2px;transition:width .5s}
 .cnew{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:.6rem}
 /* TIMELINE PAGE */
-.tl-page{display:none;max-width:1200px;margin:0 auto;padding:2.5rem 2rem}.tl-page.v{display:block}
+.tl-page{display:block;max-width:1200px;margin:0 auto;padding:2.5rem 2rem}
 .bc{font-size:.78rem;color:var(--muted2);margin-bottom:1.25rem;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:color .2s}
 .bc:hover{color:var(--accent)}
 .page-title{font-size:2.1rem;font-weight:900;letter-spacing:-.5px;margin-bottom:.4rem}
@@ -201,38 +201,28 @@ details[open] .faq-q::after{transform:rotate(90deg)}
 </style>
 </head>
 <body>
-
 <header>
   <nav>
-    <div class="logo" onclick="showHome()">
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer">
       <img id="site-logo" alt="Chronologeek" onload="this.classList.add('loaded');document.getElementById('logo-text').style.display='none'"/>
       <span class="logo-text" id="logo-text">Chronologeek</span>
     </div>
     <div class="nav-links">
-      <a onclick="showHome()">Accueil</a>
-      <a onclick="window.location.href='starwars.html'">Star Wars</a>
+      <a onclick="window.location.href='index.html'">Accueil</a>
+      <a onclick="window.location.href='starwars.html'" style="color:var(--text);font-weight:700">Star Wars</a>
       <a onclick="window.location.href='marvel.html'">Marvel</a>
-      <a onclick="showCS()">Dossiers</a>
-      <a onclick="showCS()">Communauté</a>
+      <a href="#">Dossiers</a>
+      <a href="#">Communauté</a>
     </div>
     <div class="nav-sp"></div>
     <div class="pbn" id="pbn"><span id="pbn-label">0/0</span><div class="pbn-track"><div class="pbn-fill" id="pbn-fill" style="width:0%"></div></div></div>
     <a href="#" class="disc-btn">Discord</a>
   </nav>
 </header>
+
 <div class="pm" id="pm" onclick="closePM()"><span class="pm-x">✕</span><img id="pmi" src="" alt=""/></div>
-<div id="home-page">
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-rune">✦ La référence française des timelines ✦</div>
-      <h1>Chronologeek</h1>
-      <p class="hero-tagline">Les timelines complètes de tes univers préférés — tous supports, ordre chronologique, 100% canon. Enfin à jour.</p>
-      <div class="ugrid" id="ugrid"></div>
-    </div>
-  </section>
-</div>
 <div class="tl-page" id="tl-page">
-  <div class="bc" onclick="showHome()">← Accueil</div>
+  <div class="bc" onclick="window.location.href='index.html'">← Accueil</div>
   <div class="page-title" id="tl-title"></div>
   <div class="page-sub" id="tl-sub"></div>
   <div class="progress-block">
@@ -247,10 +237,6 @@ details[open] .faq-q::after{transform:rotate(90deg)}
   <div class="leg" id="tl-legend"></div>
   <div class="filter-bar" id="filter-bar"></div>
   <div id="tl-content"></div>
-</div>
-<div class="cs" id="cs-page">
-  <h2>🌿 Bientôt disponible</h2>
-  <p>Cette section est en cours de construction.<br>Rejoins le Discord pour suivre l'avancement !</p>
 </div>
 <script>
 const DATA_SW={
@@ -343,160 +329,8 @@ const DATA_SW={
       {id:"sw-ep9",type:"film",level:"must",tmdb:"181812",media:"movie",title:"Épisode IX : L'Ascension de Skywalker",date:"35 ABY"}
     ]}
   ]
-};const DATA_MCU={
-  id:"mcu",title:"Marvel",subtitle:"Timeline Canonique",
-  description:"Films · Séries · Spider-Verse · Fox",
-  color:"#e23636",glow:"rgba(226,54,54,.3)",
-  tmdb_banner:{type:"movie",id:"299534"},
-  notes:`Si vous êtes ici c'est que vous souhaitez regarder le Marvel Cinematic Universe dans son ordre le plus optimisé, un mélange d'ordre chronologique et d'ordre de sortie, vous trouverez des détails supplémentaires en cliquant sur chaque média et tout ce site est garanti sans spoil majeur.<br><br>Il manque des choses mais elles ne sont <strong>pas du tout importantes</strong> pour la compréhension (<strong>les vieux films Punisher, la trilogie Blade, Daredevil et Elektra, Les Nouveaux Mutants et les séries X-Men, les anciens 4 Fantastiques, Spider-Noir, I Am Groot, les films du SSU hors Venom, beaucoup de dessins animés sans lien direct, les comics préludes…</strong>)<br><br>La chronologie principale de l'univers se passe sur la <strong>Terre-616</strong>. Si rien n'est précisé c'est que ça se passe bien dans la timeline principale.<br><br>Deux séries sont dans la catégorie <strong>"Canonicité non confirmée"</strong> et n'ont donc pas été officiellement déclarées comme faisant partie de la timeline principale de la Terre-616 par Marvel Studios. Je conseille seulement <strong>Agent Carter</strong> et <strong>Les Agents du S.H.I.E.L.D.</strong> (<strong>Cloak & Dagger, Inhumans, The Runaways</strong> sont dans le même cas mais il ne se passe rien de bien important). <strong>Toute</strong> production audiovisuelle Marvel existante fait bien partie du multivers global donc vous pouvez skip les séries si vous voulez (mais c'est cool, ça ajoute beaucoup de lore et ne contredit rien du canon officiel).<br><br>Certains événements sont mieux à voir en tant que <strong>FLASHBACK</strong> pour comprendre et sont donc indiqués comme tel.<br><br>En regardant dans l'ordre chronologique certaines scènes post-crédits spoilent des éléments plus tard donc j'indique s'il ne faut <strong>pas</strong> les regarder à ce moment et aussi à quel moment on doit les voir.`,
-  eras:[
-    {title:"PHASE I — Saga de l'Infini",entries:[
-      {id:"mcu-cap1",img:"images/captain-america-first-avenger-2011.webp",type:"film",level:"must",tmdb:"1771",media:"movie",title:"Captain America : First Avenger",date:"1942–1945",note:"Prologue et épilogue se passent en 2011–2012 mais important à regarder en premier. Ne pas regarder la scène post-crédits."},
-      {id:"mcu-ac-os",type:"video",level:"bonus",tmdb:"0",img:"images/one-shot-agent-carter.webp",media:"video",title:"One Shot : Agent Carter",date:"1946"},
-      {id:"mcu-ac-serie",img:"images/agent-carter-season-1.webp",type:"serie",level:"bonus",tmdb:"61550",media:"tv",season:1,title:"Agent Carter",date:"1946–1947",tags:["nc"],subitems:["Saison 1","Saison 2"]},
-      {id:"mcu-cm",img:"images/captain-marvel-2019.webp",type:"film",level:"must",tmdb:"299537",media:"movie",title:"Captain Marvel",date:"1995",note:"Ne pas regarder les scènes post-crédits."},
-      {id:"mcu-im1",img:"images/iron-man-2008.webp",type:"film",level:"must",tmdb:"1726",media:"movie",title:"Iron Man",date:"2008"},
-      {id:"mcu-im2",img:"images/iron-man-2-2010.webp",type:"film",level:"must",tmdb:"10138",media:"movie",title:"Iron Man 2",date:"2010"},
-      {id:"mcu-hulk",img:"images/l-incroyable-hulk-2008.webp",type:"film",level:"must",tmdb:"1724",media:"movie",title:"L'Incroyable Hulk",date:"2010"},
-      {id:"mcu-consultant",type:"video",level:"important",tmdb:"0",img:"images/one-shot-the-consultant.webp",media:"video",title:"One Shot : Le Consultant",date:"2010"},
-      {id:"mcu-thor1",img:"images/thor-2011.webp",type:"film",level:"must",tmdb:"10195",media:"movie",title:"Thor",date:"2010"},
-      {id:"mcu-av1",img:"images/the-avengers-2012.webp",type:"film",level:"must",tmdb:"24428",media:"movie",title:"Avengers",date:"2012"},
-      {id:"mcu-item47",type:"video",level:"bonus",tmdb:"0",img:"images/one-shot-item-47.webp",media:"video",title:"One Shot : Article 47",date:"2012"}
-    ]},
-    {title:"PHASE II — Saga de l'Infini",entries:[
-      {id:"mcu-aos-s1a",img:"images/marvels-agents-of-shield-season-1.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2013",tags:["nc"],subitems:["Saison 1 Épisodes 1-7"]},
-      {id:"mcu-thor2",img:"images/thor-the-dark-world-2013.webp",type:"film",level:"must",tmdb:"76338",media:"movie",title:"Thor : Le Monde des Ténèbres",date:"2013"},
-      {id:"mcu-aos-s1b",img:"images/marvels-agents-of-shield-season-1.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2013–2014",tags:["nc"],subitems:["Saison 1 Épisodes 8-15"]},
-      {id:"mcu-im3",img:"images/iron-man-3-2013.webp",type:"film",level:"must",tmdb:"68721",media:"movie",title:"Iron Man 3",date:"2013"},
-      {id:"mcu-roi",type:"video",level:"must",tmdb:"0",img:"images/one-shot-all-hail-the-king.webp",media:"video",title:"One Shot : Longue Vie au Roi",date:"2014"},
-      {id:"mcu-cap2",img:"images/captain-america-le-soldat-de-l-hiver-2014.webp",type:"film",level:"must",tmdb:"100402",media:"movie",title:"Captain America : Le Soldat de l'Hiver",date:"2014"},
-      {id:"mcu-aos-s1c",img:"images/marvels-agents-of-shield-season-1.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2014",tags:["nc"],subitems:["Saison 1 Épisodes 16-22"]},
-      {id:"mcu-gotg1",img:"images/les-gardiens-de-la-galaxie-2014.webp",type:"film",level:"must",tmdb:"118340",media:"movie",title:"Les Gardiens de la Galaxie",date:"2014"},
-      {id:"mcu-gotg2",img:"images/les-gardiens-de-la-galaxie-2-2017.webp",type:"film",level:"must",tmdb:"283995",media:"movie",title:"Les Gardiens de la Galaxie Vol. 2",date:"2014",note:"La 4e scène post-crédits se passe plusieurs années dans le futur mais ne spoile rien d'important."},
-      {id:"mcu-dd1",img:"images/daredevil-season-1.webp",type:"serie",level:"important",tmdb:"61889",media:"tv",season:1,title:"Daredevil",date:"2014",subitems:["Saison 1"]},
-      {id:"mcu-jj1",img:"images/jessica-jones-season-1.webp",type:"serie",level:"bonus",tmdb:"38472",media:"tv",season:1,title:"Jessica Jones",date:"2015",subitems:["Saison 1"]},
-      {id:"mcu-aos-s2a",img:"images/marvels-agents-of-shield-season-2.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:2,title:"Les Agents du S.H.I.E.L.D.",date:"2014–2015",tags:["nc"],subitems:["Saison 2 Épisodes 1-19"]},
-      {id:"mcu-aou",img:"images/avengers-age-of-ultron-2015.webp",type:"film",level:"must",tmdb:"99861",media:"movie",title:"Avengers : l'Ère d'Ultron",date:"2015"},
-      {id:"mcu-aos-s2b",img:"images/marvels-agents-of-shield-season-2.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:2,title:"Les Agents du S.H.I.E.L.D.",date:"2015",tags:["nc"],subitems:["Saison 2 Épisodes 20-22"]},
-      {id:"mcu-antman1",img:"images/ant-man-2015.webp",type:"film",level:"must",tmdb:"102899",media:"movie",title:"Ant-Man",date:"2015"},
-      {id:"mcu-dd2",img:"images/daredevil-season-2.webp",type:"serie",level:"important",tmdb:"61889",media:"tv",season:2,title:"Daredevil",date:"2015",subitems:["Saison 2"]},
-      {id:"mcu-lc1",img:"images/luke-cage-season-1.webp",type:"serie",level:"bonus",tmdb:"62126",media:"tv",season:1,title:"Luke Cage",date:"2015",subitems:["Saison 1"]},
-      {id:"mcu-if1",img:"images/iron-fist-season-1.webp",type:"serie",level:"bonus",tmdb:"62127",media:"tv",season:1,title:"Iron Fist",date:"2016",subitems:["Saison 1"]},
-      {id:"mcu-aos-s3a",img:"images/marvels-agents-of-shield-season-3.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:3,title:"Les Agents du S.H.I.E.L.D.",date:"2016",tags:["nc"],subitems:["Saison 3 Épisodes 1-18"]},
-      {id:"mcu-defenders",img:"images/the-defenders-season-1.webp",type:"serie",level:"important",tmdb:"62285",media:"tv",season:1,title:"The Defenders",date:"2016",subitems:["Saison 1"]}
-    ]},
-    {title:"PHASE III — Saga de l'Infini",entries:[
-      {id:"mcu-cw",img:"images/captain-america-civil-war-2016.webp",type:"film",level:"must",tmdb:"271110",media:"movie",title:"Captain America : Civil War",date:"2016"},
-      {id:"mcu-aos-s3b",img:"images/marvels-agents-of-shield-season-3.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:3,title:"Les Agents du S.H.I.E.L.D.",date:"2016",tags:["nc"],subitems:["Saison 3 Épisodes 19-22"]},
-      {id:"mcu-bw",img:"images/black-widow-2021.webp",type:"film",level:"must",tmdb:"497698",media:"movie",title:"Black Widow",date:"2016",note:"Ne pas regarder la scène post-crédits."},
-      {id:"mcu-bp1",img:"images/black-panther-2018.webp",type:"film",level:"must",tmdb:"284054",media:"movie",title:"Black Panther",date:"2016"},
-      {id:"mcu-eow",img:"images/eyes-of-wakanda-season-1.webp",type:"anime",level:"bonus",tmdb:"241388",media:"tv",title:"Eyes of Wakanda",date:"1260 BC – 1896",tags:["flashback"]},
-      {id:"mcu-sm1",img:"images/spider-man-homecoming-2017.webp",type:"film",level:"must",tmdb:"315635",media:"movie",title:"Spider-Man : Homecoming",date:"2016"},
-      {id:"mcu-pun1",img:"images/the-punisher-season-1.webp",type:"serie",level:"bonus",tmdb:"67178",media:"tv",season:1,title:"The Punisher",date:"2016",subitems:["Saison 1"]},
-      {id:"mcu-ds1",img:"images/doctor-strange-2016.webp",type:"film",level:"must",tmdb:"284052",media:"movie",title:"Doctor Strange",date:"2016–2017",note:"Ne pas regarder les scènes post-crédits."},
-      {id:"mcu-aos-s4",img:"images/marvels-agents-of-shield-season-4.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:4,title:"Les Agents du S.H.I.E.L.D.",date:"2017",tags:["nc"],subitems:["Saison 4"]},
-      {id:"mcu-jj2",img:"images/jessica-jones-season-2.webp",type:"serie",level:"bonus",tmdb:"38472",media:"tv",season:2,title:"Jessica Jones",date:"2017",subitems:["Saison 2"]},
-      {id:"mcu-lc2",img:"images/luke-cage-season-2.webp",type:"serie",level:"bonus",tmdb:"62126",media:"tv",season:2,title:"Luke Cage",date:"2017",subitems:["Saison 2"]},
-      {id:"mcu-if2",img:"images/iron-fist-season-2.webp",type:"serie",level:"bonus",tmdb:"62127",media:"tv",season:2,title:"Iron Fist",date:"2017",subitems:["Saison 2"]},
-      {id:"mcu-dd3",img:"images/daredevil-season-3.webp",type:"serie",level:"important",tmdb:"61889",media:"tv",season:3,title:"Daredevil",date:"2017",subitems:["Saison 3"]},
-      {id:"mcu-aos-s5a",img:"images/marvels-agents-of-shield-season-5.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:5,title:"Les Agents du S.H.I.E.L.D.",date:"2017",tags:["nc"],subitems:["Saison 5 Épisodes 1-13"]},
-      {id:"mcu-thor3",img:"images/thor-ragnarok-2017.webp",type:"film",level:"must",tmdb:"284053",media:"movie",title:"Thor : Ragnarok",date:"2017",note:"Ne pas regarder les scènes post-crédits."},
-      {id:"mcu-pun2",img:"images/the-punisher-season-2.webp",type:"serie",level:"bonus",tmdb:"67178",media:"tv",season:2,title:"The Punisher",date:"2018",subitems:["Saison 2"]},
-      {id:"mcu-jj3",img:"images/jessica-jones-season-3.webp",type:"serie",level:"bonus",tmdb:"38472",media:"tv",season:3,title:"Jessica Jones",date:"2018",subitems:["Saison 3"]},
-      {id:"mcu-antman2",img:"images/ant-man-and-the-wasp-2018.webp",type:"film",level:"must",tmdb:"363088",media:"movie",title:"Ant-Man et la Guêpe",date:"2018",note:"Ne pas regarder les scènes post-crédits."},
-      {id:"mcu-aos-s5b",img:"images/marvels-agents-of-shield-season-5.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:5,title:"Les Agents du S.H.I.E.L.D.",date:"2018",tags:["nc"],subitems:["Saison 5 Épisodes 14-18"]},
-      {id:"mcu-thor3pc",img:"images/thor-ragnarok-2017.webp",type:"video",level:"must",tmdb:"284053",media:"video",title:"Première scène post-crédits Thor : Ragnarok",date:"2018"},
-      {id:"mcu-iw",img:"images/avengers-infinity-war-2018.webp",type:"film",level:"must",tmdb:"299536",media:"movie",title:"Avengers : Infinity War",date:"2018"},
-      {id:"mcu-antman2pc",img:"images/ant-man-and-the-wasp-2018.webp",type:"video",level:"must",tmdb:"363088",media:"video",title:"Première scène post-crédits Ant-Man et la Guêpe",date:"2018"},
-      {id:"mcu-aos-s5c",img:"images/marvels-agents-of-shield-season-5.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:5,title:"Les Agents du S.H.I.E.L.D.",date:"2018",tags:["nc"],subitems:["Saison 5 Épisodes 19-22"]},
-      {id:"mcu-aos-s6",img:"images/marvels-agents-of-shield-season-6.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:6,title:"Les Agents du S.H.I.E.L.D.",date:"2019",tags:["nc"],subitems:["Saison 6"]},
-      {id:"mcu-aos-s7",img:"images/marvels-agents-of-shield-season-7.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:7,title:"Les Agents du S.H.I.E.L.D.",date:"2020",tags:["nc"],subitems:["Saison 7"]},
-      {id:"mcu-cmpc",img:"images/captain-marvel-2019.webp",type:"video",level:"must",tmdb:"299537",media:"video",title:"Première scène post-crédits Captain Marvel",date:"2018"},
-      {id:"mcu-eg",img:"images/avengers-endgame-2019.webp",type:"film",level:"must",tmdb:"299534",media:"movie",title:"Avengers : Endgame",date:"2023"}
-    ]},
-    {title:"PHASE IV — Saga du Multivers",entries:[
-      {id:"mcu-loki1",img:"images/loki-season-1.webp",type:"serie",level:"must",tmdb:"84958",media:"tv",season:1,title:"Loki",dim:"HORS DU TEMPS",subitems:["Saison 1"]},
-      {id:"mcu-wi1",img:"images/what-if-season-1.webp",type:"anime",level:"important",tmdb:"91363",media:"tv",season:1,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 1"]},
-      {id:"mcu-wv",img:"images/wanda-vision-season-1.webp",type:"serie",level:"must",tmdb:"85271",media:"tv",season:1,title:"WandaVision",date:"2023",subitems:["Saison 1"]},
-      {id:"mcu-sc",img:"images/shang-chi-2021.webp",type:"film",level:"must",tmdb:"566525",media:"movie",title:"Shang-Chi et la Légende des Dix Anneaux",date:"2024"},
-      {id:"mcu-fatws",img:"images/the-falcon-and-the-winter-soldier-season-1.webp",type:"serie",level:"must",tmdb:"88396",media:"tv",season:1,title:"Falcon et le Soldat de l'Hiver",date:"2024",subitems:["Saison 1"]},
-      {id:"mcu-smffh",img:"images/spider-man-far-from-home-2019.webp",type:"film",level:"must",tmdb:"429617",media:"movie",title:"Spider-Man : Far From Home",date:"2024"},
-      {id:"mcu-eternals",img:"images/eternals-2021.webp",type:"film",level:"must",tmdb:"524434",media:"movie",title:"Les Éternels",date:"2024"}
-    ]},
-    {title:"SEGMENT SPIDER-VERSE — avant No Way Home",special:"sv",entries:[
-      {id:"mcu-smr1",img:"images/spider-man-2002.webp",type:"film",level:"important",tmdb:"557",media:"movie",title:"Spider-Man",date:"2002",dim:"TERRE-96283"},
-      {id:"mcu-smr2",img:"images/spider-man-2-2004.webp",type:"film",level:"important",tmdb:"558",media:"movie",title:"Spider-Man 2",date:"2004",dim:"TERRE-96283"},
-      {id:"mcu-smr3",img:"images/spider-man-3-2007.webp",type:"film",level:"important",tmdb:"559",media:"movie",title:"Spider-Man 3",date:"2005",dim:"TERRE-96283"},
-      {id:"mcu-tasm1",img:"images/the-amazing-spider-man-2012.webp",type:"film",level:"important",tmdb:"1930",media:"movie",title:"The Amazing Spider-Man",date:"2013",dim:"TERRE-120703"},
-      {id:"mcu-tasm2",img:"images/the-amazing-spider-man-2-2014.webp",type:"film",level:"important",tmdb:"102382",media:"movie",title:"The Amazing Spider-Man 2 : Le Destin d'un Héros",date:"2014",dim:"TERRE-120703"},
-      {id:"mcu-itsv",img:"images/spider-man-into-the-spider-verse-2018.webp",type:"filmanim",level:"bonus",tmdb:"569094",media:"movie",title:"Spider-Man : Into the Spider-Verse",date:"2018",dim:"TERRE-1610"},
-      {id:"mcu-venom1",img:"images/venom-2018.webp",type:"film",level:"bonus",tmdb:"335983",media:"movie",title:"Venom",date:"2023",dim:"TERRE-688"},
-      {id:"mcu-venom2",img:"images/venom-let-there-be-carnage-2021.webp",type:"film",level:"bonus",tmdb:"580489",media:"movie",title:"Venom : Let There Be Carnage",date:"2024",dim:"TERRE-688"}
-    ]},
-    {title:"SUITE PHASE IV — Saga du Multivers",entries:[
-      {id:"mcu-nwh",img:"images/spider-man-no-way-home-2021.webp",type:"film",level:"must",tmdb:"634649",media:"movie",title:"Spider-Man : No Way Home",date:"2024"},
-      {id:"mcu-venom3",img:"images/venom-the-last-dance-2024.webp",type:"film",level:"bonus",tmdb:"912649",media:"movie",title:"Venom : The Last Dance",date:"2024",dim:"TERRE-688"},
-      {id:"mcu-atsv",img:"images/spider-man-across-the-spider-verse-2023.webp",type:"filmanim",level:"bonus",tmdb:"569094",media:"movie",title:"Spider-Man : Across the Spider-Verse",date:"2020",dim:"TERRE-1610"},
-      {id:"mcu-mom",img:"images/doctor-strange-in-the-multiverse-of-madness-2022.webp",type:"film",level:"must",tmdb:"453395",media:"movie",title:"Doctor Strange in the Multiverse of Madness",date:"2024"},
-      {id:"mcu-bwpc",img:"images/black-widow-2021.webp",type:"video",level:"important",tmdb:"497698",media:"video",title:"Scène post-crédits Black Widow",date:"2024"},
-      {id:"mcu-hawkeye",img:"images/hawkeye-season-1.webp",type:"serie",level:"important",tmdb:"88329",media:"tv",season:1,title:"Hawkeye",date:"2024",subitems:["Saison 1"]},
-      {id:"mcu-mk",img:"images/moon-knight-season-1.webp",type:"serie",level:"bonus",tmdb:"92749",media:"tv",season:1,title:"Moon Knight",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-bp2",img:"images/black-panther-wakanda-forever-2022.webp",type:"film",level:"must",tmdb:"505642",media:"movie",title:"Black Panther : Wakanda Forever",date:"2025"}
-    ]},
-    {title:"PHASE V — Saga du Multivers",entries:[
-      {id:"mcu-echo",img:"images/echo-season-1.webp",type:"serie",level:"important",tmdb:"122226",media:"tv",season:1,title:"Echo",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-shehulk",img:"images/she-hulk-avocate-season-1.webp",type:"serie",level:"bonus",tmdb:"92783",media:"tv",season:1,title:"She-Hulk : Avocate",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-mm",img:"images/miss-marvel-season-1.webp",type:"serie",level:"must",tmdb:"92782",media:"tv",season:1,title:"Miss Marvel",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-thor4",img:"images/thor-love-and-thunder-2022.webp",type:"film",level:"must",tmdb:"616037",media:"movie",title:"Thor : Love and Thunder",date:"2025"},
-      
-      {id:"mcu-ironheart",img:"images/ironheart-season-1.webp",type:"serie",level:"bonus",tmdb:"114471",media:"tv",season:1,title:"Ironheart",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-wwbn",img:"images/werewolf-by-night-2022.webp",type:"special",level:"bonus",tmdb:"894205",media:"movie",title:"Werewolf by Night",date:"2025"},
-      {id:"mcu-gotgxmas",img:"images/the-guardians-of-the-galaxy-holiday-special-2022.webp",type:"special",level:"must",tmdb:"774752",media:"movie",title:"Les Gardiens de la Galaxie : Joyeuses Fêtes",date:"2025"},
-      {id:"mcu-antman3",img:"images/ant-man-and-the-wasp-quantumania-2023.webp",type:"film",level:"must",tmdb:"640146",media:"movie",title:"Ant-Man et la Guêpe : Quantumania",date:"2026"},
-      {id:"mcu-gotg3",img:"images/les-gardiens-de-la-galaxie-3-2023.webp",type:"film",level:"must",tmdb:"447365",media:"movie",title:"Les Gardiens de la Galaxie Vol. 3",date:"2026"},
-      {id:"mcu-si",img:"images/secret-invasion-season-1.webp",type:"serie",level:"bonus",tmdb:"114472",media:"tv",season:1,title:"Secret Invasion",date:"2026",subitems:["Saison 1"]},
-      {id:"mcu-marvels",img:"images/the-marvels-2023.webp",type:"film",level:"must",tmdb:"609681",media:"movie",title:"The Marvels",date:"2026",note:"Ne pas regarder la scène post-crédits."},
-      {id:"mcu-loki2",img:"images/loki-season-2.webp",type:"serie",level:"must",tmdb:"84958",media:"tv",season:2,title:"Loki",dim:"HORS DU TEMPS",subitems:["Saison 2"]},
-      {id:"mcu-wi2",img:"images/what-if-season-2.webp",type:"anime",level:"important",tmdb:"91363",media:"tv",season:2,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 2"]}
-    ]},
-    {title:"SEGMENT FOX — avant Deadpool & Wolverine et Avengers Doomsday",special:"fox",entries:[
-      {id:"mcu-xfc",img:"images/x-men-first-class-2011.webp",type:"film",level:"bonus",tmdb:"49538",media:"movie",title:"X-Men : Le Commencement",date:"1962",dim:"TERRE-10005A"},
-      {id:"mcu-xow",img:"images/x-men-origins-wolverine-2009.webp",type:"film",level:"bonus",tmdb:"2080",media:"movie",title:"X-Men Origins : Wolverine",date:"1979",dim:"TERRE-10005A"},
-      {id:"mcu-xm1",img:"images/x-men-2000.webp",type:"film",level:"important",tmdb:"36657",media:"movie",title:"X-Men",date:"1994",dim:"TERRE-10005A"},
-      {id:"mcu-xm2",img:"images/x-men-2-2003.webp",type:"film",level:"important",tmdb:"36658",media:"movie",title:"X-Men 2",date:"1994",dim:"TERRE-10005A"},
-      {id:"mcu-xm3",img:"images/x-men-l-affrontement-final-2006.webp",type:"film",level:"important",tmdb:"36668",media:"movie",title:"X-Men 3 : L'Affrontement Final",date:"1999",dim:"TERRE-10005A"},
-      {id:"mcu-twolv",img:"images/wolverine-le-combat-de-l-immortel-2013.webp",type:"film",level:"important",tmdb:"76170",media:"movie",title:"Wolverine : Le Combat de l'Immortel",date:"2013",dim:"TERRE-10005A"},
-      {id:"mcu-dofp",img:"images/x-men-days-of-future-past-2014.webp",type:"film",level:"important",tmdb:"127585",media:"movie",title:"X-Men : Days of Future Past",date:"2023–1973",dim:"TERRE-10005A/B"},
-      {id:"mcu-xma",img:"images/x-men-apocalypse-2016.webp",type:"film",level:"bonus",tmdb:"246655",media:"movie",title:"X-Men : Apocalypse",date:"1983",dim:"TERRE-10005B"},
-      {id:"mcu-xdp",img:"images/x-men-dark-phoenix-2019.webp",type:"film",level:"bonus",tmdb:"320288",media:"movie",title:"X-Men : Dark Phoenix",date:"1992",dim:"TERRE-10005B"},
-      {id:"mcu-logan",img:"images/logan-2017.webp",type:"film",level:"important",tmdb:"263115",media:"movie",title:"Logan",date:"2029",dim:"TERRE-10005B"},
-      {id:"mcu-dp1",img:"images/deadpool-2016.webp",type:"film",level:"important",tmdb:"293660",media:"movie",title:"Deadpool",date:"2016",dim:"TERRE-10005B",tags:["flashback"]},
-      {id:"mcu-dp2",img:"images/deadpool-2-2018.webp",type:"film",level:"important",tmdb:"383498",media:"movie",title:"Deadpool 2",date:"2018",dim:"TERRE-10005B",tags:["flashback"]}
-    ]},
-    {title:"PHASE V — Suite (Saga du Multivers)",entries:[
-      {id:"mcu-dpw",img:"images/deadpool-and-wolverine-2024.webp",type:"film",level:"must",tmdb:"533535",media:"movie",title:"Deadpool & Wolverine",date:"2024",dim:"TERRE-10005"},
-      {id:"mcu-marvelspc",img:"images/the-marvels-2023.webp",type:"video",level:"important",tmdb:"609681",media:"video",title:"Scène post-crédits The Marvels",date:"2026"},
-      {id:"mcu-agatha",img:"images/agatha-all-along-season-1.webp",type:"serie",level:"bonus",tmdb:"138501",media:"tv",season:1,title:"Agatha All Along",date:"2026",subitems:["Saison 1"]},
-      {id:"mcu-wi3",img:"images/what-if-season-3.webp",type:"anime",level:"important",tmdb:"91363",media:"tv",season:3,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 3"]},
-      {id:"mcu-vfsm",img:"images/your-friendly-neighbourhood-spider-man-season-1.webp",type:"anime",level:"bonus",tmdb:"138503",media:"tv",title:"Votre fidèle serviteur Spider-Man",date:"2016",dim:"TERRE-86445",subitems:["Saison 1"]},
-      {id:"mcu-dba1",img:"images/daredevil-born-again-season-1.webp",type:"serie",level:"important",tmdb:"202555",media:"tv",season:1,title:"Daredevil : Born Again",date:"2027",subitems:["Saison 1"]},
-      {id:"mcu-cabf",img:"images/captain-america-brave-new-world-2025.webp",type:"film",level:"must",tmdb:"822119",media:"movie",title:"Captain America : Brave New World",date:"2027"},
-      {id:"mcu-tb",img:"images/thunderbolts-2025.webp",type:"film",level:"must",tmdb:"986056",media:"movie",title:"Thunderbolts*",date:"2027"}
-    ]},
-    {title:"PHASE VI — Saga du Multivers (en cours)",entries:[
-      {id:"mcu-mz",img:"images/marvel-zombies-season-1.webp",type:"anime",level:"bonus",tmdb:"138505",media:"tv",season:1,title:"Marvel Zombies",date:"2022",dim:"TERRE-89521",note:"Suite de l'épisode 5 de la saison 1 de What If…?",subitems:["Saison 1"]},
-      {id:"mcu-ff",img:"images/the-fantastic-four-first-steps-2025.webp",type:"film",level:"must",tmdb:"617126",media:"movie",title:"Les 4 Fantastiques : Premiers Pas",date:"~1964",dim:"TERRE-828"},
-      {id:"mcu-wm",img:"images/wonder-man-season-1.webp",type:"serie",level:"bonus",tmdb:"198178",media:"tv",season:1,title:"Wonder Man",date:"2027",subitems:["Saison 1"]},
-      {id:"mcu-dba2",img:"images/daredevil-born-again-season-2.webp",type:"serie",level:"important",tmdb:"202555",media:"tv",season:2,title:"Daredevil : Born Again",date:"2027",subitems:["Saison 2"]},
-      {id:"mcu-pun-olk",img:"images/the-punisher-one-last-kill-2026.webp",type:"special",level:"important",tmdb:"1439930",media:"movie",title:"The Punisher : One Last Kill",date:"~2028"}
-    ]}
-  ]
 };
-const UNIVERSES=[
-  {data:DATA_SW,icon:'⚔️'},
-  {data:DATA_MCU,icon:'🦸'},
-  {data:null,id:'soon',icon:'🌙',title:'Bientôt…',description:"D'autres univers arrivent",color:'#7c6af7',soon:true}
-];
+const UNIVERSES=[{data:DATA_SW,icon:'x'}];
 const TMDB_KEY='6257b37bf29ab31357853fce00232314';
 const IMG='https://image.tmdb.org/t/p/';
 const BADGES={
@@ -547,9 +381,7 @@ function renderProgress(){
   document.getElementById('pb-fill').style.cssText='width:'+pct+'%;background:'+grad;
   document.getElementById('pb-counts').innerHTML='<strong>'+done+'</strong> / '+total+' vus · <strong>'+pct+'%</strong>';
   const pbn=document.getElementById('pbn');
-  pbn.classList.toggle('show',total>0);
-  document.getElementById('pbn-label').textContent=done+'/'+total;
-  document.getElementById('pbn-fill').style.cssText='width:'+pct+'%;background:'+grad;
+  if(pbn){pbn.classList.toggle('show',total>0);document.getElementById('pbn-label').textContent=done+'/'+total;document.getElementById('pbn-fill').style.cssText='width:'+pct+'%;background:'+grad;}
 }
 
 async function fetchPoster(id,type,season){
@@ -794,81 +626,27 @@ function buildTimeline(data){
   document.getElementById('tl-content').innerHTML=html;
 }
 
-function buildHomeCards(){
-  const grid=document.getElementById('ugrid');
-  grid.innerHTML='';
-  const now=new Date();
-  const months=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-  const dl='À jour — '+months[now.getMonth()]+' '+now.getFullYear();
-  UNIVERSES.forEach(u=>{
-    const d=u.data||u;
-    const prog=u.data?getProgress(u.data.id):{};
-    const total=u.data?u.data.eras.reduce((a,e)=>a+e.entries.length,0):0;
-    const done=u.data?u.data.eras.reduce((a,era)=>a+era.entries.filter(e=>!!prog[e.id]).length,0):0;
-    const pct=total?Math.round(done/total*100):0;
-    const card=document.createElement('div');
-    card.className='ucard'+(u.soon?' soon':'');
-    card.id='card-'+(u.data?u.data.id:u.id);
-    card.onclick=u.soon?showCS:()=>window.location.href=(u.data.id==='mcu'?'marvel.html':'starwars.html');
-    card.innerHTML='<div class="cbanner"><img id="banner-'+(u.data?u.data.id:u.id)+'" src="" alt=""/><span class="cicon">'+u.icon+'</span></div>'
-      +'<div class="cbody"><div class="cname" style="color:'+(d.color||'var(--text)')+'">'+d.title+'</div>'
-      +'<div class="csub">'+(d.description||d.subtitle||'')+'</div>'
-      +(u.soon
-        ?'<span class="cnew" style="background:rgba(124,106,247,.12);color:var(--accent);border:1px solid rgba(124,106,247,.25)">BIENTÔT</span>'
-        :'<div class="cprogress"><div class="cp-track"><div class="cp-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+(d.color||'var(--accent)')+',var(--accent2))"></div></div><span>'+done+' / '+total+' vus</span></div><span class="cnew" style="background:rgba(86,194,122,.12);color:var(--green);border:1px solid rgba(86,194,122,.28)">'+dl+'</span>'
-      )+'</div>';
-    grid.appendChild(card);
-    if(u.data&&u.data.tmdb_banner){
-      const{type,id}=u.data.tmdb_banner;
-      fetch('https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+TMDB_KEY)
-        .then(r=>r.json()).then(dd=>{
-          if(dd.backdrop_path){const img=document.getElementById('banner-'+u.data.id);if(img)img.src=IMG+'w780'+dd.backdrop_path}
-        }).catch(()=>{});
-    }
-  });
-}
 
-function showHome(){
-  document.getElementById('home-page').classList.add('v');
-  document.getElementById('tl-page').classList.remove('v');
-  document.getElementById('cs-page').classList.remove('v');
-  document.getElementById('pbn').classList.remove('show');
-  currentData=null;window.scrollTo(0,0);buildHomeCards();
-}
+
+function showHome(){window.location.href='index.html';}
 function showUniverse(uid){
   const u=UNIVERSES.find(x=>x.data&&x.data.id===uid);
   if(!u){showCS();return}
   currentData=u.data;
-  window._currentUID=uid;
-  document.getElementById('tl-title').textContent=currentData.title+' — '+currentData.subtitle;
+  const tlTitle=document.getElementById('tl-title');if(tlTitle)tlTitle.textContent=currentData.title+' — '+currentData.subtitle;
   document.getElementById('tl-title').style.color=currentData.color||'var(--text)';
   document.getElementById('tl-title').style.textShadow='0 0 40px '+(currentData.glow||'transparent');
   document.getElementById('tl-sub').textContent=currentData.description||'';
   document.getElementById('tl-notes').innerHTML=currentData.notes||'';
   document.getElementById('pb-fill').style.background='linear-gradient(90deg,'+(currentData.color||'var(--accent)')+',var(--accent2))';
   buildTimeline(currentData);renderProgress();
-  document.getElementById('home-page').classList.remove('v');
-  document.getElementById('tl-page').classList.add('v');
-  document.getElementById('cs-page').classList.remove('v');
   window.scrollTo(0,0);loadPosters();
 }
-function showCS(){
-  document.getElementById('home-page').classList.remove('v');
-  document.getElementById('tl-page').classList.remove('v');
-  document.getElementById('cs-page').classList.add('v');
-  document.getElementById('pbn').classList.remove('show');
-  window.scrollTo(0,0);
-}
+function showCS(){window.location.href='index.html';}
 
-window.addEventListener('scroll',()=>{
-  const mm=document.getElementById('miss-minute');
-  if(!mm)return;
-  const tlActive=document.getElementById('tl-page').classList.contains('v');
-  const isMCU=window._currentUID==='mcu';
-  mm.classList.toggle('visible',tlActive&&isMCU&&window.scrollY>400);
-});
 
-showHome();
+
+showUniverse('sw');
 </script>
 </body>
 </html>
