@@ -498,23 +498,6 @@ const DATA_SW={
     ]}
   ]
 };
-// Miss Minute init
-(function(){
-  const mm=document.createElement('div');
-  mm.id='miss-minute';
-  mm.title='Remonter en haut';
-  mm.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
-  mm.innerHTML='<img class="mm-normal" src="images/miss-minutes.png" alt="Miss Minute"/><img class="mm-hover" src="images/miss-minutes-overclick.png" alt="Miss Minute"/>';
-  document.body.appendChild(mm);
-})();
-window.addEventListener('scroll',()=>{
-  const mm=document.getElementById('miss-minute');
-  if(!mm)return;
-  const tlActive=document.getElementById('tl-page').classList.contains('v');
-  const isMCU=window._currentUID==='mcu';
-  mm.classList.toggle('visible',tlActive&&isMCU&&window.scrollY>400);
-});
-
 const UNIVERSES=[
   {data:DATA_SW,icon:'⚔️'},
   {data:DATA_MCU,icon:'🦸'},
@@ -884,6 +867,15 @@ function showCS(){
   document.getElementById('pbn').classList.remove('show');
   window.scrollTo(0,0);
 }
+
+window.addEventListener('scroll',()=>{
+  const mm=document.getElementById('miss-minute');
+  if(!mm)return;
+  const tlActive=document.getElementById('tl-page').classList.contains('v');
+  const isMCU=window._currentUID==='mcu';
+  mm.classList.toggle('visible',tlActive&&isMCU&&window.scrollY>400);
+});
+
 showHome();
 </script>
 </body>
