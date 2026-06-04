@@ -51,7 +51,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .cp-fill{height:100%;border-radius:2px;transition:width .5s}
 .cnew{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:.6rem}
 /* TIMELINE PAGE */
-.tl-page{display:none;max-width:1020px;margin:0 auto;padding:2.5rem 2rem}.tl-page.v{display:block}
+.tl-page{display:none;max-width:1200px;margin:0 auto;padding:2.5rem 2rem}.tl-page.v{display:block}
 .bc{font-size:.78rem;color:var(--muted2);margin-bottom:1.25rem;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:color .2s}
 .bc:hover{color:var(--accent)}
 .page-title{font-size:2.1rem;font-weight:900;letter-spacing:-.5px;margin-bottom:.4rem}
@@ -119,7 +119,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .en-level-icon{font-size:1rem;line-height:1;min-height:1rem}
 .date-main{font-size:.82rem;font-weight:900;color:var(--text);text-align:center;line-height:1.2}
 .dim-badge{font-size:.52rem;font-weight:700;color:#a99fff;background:rgba(124,106,247,.15);border:1px solid rgba(124,106,247,.25);border-radius:4px;padding:1px 4px;text-align:center;line-height:1.4;margin-top:.1rem;max-width:92px;word-break:break-word}
-.ep{width:120px;min-width:120px;background:var(--surface2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border-right:1px solid var(--border);cursor:pointer}
+.ep{width:200px;min-width:200px;background:var(--surface2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border-right:1px solid var(--border);cursor:pointer}
 .ep img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .3s}
 .ep:hover img{transform:scale(1.06)}.pp{font-size:1.5rem;opacity:.15}
 .em{flex:1;padding:.7rem .9rem;min-width:0;display:flex;flex-direction:column;gap:.18rem}
@@ -159,37 +159,30 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
   .en-top{flex-direction:column;min-height:unset}
   .ep{width:100%!important;min-width:unset!important;height:120px;border-right:none;border-bottom:1px solid var(--border)}
   .ep img{object-position:center 25%}
-  .en-check{width:100%;height:34px;border-right:none;border-bottom:1px solid var(--border);justify-content:flex-start;padding-left:1rem;gap:.5rem}
+  .en-check{width:100%;height:34px;border-right:none;border-bottom:1px solid var(--border);justify-content:flex-start;padding-left:1rem}
   .en-datebadge{width:100%!important;min-width:unset!important;flex-direction:row;gap:.6rem;justify-content:flex-start;border-right:none;border-bottom:1px solid var(--border);padding:.3rem .75rem;background:rgba(124,106,247,.05)}
   .en-level-icon{min-height:unset}
   .dim-badge{max-width:none;font-size:.6rem}
-  .en-datebadge .date-main{font-size:.76rem}
-  .en.deviate{margin-left:10px}
-  .segment-box{margin-left:10px}
-  .en-datebadge{width:56px;min-width:56px;padding:.3rem .2rem}
-  .date-main{font-size:.68rem}
-  .en-level-icon{font-size:.78rem}
-  .ep{width:68px;min-width:68px}
-  .em{padding:.5rem .6rem}
-  .en-name{font-size:.84rem}
-  .enote{font-size:.72rem}
-  .si{font-size:.71rem}
-  .b{font-size:.62rem;padding:2px 6px}
-  .nt,.ft,.dt{font-size:.6rem;padding:2px 5px}
-  .en-check{width:32px;min-width:32px}
+  .em{padding:.6rem .75rem}
+  .en-name{font-size:.88rem}
+  .enote{font-size:.75rem}
+  .b{font-size:.64rem;padding:2px 6px}
+  .nt,.ft,.dt{font-size:.62rem;padding:2px 5px}
   .expand-poster{width:80px;min-width:80px}
-  .expand-info{padding:.65rem .75rem}
-  .expand-synopsis{font-size:.76rem;-webkit-line-clamp:4}
   nav{gap:.5rem;height:auto;padding:.5rem 0;flex-wrap:wrap}
   .nav-links{gap:.7rem}
   .nav-links a{font-size:.78rem}
   .disc-btn{padding:.3rem .7rem;font-size:.78rem}
-  #miss-minute{width:62px;height:62px;bottom:1.25rem;right:1.25rem}
-  .filter-label{font-size:.67rem;min-width:44px}
+  .en.deviate{margin-left:10px}
+  .segment-box{margin-left:10px}
+  #miss-minute{width:64px;height:64px;bottom:1.25rem;right:1.25rem}
+  .filter-group{gap:.35rem}
   .fbt{font-size:.73rem;padding:.28rem .65rem}
   .progress-block{flex-direction:column;align-items:flex-start;gap:.75rem}
-  .leg{padding:.75rem 1rem}
-  .nb{padding:.9rem 1rem}
+}
+@media(max-width:420px){
+  .ep{height:90px}
+  .en-name{font-size:.82rem}
 }
 @media(max-width:420px){
   .ep{width:60px;min-width:60px}
@@ -208,6 +201,10 @@ details[open] .faq-q::after{transform:rotate(90deg)}
 </style>
 </head>
 <body>
+<div id="miss-minute" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Remonter en haut">
+  <img class="mm-normal" src="images/miss-minutes.png" alt="Miss Minute"/>
+  <img class="mm-hover" src="images/miss-minutes-overclick.png" alt="Miss Minute"/>
+</div>
 <header>
   <nav>
     <div class="logo" onclick="showHome()">
@@ -358,23 +355,23 @@ const DATA_SW={
   eras:[
     {title:"PHASE I — Saga de l'Infini",entries:[
       {id:"mcu-cap1",img:"images/captain-america-first-avenger-2011.webp",type:"film",level:"must",tmdb:"1771",media:"movie",title:"Captain America : First Avenger",date:"1942–1945",note:"Prologue et épilogue se passent en 2011–2012 mais important à regarder en premier. Ne pas regarder la scène post-crédits."},
-      {id:"mcu-ac-os",type:"video",level:"bonus",tmdb:"0",img:"images/Agent Carter.png",media:"video",title:"One Shot : Agent Carter",date:"1946"},
+      {id:"mcu-ac-os",type:"video",level:"bonus",tmdb:"0",img:"images/one-shot-agent-carter.webp",media:"video",title:"One Shot : Agent Carter",date:"1946"},
       {id:"mcu-ac-serie",img:"images/agent-carter-season-1.webp",type:"serie",level:"bonus",tmdb:"61550",media:"tv",season:1,title:"Agent Carter",date:"1946–1947",tags:["nc"],subitems:["Saison 1","Saison 2"]},
       {id:"mcu-cm",img:"images/captain-marvel-2019.webp",type:"film",level:"must",tmdb:"299537",media:"movie",title:"Captain Marvel",date:"1995",note:"Ne pas regarder les scènes post-crédits."},
       {id:"mcu-im1",img:"images/iron-man-2008.webp",type:"film",level:"must",tmdb:"1726",media:"movie",title:"Iron Man",date:"2008"},
       {id:"mcu-im2",img:"images/iron-man-2-2010.webp",type:"film",level:"must",tmdb:"10138",media:"movie",title:"Iron Man 2",date:"2010"},
       {id:"mcu-hulk",img:"images/l-incroyable-hulk-2008.webp",type:"film",level:"must",tmdb:"1724",media:"movie",title:"L'Incroyable Hulk",date:"2010"},
-      {id:"mcu-consultant",type:"video",level:"important",tmdb:"0",img:"images/Le Consultant.png",media:"video",title:"One Shot : Le Consultant",date:"2010"},
+      {id:"mcu-consultant",type:"video",level:"important",tmdb:"0",img:"images/one-shot-the-consultant.webp",media:"video",title:"One Shot : Le Consultant",date:"2010"},
       {id:"mcu-thor1",img:"images/thor-2011.webp",type:"film",level:"must",tmdb:"10195",media:"movie",title:"Thor",date:"2010"},
       {id:"mcu-av1",img:"images/the-avengers-2012.webp",type:"film",level:"must",tmdb:"24428",media:"movie",title:"Avengers",date:"2012"},
-      {id:"mcu-item47",type:"video",level:"bonus",tmdb:"0",img:"images/item47.jpg",media:"video",title:"One Shot : Article 47",date:"2012"}
+      {id:"mcu-item47",type:"video",level:"bonus",tmdb:"0",img:"images/one-shot-item-47.webp",media:"video",title:"One Shot : Article 47",date:"2012"}
     ]},
     {title:"PHASE II — Saga de l'Infini",entries:[
       {id:"mcu-aos-s1a",img:"images/marvels-agents-of-shield-season-1.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2013",tags:["nc"],subitems:["Saison 1 Épisodes 1-7"]},
       {id:"mcu-thor2",img:"images/thor-the-dark-world-2013.webp",type:"film",level:"must",tmdb:"76338",media:"movie",title:"Thor : Le Monde des Ténèbres",date:"2013"},
       {id:"mcu-aos-s1b",img:"images/marvels-agents-of-shield-season-1.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2013–2014",tags:["nc"],subitems:["Saison 1 Épisodes 8-15"]},
       {id:"mcu-im3",img:"images/iron-man-3-2013.webp",type:"film",level:"must",tmdb:"68721",media:"movie",title:"Iron Man 3",date:"2013"},
-      {id:"mcu-roi",type:"video",level:"must",tmdb:"0",img:"images/All Hail the King.png",media:"video",title:"One Shot : Longue Vie au Roi",date:"2014"},
+      {id:"mcu-roi",type:"video",level:"must",tmdb:"0",img:"images/one-shot-all-hail-the-king.webp",media:"video",title:"One Shot : Longue Vie au Roi",date:"2014"},
       {id:"mcu-cap2",img:"images/captain-america-le-soldat-de-l-hiver-2014.webp",type:"film",level:"must",tmdb:"100402",media:"movie",title:"Captain America : Le Soldat de l'Hiver",date:"2014"},
       {id:"mcu-aos-s1c",img:"images/marvels-agents-of-shield-season-1.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2014",tags:["nc"],subitems:["Saison 1 Épisodes 16-22"]},
       {id:"mcu-gotg1",img:"images/les-gardiens-de-la-galaxie-2014.webp",type:"film",level:"must",tmdb:"118340",media:"movie",title:"Les Gardiens de la Galaxie",date:"2014"},
@@ -484,7 +481,7 @@ const DATA_SW={
       {id:"mcu-marvelspc",img:"images/the-marvels-2023.webp",type:"video",level:"important",tmdb:"609681",media:"video",title:"Scène post-crédits The Marvels",date:"2026"},
       {id:"mcu-agatha",img:"images/agatha-all-along-season-1.webp",type:"serie",level:"bonus",tmdb:"138501",media:"tv",season:1,title:"Agatha All Along",date:"2026",subitems:["Saison 1"]},
       {id:"mcu-wi3",img:"images/what-if-season-3.webp",type:"anime",level:"important",tmdb:"91363",media:"tv",season:3,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 3"]},
-      {id:"mcu-vfsm",img:"images/your-friendly-neighbourhood-spider-man.webp",type:"anime",level:"bonus",tmdb:"138503",media:"tv",title:"Votre fidèle serviteur Spider-Man",date:"2016",dim:"TERRE-86445",subitems:["Saison 1"]},
+      {id:"mcu-vfsm",img:"images/your-friendly-neighbourhood-spider-man-season-1.webp",type:"anime",level:"bonus",tmdb:"138503",media:"tv",title:"Votre fidèle serviteur Spider-Man",date:"2016",dim:"TERRE-86445",subitems:["Saison 1"]},
       {id:"mcu-dba1",img:"images/daredevil-born-again-season-1.webp",type:"serie",level:"important",tmdb:"202555",media:"tv",season:1,title:"Daredevil : Born Again",date:"2027",subitems:["Saison 1"]},
       {id:"mcu-cabf",img:"images/captain-america-brave-new-world-2025.webp",type:"film",level:"must",tmdb:"822119",media:"movie",title:"Captain America : Brave New World",date:"2027"},
       {id:"mcu-tb",img:"images/thunderbolts-2025.webp",type:"film",level:"must",tmdb:"986056",media:"movie",title:"Thunderbolts*",date:"2027"}
@@ -652,7 +649,7 @@ async function toggleExpand(el,ev){
   if(runtime)meta+='<span><strong>Durée</strong> '+runtime+'</span>';
   if(genres)meta+='<span><strong>Genre</strong> '+genres+'</span>';
   if(rating)meta+='<span><strong>Note</strong> ⭐ '+rating+'/10</span>';
-  const entryObj=currentData&&currentData.eras.flatMap(e=>e.entries).find(e=>e.id===el.dataset.id);
+    const entryObj=currentData&&currentData.eras.flatMap(e=>e.entries).find(e=>e.id===el.dataset.id);
   const faqHtml=entryObj&&entryObj.faq?entryObj.faq.map(item=>'<details class="faq-item"><summary class="faq-q">'+item.q+'</summary><div class="faq-a">'+item.a+'</div></details>').join(''):'';
   panel.innerHTML='<div class="expand-inner">'
     +(poster?'<div class="expand-poster" onclick="openPMurl(\''+IMG+'w500'+d.poster_path+'\')"><img src="'+poster+'" loading="lazy"/><div class="expand-poster-ov">🔍</div></div>':'')
@@ -777,9 +774,7 @@ function buildTimeline(data){
     f+='<button class="fbt active" id="lvl-bonus" onclick="toggleLevelFilter(this)">Optionnel</button>';
     f+='</div>';
   }
-  if(hasNC){
-    f+='<button class="fbt active" id="btn-nc" onclick="toggleNCFilter(this)">Canonicité non confirmée</button>';
-  }
+  if(hasNC){f+='<button class="fbt active" id="btn-nc" onclick="toggleNCFilter(this)">Canonicité non confirmée</button>';}
   document.getElementById('filter-bar').innerHTML=f;
 
   // Contenu
