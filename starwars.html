@@ -198,6 +198,14 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .faq-q::after{content:'›';font-size:1.2rem;transition:transform .2s;color:var(--muted2)}
 details[open] .faq-q::after{transform:rotate(90deg)}
 .faq-a{padding:.5rem .85rem .65rem;font-size:.81rem;color:var(--muted2);line-height:1.65;border-top:1px solid var(--border)}
+
+#grogu{position:fixed;bottom:2rem;right:2rem;z-index:300;width:88px;height:88px;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1);filter:drop-shadow(0 4px 16px rgba(0,0,0,.6));display:none}
+#grogu.visible{display:block}
+#grogu img{width:100%;height:100%;object-fit:contain}
+#grogu:hover{transform:scale(1.15) rotate(8deg)}
+.grogu-normal{display:block}.grogu-hover{display:none}
+#grogu:hover .grogu-normal{display:none}
+#grogu:hover .grogu-hover{display:block}
 </style>
 </head>
 <body>
@@ -219,7 +227,10 @@ details[open] .faq-q::after{transform:rotate(90deg)}
     <a href="#" class="disc-btn">Discord</a>
   </nav>
 </header>
-
+<div id="grogu" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Remonter en haut">
+  <img class="grogu-normal" src="images/grogu.png" alt="Grogu"/>
+  <img class="grogu-hover" src="images/grogumouseover.png" alt="Grogu"/>
+</div>
 <div class="pm" id="pm" onclick="closePM()"><span class="pm-x">✕</span><img id="pmi" src="" alt=""/></div>
 <div class="tl-page" id="tl-page">
   <div class="bc" onclick="window.location.href='index.html'">← Accueil</div>
@@ -229,9 +240,10 @@ details[open] .faq-q::after{transform:rotate(90deg)}
     <div class="pb-info">
       <div class="pb-label">Ma progression</div>
       <div class="pb-track"><div class="pb-fill" id="pb-fill" style="width:0%"></div></div>
-      <div class="pb-counts" id="pb-counts">Coche les entrées que tu as vues</div>
+      <div class="pb-counts" id="pb-counts">0 / 0 · 0%</div>
+      <div class="pb-hint">Vous pouvez cocher votre progression qui sera sauvegardée sur ce navigateur</div>
     </div>
-    <button class="pb-reset" onclick="resetProgress()">À zéro</button>
+    <button class="pb-reset" onclick="resetProgress()">Reset</button>
   </div>
   <div class="nb" id="tl-notes"></div>
   <div class="leg" id="tl-legend"></div>
@@ -240,93 +252,140 @@ details[open] .faq-q::after{transform:rotate(90deg)}
 </div>
 <script>
 const DATA_SW={
-  id:"sw",title:"Star Wars",subtitle:"Timeline Canonique",description:"Films · Séries · Animés · Jeux vidéo",
-  color:"#ffe81f",glow:"rgba(255,232,31,.3)",spineStyle:"sw-style",
+  id:"sw",title:"Star Wars",subtitle:"Timeline Canonique",
+  description:"Films · Séries · Animés · Jeux vidéo",
+  color:"#ffe81f",glow:"rgba(255,232,31,.3)",
   tmdb_banner:{type:"tv",id:"82856"},
-  notes:`Il manque des choses mais elles ne sont <strong>pas importantes</strong> pour la compréhension de la saga (<strong>The Acolyte, certains épisodes de The Clone Wars, Résistance, les séries d'animations pour enfants… et bien sûr tous les jeux mobiles, romans et comics</strong>).<br><br>L'an 0 du calendrier est la <strong>Bataille de Yavin</strong> (Star Wars Épisode IV) donc <strong>BBY</strong> = Before Battle of Yavin / <strong>ABY</strong> = After Battle of Yavin<br><br>Certains événements sont mieux à voir en tant que <strong>FLASHBACK</strong> pour comprendre et sont donc indiqués comme tel.<br><br>Si vous ne voulez pas faire les jeux tapez <em>"Nom du jeu film complet"</em> sur YouTube.`,
+  notes:`Il manque des choses mais elles ne sont <strong>pas importantes pour la compréhension de la saga</strong> (<strong>The Acolyte, certains épisodes de The Clone Wars, Résistance, les séries d'animations pour enfants… et bien sûr tous les jeux mobiles, romans et comics</strong>)<br><br>L'an 0 du calendrier est la Bataille de Yavin (Star Wars Épisode IV) donc <strong>BBY</strong> = Before Battle of Yavin / <strong>ABY</strong> = After Battle of Yavin<br><br>Certains événements sont mieux à voir en tant que <strong>FLASHBACK</strong> pour comprendre et sont donc indiqués comme tel<br><br>Si vous ne voulez pas faire les jeux tapez <em>"NOM DU JEU film complet"</em> sur YouTube`,
   eras:[
-    {title:"Prélogie (32–19 BBY)",entries:[
-      {id:"sw-ep1",type:"film",level:"must",tmdb:"1895",media:"movie",title:"Épisode I : La Menace Fantôme",date:"32 BBY"},
-      {id:"sw-ep2",type:"film",level:"must",tmdb:"1894",media:"movie",title:"Épisode II : L'Attaque des Clones",date:"22 BBY"},
-      {id:"sw-toj2",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 2",date:"~60 BBY",tags:["flashback"]},
-      {id:"sw-toj3",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 3",date:"~50 BBY",tags:["flashback"]},
-      {id:"sw-toj4",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 4",date:"32 BBY",tags:["flashback"]}
+    {title:"L'ÈRE DE LA RÉPUBLIQUE",entries:[
+      {id:"sw-ep1",type:"film",tmdb:"1893",media:"movie",img:"images/starwars1.webp",title:"Épisode I : La Menace Fantôme",date:"32 BBY"},
+      {id:"sw-ep2",type:"film",tmdb:"1894",media:"movie",img:"images/starwars2.webp",title:"Épisode II : L'Attaque des Clones",date:"22 BBY"},
+      {id:"sw-toj2",type:"anime",tmdb:"209867",media:"tv",img:"images/talesofthejedi.webp",title:"Tales of the Jedi — Épisode 2",date:"~60 BBY",tags:["flashback"]},
+      {id:"sw-toj3",type:"anime",tmdb:"209867",media:"tv",img:"images/talesofthejedi.webp",title:"Tales of the Jedi — Épisode 3",date:"~50 BBY",tags:["flashback"]},
+      {id:"sw-toj4",type:"anime",tmdb:"209867",media:"tv",img:"images/talesofthejedi.webp",title:"Tales of the Jedi — Épisode 4",date:"32 BBY",note:"Pendant La Menace Fantôme",tags:["flashback"]}
     ]},
-    {title:"The Clone Wars (22–19 BBY)",entries:[
-      {id:"sw-tcw-pre",type:"anime",level:"bonus",tmdb:"4194",media:"tv",title:"The Clone Wars",date:"22 BBY",
+    {title:"LA GUERRE DES CLONES — 22 BBY",entries:[
+      {id:"sw-tcw-pre",type:"anime",tmdb:"4194",media:"tv",img:"images/clonewarsserie.webp",title:"The Clone Wars",date:"22 BBY",
         note:"Les épisodes regroupés sont des arcs narratifs. Regarder dans cet ordre :",
-        subitems:["S2E16 · S1E16 → Tales of the Jedi E1 (FLASHBACK 36-35 BBY)"]},
-      {id:"sw-toj1",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 1",date:"36–35 BBY",tags:["flashback"]},
-      {id:"sw-tcwfilm",type:"filmanim",level:"important",tmdb:"12180",media:"movie",title:"Star Wars : The Clone Wars",date:"22 BBY"},
-      {id:"sw-tcw",type:"anime",level:"bonus",tmdb:"4194",media:"tv",title:"The Clone Wars (suite)",date:"22–19 BBY",
+        subitems:["S2E16 · S1E16"]},
+      {id:"sw-toj1",type:"anime",tmdb:"209867",media:"tv",img:"images/talesofthejedi.webp",title:"Tales of the Jedi — Épisode 1",date:"36–35 BBY",tags:["flashback"]},
+      {id:"sw-tcwfilm",type:"filmanim",tmdb:"12180",media:"movie",img:"images/clonewarsfilm.webp",title:"Star Wars : The Clone Wars",date:"22 BBY"},
+      {id:"sw-tcw-22",type:"anime",tmdb:"4194",media:"tv",img:"images/clonewarsserie.webp",title:"The Clone Wars",date:"22 BBY",
+        subitems:["S3E1","S3E3","S1E1 · S1E2 · S1E3 · S1E4 · S1E5","S1E9 · S1E10"]}
+    ]},
+    {title:"LA GUERRE DES CLONES — 21 BBY",entries:[
+      {id:"sw-tcw-21",type:"anime",tmdb:"4194",media:"tv",img:"images/clonewarsserie.webp",title:"The Clone Wars",date:"21 BBY",
         subitems:[
-          "<strong>22 BBY :</strong> S3E1 · S3E3 · S1E1-5 · S1E9-10",
-          "<strong>21 BBY :</strong> S1E11-12 · S1E15 · S1E19-21 · S2E1-3 · S2E17 · S2E18-19 · S2E4-8 · S2E9-10 · S2E12-14 · S2E20-22 · S3E5-6 · S3E7 · S3E2 · S3E8 · S1E22 · S3E9-10 · S3E12-14",
-          "<strong>20 BBY :</strong> S3E15-17 · S3E18-20 · S3E21-22 · S4E7-10 · S4E14 · S4E15-18 · S4E19-22 · S5E2-5 · S5E6-9 · S5E12",
-          "<strong>19 BBY :</strong> S5E1 · S5E14-16 · S5E17-20 · S6E1-4 · S6E5-7 · S6E10-13 · S7E5-8 · S7E1-4"
+          "S1E11 · S1E12",
+          "S1E15",
+          "S1E19 · S1E20 · S1E21",
+          "S2E1 · S2E2 · S2E3",
+          "S2E17",
+          "S2E18 · S2E19",
+          "S2E4 · S2E5 · S2E6 · S2E7 · S2E8",
+          "S2E9 · S2E10",
+          "S2E12 · S2E13 · S2E14",
+          "S2E20 · S2E21 · S2E22",
+          "S3E5 · S3E6",
+          "S3E7",
+          "S3E2",
+          "S3E8 · S1E22 · S3E9",
+          "S3E10",
+          "S3E12 · S3E13 · S3E14"
+        ]}
+    ]},
+    {title:"LA GUERRE DES CLONES — 20 BBY",entries:[
+      {id:"sw-tcw-20",type:"anime",tmdb:"4194",media:"tv",img:"images/clonewarsserie.webp",title:"The Clone Wars",date:"20 BBY",
+        subitems:[
+          "S3E15 · S3E16 · S3E17",
+          "S3E18 · S3E19 · S3E20",
+          "S3E21 · S3E22",
+          "S4E7 · S4E8 · S4E9 · S4E10",
+          "S4E14",
+          "S4E15 · S4E16 · S4E17 · S4E18",
+          "S4E19 · S4E20 · S4E21 · S4E22",
+          "S5E2 · S5E3 · S5E4 · S5E5",
+          "S5E6 · S5E7 · S5E8 · S5E9",
+          "S5E12"
+        ]}
+    ]},
+    {title:"LA GUERRE DES CLONES — 19 BBY",entries:[
+      {id:"sw-tcw-19",type:"anime",tmdb:"4194",media:"tv",img:"images/clonewarsserie.webp",title:"The Clone Wars",date:"19 BBY",
+        subitems:[
+          "S5E1 · S5E14 · S5E15 · S5E16",
+          "S5E17 · S5E18 · S5E19 · S5E20",
+          "S6E1 · S6E2 · S6E3 · S6E4",
+          "S6E5 · S6E6 · S6E7",
+          "S6E10 · S6E11 · S6E12 · S6E13",
+          "S7E5 · S7E6 · S7E7 · S7E8",
+          "S7E1 · S7E2 · S7E3 · S7E4"
         ]},
-      {id:"sw-ep3",type:"film",level:"must",tmdb:"1893",media:"movie",title:"Épisode III : La Revanche des Sith",date:"19 BBY"},
-      {id:"sw-tcw-s7",type:"anime",level:"bonus",tmdb:"4194",media:"tv",season:7,title:"The Clone Wars — Saison 7 E9-12",date:"19 BBY",note:"L'épilogue (vers 17 BBY) ne spoile rien d'important."},
-      {id:"sw-toj5",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 5",date:"~22–19 BBY",tags:["flashback"]},
-      {id:"sw-toe4",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 4",date:"19 BBY",note:"Pendant La Revanche des Sith."},
-      {id:"sw-toe5",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 5",date:"19 BBY"}
+      {id:"sw-ep3",type:"film",tmdb:"1895",media:"movie",img:"images/starwars3.webp",title:"Épisode III : La Revanche des Sith",date:"19 BBY"},
+      {id:"sw-tcw-rsith",type:"anime",tmdb:"4194",media:"tv",img:"images/clonewarsserie.webp",title:"The Clone Wars — pendant La Revanche des Sith",date:"19 BBY",
+        subitems:[
+          "S7E9 · S7E10 · S7E11",
+          "S7E12 (épilogue ~17 BBY)"
+        ]},
+      {id:"sw-toj5",type:"anime",tmdb:"209867",media:"tv",img:"images/talesofthejedi.webp",title:"Tales of the Jedi — Épisode 5",date:"~22–19 BBY",tags:["flashback"]},
+      {id:"sw-toe4",type:"anime",tmdb:"225080",media:"tv",img:"images/talesofthempire.webp",title:"Tales of the Empire — Épisode 4",date:"19 BBY",note:"Pendant la Revanche des Sith"},
+      {id:"sw-toe5",type:"anime",tmdb:"225080",media:"tv",img:"images/talesofthempire.webp",title:"Tales of the Empire — Épisode 5",date:"19 BBY"}
     ]},
-    {title:"Ère de l'Empire (19–5 BBY)",entries:[
-      {id:"sw-badbatch1",type:"serie",level:"bonus",tmdb:"105971",media:"tv",season:1,title:"The Bad Batch",date:"19 BBY",note:"Épisode 1 pendant La Revanche des Sith.",subitems:["Saison 1"]},
-      {id:"sw-badbatch23",type:"serie",level:"bonus",tmdb:"105971",media:"tv",season:2,title:"The Bad Batch",date:"18 BBY",subitems:["Saison 2","Saison 3"]},
-      {id:"sw-tou1",type:"anime",level:"bonus",tmdb:"0",media:"tv",title:"Tales of the Underworld — Épisode 1",date:"~17–16 BBY",note:"Prologue avant La Revanche des Sith. La mort du personnage se passe dans le livre Dark Disciple (lisez un résumé si ça vous intéresse)."},
-      {id:"sw-tou23",type:"anime",level:"bonus",tmdb:"0",media:"tv",title:"Tales of the Underworld — Épisodes 2–3",date:"~17–16 BBY"},
-      {id:"sw-toj6",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 6",date:"~16–15 BBY",note:"Prologue pendant La Revanche des Sith."},
-      {id:"sw-jfo",type:"jeu",level:"important",tmdb:"0",media:"game",title:"Star Wars Jedi : Fallen Order",date:"14 BBY"},
-      {id:"sw-solo",type:"film",level:"important",tmdb:"348350",media:"movie",title:"Solo : A Star Wars Story",date:"10 BBY"},
-      {id:"sw-obiwan",type:"serie",level:"must",tmdb:"92830",media:"tv",season:1,title:"Obi-Wan Kenobi",date:"9 BBY",subitems:["Saison 1"]},
-      {id:"sw-toe6",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 6",date:"~9–6 BBY"},
-      {id:"sw-jsurvivr",type:"jeu",level:"important",tmdb:"0",media:"game",title:"Star Wars Jedi : Survivor",date:"9 BBY"}
+    {title:"L'ÈRE DE L'EMPIRE",entries:[
+      {id:"sw-bb1",type:"anime",tmdb:"105971",media:"tv",img:"images/badbatch.webp",title:"The Bad Batch — Saison 1",date:"19 BBY",note:"Épisode 1 pendant la Revanche des Sith",subitems:["Saison 1"]},
+      {id:"sw-bb2",type:"anime",tmdb:"105971",media:"tv",img:"images/badbatch.webp",title:"The Bad Batch — Saisons 2 & 3",date:"18 BBY",subitems:["Saison 2","Saison 3"]},
+      {id:"sw-totu1",type:"anime",tmdb:"279566",media:"tv",img:"images/talesoftheunderground.webp",title:"Tales of the Underworld — Épisode 1",date:"~17–16 BBY",note:"Prologue avant La Revanche des Sith. La mort du personnage se passe dans le livre Dark Disciple (lisez un résumé si ça vous intéresse)"},
+      {id:"sw-totu23",type:"anime",tmdb:"279566",media:"tv",img:"images/talesoftheunderground.webp",title:"Tales of the Underworld — Épisodes 2-3",date:"~17–16 BBY"},
+      {id:"sw-maul",type:"jeu",tmdb:"0",media:"game",img:"images/talesoftheunderground.webp",title:"Maul : Shadow Lord",date:"~17–16 BBY"},
+      {id:"sw-toj6",type:"anime",tmdb:"209867",media:"tv",img:"images/talesofthejedi.webp",title:"Tales of the Jedi — Épisode 6",date:"~16–15 BBY",note:"Prologue pendant La Revanche des Sith"},
+      {id:"sw-fo",type:"jeu",tmdb:"0",media:"game",img:"images/fallenorder.jpg",title:"Star Wars Jedi : Fallen Order",date:"14 BBY"},
+      {id:"sw-solo",type:"film",tmdb:"348350",media:"movie",img:"images/solo.webp",title:"Solo : A Star Wars Story",date:"10 BBY"},
+      {id:"sw-kenobi",type:"serie",tmdb:"92683",media:"tv",img:"images/kenobi.webp",title:"Obi-Wan Kenobi",date:"9 BBY"},
+      {id:"sw-toe6",type:"anime",tmdb:"225080",media:"tv",img:"images/talesofthempire.webp",title:"Tales of the Empire — Épisode 6",date:"~9–6 BBY"},
+      {id:"sw-survivor",type:"jeu",tmdb:"0",media:"game",img:"images/survivor.jpg",title:"Star Wars Jedi : Survivor",date:"9 BBY"}
     ]},
-    {title:"Rébellion — Andor & Rebels (5–1 BBY)",entries:[
-      {id:"sw-andor-s1",type:"serie",level:"must",tmdb:"83867",media:"tv",season:1,title:"Andor",date:"5 BBY",note:"On va alterner entre Andor et Rebels pas mal de fois. Si le changement de ton vous dérange, regardez Rebels d'abord puis Andor. Mais en vrai, ça vaut le coup en termes de narration.",subitems:["Saison 1"]},
-      {id:"sw-rebels-1",type:"anime",level:"must",tmdb:"60554",media:"tv",season:1,title:"Rebels",date:"5–4 BBY",subitems:["Courts-métrages 1–4","Saison 1","Saison 2 épisodes 1-9"]},
-      {id:"sw-andor-s2a",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"4 BBY",subitems:["Saison 2 épisodes 1-2-3"]},
-      {id:"sw-rebels-2",type:"anime",level:"must",tmdb:"60554",media:"tv",season:2,title:"Rebels",date:"4 BBY",subitems:["Saison 2 épisode 10"]},
-      {id:"sw-andor-s2b",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"3 BBY",subitems:["Saison 2 épisodes 4-5-6"]},
-      {id:"sw-rebels-3",type:"anime",level:"must",tmdb:"60554",media:"tv",season:2,title:"Rebels",date:"3–2 BBY",subitems:["Saison 2 épisodes 11-22","Saison 3 épisodes 1-16"]},
-      {id:"sw-andor-s2c",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"2 BBY",subitems:["Saison 2 épisodes 7-8"]},
-      {id:"sw-rebels-4",type:"anime",level:"must",tmdb:"60554",media:"tv",season:3,title:"Rebels",date:"2 BBY",subitems:["Saison 3 épisode 17"]},
-      {id:"sw-andor-s2d",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"2 BBY",subitems:["Saison 2 épisode 9"]},
-      {id:"sw-rebels-5",type:"anime",level:"must",tmdb:"60554",media:"tv",season:3,title:"Rebels",date:"2 BBY",subitems:["Saison 3 épisodes 18-22"]},
-      {id:"sw-rebels-6",type:"anime",level:"must",tmdb:"60554",media:"tv",season:4,title:"Rebels",date:"1 BBY",note:"Arrêtez l'épisode final à 42 min si vous n'avez jamais vu SW IV–V–VI (gros spoil). L'épilogue se passe au début de la série Ahsoka.",subitems:["Saison 4"]},
-      {id:"sw-andor-s2e",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"1 BBY",subitems:["Saison 2 épisodes 10-11-12"]},
-      {id:"sw-r1",type:"film",level:"must",tmdb:"330459",media:"movie",title:"Rogue One : A Star Wars Story",date:"1 BBY"}
+    {title:"L'ÈRE DE LA RÉBELLION",entries:[
+      {id:"sw-andors1",type:"serie",tmdb:"83867",media:"tv",img:"images/andors1.webp",title:"Andor — Saison 1",date:"5 BBY",note:"On va alterner Andor et Rebels. Si le changement de ton vous dérange regardez Rebels d'abord (sauf épilogue), puis Andor. Mais faites-moi confiance ça vaut le coup.",subitems:["Saison 1"]},
+      {id:"sw-rebels-s1",type:"anime",tmdb:"60554",media:"tv",img:"images/rebels.webp",title:"Rebels",date:"5–4 BBY",subitems:["Courts-métrages 1-4","Saison 1","Saison 2 épisodes 1-9"]},
+      {id:"sw-andors2-1",type:"serie",tmdb:"83867",media:"tv",img:"images/andors2.webp",title:"Andor — Saison 2 épisodes 1-3",date:"4 BBY",subitems:["Saison 2 épisodes 1-2-3"]},
+      {id:"sw-rebels-s2a",type:"anime",tmdb:"60554",media:"tv",img:"images/rebels.webp",title:"Rebels",date:"4 BBY",subitems:["Saison 2 épisode 10"]},
+      {id:"sw-andors2-2",type:"serie",tmdb:"83867",media:"tv",img:"images/andors2.webp",title:"Andor — Saison 2 épisodes 4-6",date:"3 BBY",subitems:["Saison 2 épisodes 4-5-6"]},
+      {id:"sw-rebels-s2b",type:"anime",tmdb:"60554",media:"tv",img:"images/rebels.webp",title:"Rebels",date:"3–2 BBY",subitems:["Saison 2 épisodes 11-22","Saison 3 épisodes 1-16"]},
+      {id:"sw-andors2-3",type:"serie",tmdb:"83867",media:"tv",img:"images/andors2.webp",title:"Andor — Saison 2 épisodes 7-8",date:"2 BBY",subitems:["Saison 2 épisodes 7-8"]},
+      {id:"sw-rebels-s3a",type:"anime",tmdb:"60554",media:"tv",img:"images/rebels.webp",title:"Rebels",date:"2 BBY",subitems:["Saison 3 épisode 17"]},
+      {id:"sw-andors2-4",type:"serie",tmdb:"83867",media:"tv",img:"images/andors2.webp",title:"Andor — Saison 2 épisode 9",date:"2 BBY",subitems:["Saison 2 épisode 9"]},
+      {id:"sw-rebels-s3b",type:"anime",tmdb:"60554",media:"tv",img:"images/rebels.webp",title:"Rebels",date:"2 BBY",subitems:["Saison 3 épisodes 18-22"]},
+      {id:"sw-rebels-s4",type:"anime",tmdb:"60554",media:"tv",img:"images/rebels.webp",title:"Rebels — Saison 4",date:"1 BBY",note:"Arrêtez l'épisode final à 42min si vous n'avez jamais vu Ep IV-V-VI. L'épilogue se passe plus tard.",subitems:["Saison 4"]},
+      {id:"sw-andors2-5",type:"serie",tmdb:"83867",media:"tv",img:"images/andors2.webp",title:"Andor — Saison 2 épisodes 10-12",date:"1 BBY",subitems:["Saison 2 épisodes 10-11-12"]},
+      {id:"sw-rogue",type:"film",tmdb:"330459",media:"movie",img:"images/rogueone.webp",title:"Rogue One : A Star Wars Story",date:"1 BBY"},
+      {id:"sw-ep4",type:"film",tmdb:"11",media:"movie",img:"images/starwars4.webp",title:"Épisode IV : Un Nouvel Espoir",date:"1 BBY – 0 ABY"},
+      {id:"sw-ep5",type:"film",tmdb:"1891",media:"movie",img:"images/starwars5.webp",title:"Épisode V : L'Empire Contre-Attaque",date:"3 ABY"},
+      {id:"sw-outlaws",type:"jeu",tmdb:"0",media:"game",img:"images/outlaws.avif",title:"Star Wars Outlaws + DLC Wild Card + DLC A Pirate's Fortune",date:"3 ABY"},
+      {id:"sw-ep6",type:"film",tmdb:"1892",media:"movie",img:"images/starwars6.webp",title:"Épisode VI : Le Retour du Jedi",date:"4 ABY"},
+      {id:"sw-bf2-prologue",type:"jeu",tmdb:"0",media:"game",img:"images/battlefront.png",title:"Star Wars Battlefront II Prologue : The Cleaner",date:"4 ABY",tags:["flashback"]},
+      {id:"sw-bf2-c1",type:"jeu",tmdb:"0",media:"game",img:"images/battlefront.png",title:"Star Wars Battlefront II Campagne : Missions 1-6",date:"4 ABY"},
+      {id:"sw-squadrons",type:"jeu",tmdb:"0",media:"game",img:"images/squadrons.jpg",title:"Star Wars Squadrons",date:"4 ABY"},
+      {id:"sw-bf2-c2",type:"jeu",tmdb:"0",media:"game",img:"images/battlefront.png",title:"Star Wars Battlefront II Campagne : Missions 7-11",date:"5 ABY"}
     ]},
-    {title:"Trilogie Originale (0–5 ABY)",entries:[
-      {id:"sw-ep4",type:"film",level:"must",tmdb:"11",media:"movie",title:"Épisode IV : Un Nouvel Espoir",date:"1 BBY–0 ABY"},
-      {id:"sw-ep5",type:"film",level:"must",tmdb:"1891",media:"movie",title:"Épisode V : L'Empire Contre-Attaque",date:"3 ABY"},
-      {id:"sw-outlaws",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Outlaws + DLC Wild Card + DLC A Pirate's Fortune",date:"3 ABY"},
-      {id:"sw-bf2pro",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Prologue : The Cleaner",date:"4 ABY"},
-      {id:"sw-ep6",type:"film",level:"must",tmdb:"1892",media:"movie",title:"Épisode VI : Le Retour du Jedi",date:"4 ABY"},
-      {id:"sw-bf2c1",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Missions 1–6",date:"4 ABY"},
-      {id:"sw-squadrons",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Squadrons",date:"4 ABY"},
-      {id:"sw-bf2c2",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Missions 7–11",date:"5 ABY"}
+    {title:"L'ÈRE DU NOUVEL ORDRE JEDI — 9 ABY",entries:[
+      {id:"sw-mando-s1",type:"serie",tmdb:"82856",media:"tv",img:"images/mandalorian.webp",title:"The Mandalorian",date:"9 ABY",subitems:["Saison 1","Saison 2 épisodes 1-5"]},
+      {id:"sw-toe1",type:"anime",tmdb:"225080",media:"tv",img:"images/talesofthempire.webp",title:"Tales of the Empire — Épisode 1",date:"20 BBY",note:"Pendant The Clone Wars",tags:["flashback"]},
+      {id:"sw-toe2",type:"anime",tmdb:"225080",media:"tv",img:"images/talesofthempire.webp",title:"Tales of the Empire — Épisode 2",date:"~9–5 BBY",tags:["flashback"]},
+      {id:"sw-toe3",type:"anime",tmdb:"225080",media:"tv",img:"images/talesofthempire.webp",title:"Tales of the Empire — Épisode 3",date:"~8–9 ABY",tags:["flashback"]},
+      {id:"sw-mando-s2b",type:"serie",tmdb:"82856",media:"tv",img:"images/mandalorian.webp",title:"The Mandalorian — Saison 2 épisodes 6-8",date:"9 ABY",subitems:["Saison 2 épisodes 6-8"]},
+      {id:"sw-boba",type:"serie",tmdb:"115036",media:"tv",img:"images/bobafett.webp",title:"Le Livre de Boba Fett",date:"9 ABY"},
+      {id:"sw-mando-s3",type:"serie",tmdb:"82856",media:"tv",img:"images/mandalorian.webp",title:"The Mandalorian — Saison 3",date:"9 ABY",subitems:["Saison 3"]},
+      {id:"sw-mag",type:"film",tmdb:"0",media:"movie",img:"images/mandalorianandgrogu.webp",title:"The Mandalorian and Grogu",date:"9 ABY"},
+      {id:"sw-rebels-ep",type:"anime",tmdb:"60554",media:"tv",img:"images/rebels.webp",title:"Épilogue de l'épisode final de Rebels",date:"9 ABY"},
+      {id:"sw-ahsoka",type:"serie",tmdb:"114461",media:"tv",img:"images/ahsoka.webp",title:"Ahsoka",date:"9 ABY"},
+      {id:"sw-skelcrew",type:"serie",tmdb:"247317",media:"tv",img:"images/skeletoncrew.webp",title:"Skeleton Crew",date:"~9 ABY"}
     ]},
-    {title:"Le Mandalorien & Nouvel Empire (9 ABY)",entries:[
-      {id:"sw-mando1",type:"serie",level:"must",tmdb:"82856",media:"tv",season:1,title:"The Mandalorian",date:"9 ABY",subitems:["Saison 1","Saison 2 épisodes 1-5"]},
-      {id:"sw-toe1",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 1",date:"20 BBY",tags:["flashback"],note:"Pendant The Clone Wars."},
-      {id:"sw-toe2",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 2",date:"~9–5 BBY",tags:["flashback"]},
-      {id:"sw-toe3",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 3",date:"~8–9 ABY",tags:["flashback"]},
-      {id:"sw-mando2",type:"serie",level:"must",tmdb:"82856",media:"tv",season:2,title:"The Mandalorian",date:"9 ABY",subitems:["Saison 2 épisodes 6-8"]},
-      {id:"sw-boba",type:"serie",level:"must",tmdb:"115036",media:"tv",season:1,title:"The Book of Boba Fett",date:"9 ABY",subitems:["Saison 1"]},
-      {id:"sw-mando3",type:"serie",level:"must",tmdb:"82856",media:"tv",season:3,title:"The Mandalorian",date:"9 ABY",subitems:["Saison 3"]},
-      {id:"sw-mandogrogu",type:"film",level:"must",tmdb:"774752",media:"movie",title:"The Mandalorian and Grogu",date:"9 ABY"},
-      {id:"sw-rebels-ep",type:"anime",level:"bonus",tmdb:"60554",media:"tv",title:"Épilogue de l'épisode final de Rebels",date:"9 ABY"},
-      {id:"sw-ahsoka",type:"serie",level:"must",tmdb:"114461",media:"tv",season:1,title:"Ahsoka",date:"9 ABY",subitems:["Saison 1"]},
-      {id:"sw-skeleton",type:"serie",level:"bonus",tmdb:"202555",media:"tv",season:1,title:"Skeleton Crew",date:"9 ABY",subitems:["Saison 1"]}
-    ]},
-    {title:"Trilogie Sequel (34–35 ABY)",entries:[
-      {id:"sw-bf2c3",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Mission 12",date:"~34 ABY"},
-      {id:"sw-ep7",type:"film",level:"must",tmdb:"140607",media:"movie",title:"Épisode VII : Le Réveil de la Force",date:"34 ABY"},
-      {id:"sw-bf2res",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Résurrection",date:"34 ABY"},
-      {id:"sw-ep8",type:"film",level:"must",tmdb:"181808",media:"movie",title:"Épisode VIII : Les Derniers Jedi",date:"34 ABY"},
-      {id:"sw-ep9",type:"film",level:"must",tmdb:"181812",media:"movie",title:"Épisode IX : L'Ascension de Skywalker",date:"35 ABY"}
+    {title:"L'ÈRE DU PREMIER ORDRE",entries:[
+      {id:"sw-ep7",type:"film",tmdb:"140607",media:"movie",img:"images/starwars7.webp",title:"Épisode VII : Le Réveil de la Force",date:"34 ABY"},
+      {id:"sw-bf2-m12",type:"jeu",tmdb:"0",media:"game",img:"images/battlefront.png",title:"Star Wars Battlefront II Campagne : Mission 12",date:"~34 ABY",tags:["flashback"]},
+      {id:"sw-bf2res",type:"jeu",tmdb:"0",media:"game",img:"images/battlefront.png",title:"Star Wars Battlefront II Campagne : Résurrection",date:"34 ABY"},
+      {id:"sw-ep8",type:"film",tmdb:"181808",media:"movie",img:"images/starwars8.webp",title:"Épisode VIII : Les Derniers Jedi",date:"34 ABY"},
+      {id:"sw-ep9",type:"film",tmdb:"181812",media:"movie",img:"images/starwars9.webp",title:"Épisode IX : L'Ascension de Skywalker",date:"35 ABY"}
     ]}
   ]
 };
@@ -448,7 +507,24 @@ async function toggleExpand(el,ev){
   if(panel.dataset.loaded)return;
   panel.dataset.loaded='1';
   const id=el.dataset.tmdb,media=el.dataset.media;
-  if(!id||id==='0'){panel.innerHTML='<div class="expand-no-data">Pas d\'informations TMDB pour cette entrée.</div>';return}
+  const entryObj=currentData&&currentData.eras.flatMap(e=>e.entries).find(e=>e.id===el.dataset.id);
+  const faqDef=entryObj&&entryObj.faq||{};
+  const mediaName=entryObj?entryObj.title:'ce média';
+  const isSW=currentData&&currentData.id==='sw';
+  const faqCats=isSW?[
+    {key:'quand',q:'Quand se déroule '+mediaName+' dans l\'univers Star Wars ?',fallback:'Information non disponible.'},
+    {key:'pourquoi',q:'Pourquoi regarder '+mediaName+' maintenant dans la timeline ?',fallback:'Information non disponible.'}
+  ]:[
+    {key:'quand',q:'Quand se déroule '+mediaName+' dans le MCU ?',fallback:'Information non disponible.'},
+    {key:'comment',q:'Comment est relié '+mediaName+' au MCU ?',fallback:'Information non disponible.'},
+    {key:'pourquoi',q:'Pourquoi regarder '+mediaName+' maintenant dans la timeline ?',fallback:'Information non disponible.'},
+    {key:'postcredits',q:'La ou les scènes post-crédits ?',fallback:'Aucune information disponible.'}
+  ];
+  const faqHtml=faqCats.map(cat=>'<details class="faq-item"><summary class="faq-q">'+cat.q+'</summary><div class="faq-a">'+(faqDef[cat.key]||cat.fallback)+'</div></details>').join('');
+  if(!id||id==='0'){
+    panel.innerHTML='<div class="expand-no-data">'+(faqHtml?'<div class="expand-faq">'+faqHtml+'</div>':'Pas d\'informations TMDB pour cette entrée.')+'</div>';
+    return;
+  }
   panel.innerHTML='<div class="expand-loading">Chargement…</div>';
   const type=(media==='movie'||media==='video')?'movie':'tv';
   const k=type+id;
@@ -478,8 +554,7 @@ async function toggleExpand(el,ev){
   if(runtime)meta+='<span><strong>Durée</strong> '+runtime+'</span>';
   if(genres)meta+='<span><strong>Genre</strong> '+genres+'</span>';
   if(rating)meta+='<span><strong>Note</strong> ⭐ '+rating+'/10</span>';
-    const entryObj=currentData&&currentData.eras.flatMap(e=>e.entries).find(e=>e.id===el.dataset.id);
-  const faqHtml=entryObj&&entryObj.faq?entryObj.faq.map(item=>'<details class="faq-item"><summary class="faq-q">'+item.q+'</summary><div class="faq-a">'+item.a+'</div></details>').join(''):'';
+    
   panel.innerHTML='<div class="expand-inner">'
     +(poster?'<div class="expand-poster" onclick="openPMurl(\''+IMG+'w500'+d.poster_path+'\')"><img src="'+poster+'" loading="lazy"/><div class="expand-poster-ov">🔍</div></div>':'')
     +'<div class="expand-info"><div class="expand-synopsis">'+synopsis+'</div>'
@@ -514,24 +589,28 @@ function buildEntry(e,showLevel,inSeg){
   if(e.subitems&&e.subitems.length)sub='<div class="esub">'+e.subitems.map(s=>'<div class="si">'+s+'</div>').join('')+'</div>';
   const note=e.note?'<div class="enote">'+e.note+'</div>':'';
   const details=e.details?'<div class="edetails">'+e.details+'</div>':'';
-  return '<div class="en '+levelClass+devClass+ncClass+(isDone?' done':'')+'" data-id="'+e.id+'" data-type="'+e.type+'" data-level="'+e.level+'" data-tmdb="'+(e.tmdb||'0')+'" data-media="'+mediaAttr+'" data-nc="'+(isNC?'1':'0')+'"'+seasonAttr+' onclick="toggleExpand(this,event)">'
-    +'<div class="en-top">'
+  return '<div class="en '+levelClass+devClass+ncClass+(isDone?' done':'')+'" data-id="'+e.id+'" data-type="'+e.type+'" data-level="'+e.level+'" data-tmdb="'+(e.tmdb||'0')+'" data-media="'+mediaAttr+'" data-nc="'+(isNC?'1':'0')+'"'+seasonAttr+'>'
+    +'<div class="en-top" onclick="toggleExpand(this.closest(\'.en\'),event)">'
     +'<div class="en-check" onclick="toggleEntry(\''+e.id+'\',event)"><div class="checkmark">'+(isDone?'✓':'')+'</div></div>'
     +'<div class="en-datebadge"><div class="en-level-icon">'+levelIcon+'</div><div class="date-main">'+(e.date||'—')+'</div>'+dimBadge+'</div>'
     +'<div class="ep"'+imgAttr+'><div class="pp">'+ppIcon+'</div></div>'
     +'<div class="em"><div class="tr">'+pre+'<span class="b '+cls+'">'+label+'</span><span class="en-name">'+e.title+'</span></div>'+note+details+sub+'</div>'
     +'</div>'
-    +'<div class="en-expand"></div></div>';
+    +'<div class="en-expand" onclick="event.stopPropagation()"></div></div>';
 }
 
 // Filtrage avancé
 function applyFilters(){
   const showTypes=new Set();
   document.querySelectorAll('.type-filter-btn.active').forEach(b=>showTypes.add(b.dataset.type));
-  const showMust=document.getElementById('lvl-must').classList.contains('active');
-  const showImp=document.getElementById('lvl-imp').classList.contains('active');
-  const showBonus=document.getElementById('lvl-bonus').classList.contains('active');
-  const hideNC=document.getElementById('btn-nc').classList.contains('active');
+  const lvlMust=document.getElementById('lvl-must');
+  const lvlImp=document.getElementById('lvl-imp');
+  const lvlBonus=document.getElementById('lvl-bonus');
+  const btnNC=document.getElementById('btn-nc');
+  const showMust=lvlMust?lvlMust.classList.contains('active'):true;
+  const showImp=lvlImp?lvlImp.classList.contains('active'):true;
+  const showBonus=lvlBonus?lvlBonus.classList.contains('active'):true;
+  const hideNC=btnNC?!btnNC.classList.contains('active'):false;
 
   document.querySelectorAll('#tl-content .en').forEach(e=>{
     const type=e.dataset.type;
@@ -601,9 +680,9 @@ function buildTimeline(data){
     f+='<button class="fbt active" id="lvl-must" onclick="toggleLevelFilter(this)">⭐ Obligatoire</button>';
     f+='<button class="fbt active" id="lvl-imp" onclick="toggleLevelFilter(this)">🚨 Important</button>';
     f+='<button class="fbt active" id="lvl-bonus" onclick="toggleLevelFilter(this)">Optionnel</button>';
+    if(hasNC){f+='<button class="fbt active" id="btn-nc" onclick="toggleNCFilter(this)">Canonicité non confirmée</button>';}
     f+='</div>';
   }
-  if(hasNC){f+='<button class="fbt active" id="btn-nc" onclick="toggleNCFilter(this)">Canonicité non confirmée</button>';}
   document.getElementById('filter-bar').innerHTML=f;
 
   // Contenu
@@ -646,6 +725,17 @@ function showCS(){window.location.href='index.html';}
 
 
 
+window.addEventListener('scroll',()=>{
+  const mm=document.getElementById('miss-minute');
+  if(mm)mm.classList.toggle('visible',window.scrollY>400);
+});
+showUniverse('mcu');
+
+
+window.addEventListener('scroll',()=>{
+  const g=document.getElementById('grogu');
+  if(g)g.classList.toggle('visible',window.scrollY>400);
+});
 showUniverse('sw');
 </script>
 </body>
