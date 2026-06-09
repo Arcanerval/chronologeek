@@ -20,7 +20,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-grad
 header{background:rgba(8,8,15,.88);border-bottom:1px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:200;backdrop-filter:blur(20px)}
 nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;height:62px}
 .logo{display:flex;align-items:center;gap:.6rem;cursor:pointer;flex-shrink:0}
-.logo img{height:38px;display:none}.logo img.loaded{display:block}
+.logo img{height:32px;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
 .logo-text{font-size:1.35rem;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-links{display:flex;gap:1.25rem;align-items:center}
 .nav-links a{color:var(--muted2);font-size:.88rem;text-decoration:none;cursor:pointer;transition:color .2s;white-space:nowrap}
@@ -34,7 +34,8 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .hero-inner{position:relative;z-index:1}
 .hero-eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem}
 .hero-logo{display:block;height:clamp(48px,8vw,90px);margin:0 auto 1.5rem;filter:drop-shadow(0 0 40px rgba(124,106,247,.4))}
-.hero-tagline{color:var(--muted2);font-size:1.05rem;max-width:520px;margin:0 auto 3.5rem;line-height:1.65}
+.hero-tagline{color:var(--muted2);font-size:1.05rem;max-width:520px;margin:0 auto .75rem;line-height:1.65}
+.hero-update{font-size:.78rem;color:var(--muted);margin-top:-.5rem;margin-bottom:3.5rem;letter-spacing:.03em}
 
 /* ── GRILLE UNIVERS ── */
 .ugrid{display:flex;gap:1.75rem;justify-content:center;flex-wrap:wrap;max-width:1000px;margin:0 auto}
@@ -67,8 +68,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 <header>
   <nav>
     <div class="logo" onclick="window.location.href='index.html'">
-      <img id="site-logo" src="images/logo-chronologeek.png" alt="Chronologeek" onload="this.classList.add('loaded');document.getElementById('logo-text').style.display='none'"/>
-      <span class="logo-text" id="logo-text">Chronologeek</span>
+      <img id="site-logo" src="images/logo-chronologeek.png" alt="Chronologeek"/>
     </div>
     <div class="nav-links">
       <a onclick="window.location.href='index.html'">Accueil</a>
@@ -105,7 +105,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
       <!-- Marvel -->
       <a class="ucard" href="marvel.html">
         <div class="cbanner">
-          <img src="images/marvel-banner.webp" alt="Marvel" onerror="this.style.display='none'"/>
+          <img src="images/mcu.webp" alt="Marvel" onerror="this.style.display='none'"/>
         </div>
         <div class="cbody">
           <div class="ctitle">Marvel — MCU</div>
@@ -117,7 +117,7 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
       <!-- Bientôt -->
       <div class="ucard" style="cursor:default">
         <div class="cbanner">
-          <img src="images/space-bg.webp" alt="" onerror="this.style.display='none'"/>
+          <img src="images/autresunivers.webp" alt="" onerror="this.style.display='none'"/>
         </div>
         <div class="cbody">
           <div class="ctitle" style="color:var(--muted2)">Bientôt…</div>
