@@ -8,867 +8,127 @@
 :root{
   --bg:#08080f;--surface:#0f0f1a;--surface2:#161625;--border:#1e1e35;--border2:#2a2a48;
   --accent:#7c6af7;--accent2:#f06292;--gold:#f5c842;--text:#e2e2f0;--muted:#686880;
-  --muted2:#9090b0;--green:#56c27a;--orange:#f09642;--red:#e05555;--radius:12px;
+  --muted2:#9090b0;--green:#56c27a;--radius:12px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(124,106,247,.12),transparent 60%),radial-gradient(ellipse 60% 50% at 80% 110%,rgba(240,98,146,.08),transparent 60%);pointer-events:none}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── HEADER ── */
 header{background:rgba(8,8,15,.88);border-bottom:1px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:200;backdrop-filter:blur(20px)}
-nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;height:62px;flex-wrap:wrap}
+nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;height:62px}
 .logo{display:flex;align-items:center;gap:.6rem;cursor:pointer;flex-shrink:0}
-.logo img{height:36px;display:none}.logo img.loaded{display:block}
+.logo img{height:38px;display:none}.logo img.loaded{display:block}
 .logo-text{font-size:1.35rem;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-links{display:flex;gap:1.25rem;align-items:center}
 .nav-links a{color:var(--muted2);font-size:.88rem;text-decoration:none;cursor:pointer;transition:color .2s;white-space:nowrap}
 .nav-links a:hover{color:var(--text)}
 .nav-sp{flex:1}
-.pbn{display:none;align-items:center;gap:.6rem;font-size:.78rem;color:var(--muted2)}.pbn.show{display:flex}
-.pbn-track{width:100px;height:4px;background:var(--border2);border-radius:2px;overflow:hidden}
-.pbn-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .4s}
-.disc-btn{background:linear-gradient(135deg,#5865f2,#4752c4);color:#fff!important;padding:.4rem 1rem;border-radius:8px;font-size:.82rem;font-weight:600;white-space:nowrap}
-/* HOME */
-#home-page{display:none}#home-page.v{display:block}
-.hero{padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.disc-btn{background:linear-gradient(135deg,#5865f2,#4752c4);color:#fff!important;padding:.4rem 1rem;border-radius:8px;font-size:.82rem;font-weight:600;white-space:nowrap;text-decoration:none}
+
+/* ── HERO ── */
+.hero{padding:5rem 2rem 4.5rem;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 0%,rgba(124,106,247,.15),transparent 70%);pointer-events:none}
 .hero-inner{position:relative;z-index:1}
-.hero h1{font-size:clamp(2.8rem,7vw,5rem);font-weight:900;letter-spacing:-2px;background:linear-gradient(135deg,#fff 0%,var(--accent) 45%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.25rem;line-height:1}
-.hero-rune{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
-.hero-tagline{color:var(--muted2);font-size:1.05rem;max-width:540px;margin:0 auto 3.5rem;line-height:1.65}
-.ugrid{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;max-width:960px;margin:0 auto}
-.ucard{background:linear-gradient(160deg,var(--surface),var(--surface2));border:1px solid var(--border2);border-radius:18px;cursor:pointer;transition:all .3s cubic-bezier(.34,1.56,.64,1);width:240px;overflow:hidden}
-.ucard:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 60px rgba(124,106,247,.25),0 0 0 1px rgba(124,106,247,.3)}
-.cbanner{height:130px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
-.cbanner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
-.cbanner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--surface) 100%);pointer-events:none}
-.cicon{position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.9))}
-.cbody{padding:1.1rem 1.25rem 1.25rem}
-.cname{font-weight:800;font-size:1.05rem;margin-bottom:.3rem}
-.csub{font-size:.78rem;color:var(--muted2);line-height:1.4}
-.cprogress{margin-top:.75rem;display:flex;align-items:center;gap:.6rem;font-size:.72rem;color:var(--muted2)}
-.cp-track{flex:1;height:4px;background:var(--border2);border-radius:2px;overflow:hidden}
-.cp-fill{height:100%;border-radius:2px;transition:width .5s}
-.cnew{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:.6rem}
-/* TIMELINE PAGE */
-.tl-page{display:none;max-width:1200px;margin:0 auto;padding:2.5rem 2rem}.tl-page.v{display:block}
-.bc{font-size:.78rem;color:var(--muted2);margin-bottom:1.25rem;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:color .2s}
-.bc:hover{color:var(--accent)}
-.page-title{font-size:2.1rem;font-weight:900;letter-spacing:-.5px;margin-bottom:.4rem}
-.page-sub{color:var(--muted2);font-size:.9rem;line-height:1.55;margin-bottom:1.5rem}
-.progress-block{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1.25rem}
-.pb-info{flex:1}.pb-label{font-size:.72rem;color:var(--muted2);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em}
-.pb-track{height:6px;background:var(--border2);border-radius:3px;overflow:hidden;margin-bottom:.35rem}
-.pb-fill{height:100%;border-radius:3px;transition:width .5s}
-.pb-counts{font-size:.78rem;color:var(--muted2)}.pb-counts strong{color:var(--text)}
-.pb-reset{background:transparent;border:1px solid var(--border2);color:var(--muted2);padding:.35rem .8rem;border-radius:8px;font-size:.75rem;cursor:pointer;transition:all .2s;white-space:nowrap}
-.pb-reset:hover{border-color:var(--red);color:var(--red)}
-.nb{background:linear-gradient(135deg,rgba(124,106,247,.08),rgba(240,98,146,.05));border:1px solid rgba(124,106,247,.2);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:1.1rem 1.3rem;margin-bottom:1.5rem;font-size:.86rem;line-height:1.75;color:var(--muted2)}
-.nb strong{color:var(--text)}
-.leg{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;font-size:.82rem}
-.leg-title{width:100%;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.1rem}
-/* BADGES */
-.b{display:inline-flex;align-items:center;padding:2px 8px;border-radius:6px;font-size:.69rem;font-weight:700;white-space:nowrap}
-.bf{background:rgba(100,181,246,.12);color:#64b5f6;border:1px solid rgba(100,181,246,.25)}
-.bfa{background:rgba(144,202,249,.10);color:#90caf9;border:1px solid rgba(144,202,249,.2)}
-.bs{background:rgba(129,199,132,.12);color:#81c784;border:1px solid rgba(129,199,132,.25)}
-.ba{background:rgba(206,147,216,.12);color:#ce93d8;border:1px solid rgba(206,147,216,.25)}
-.bj{background:rgba(255,183,77,.12);color:#ffb74d;border:1px solid rgba(255,183,77,.25)}
-.bsp{background:rgba(255,167,38,.12);color:#ffa726;border:1px solid rgba(255,167,38,.25)}
-.bv{background:rgba(239,83,80,.12);color:#ef5350;border:1px solid rgba(239,83,80,.25)}
-.nt{display:inline-flex;font-size:.65rem;padding:2px 7px;border-radius:5px;font-weight:700;white-space:nowrap;background:rgba(224,85,85,.12);color:var(--red);border:1px solid rgba(224,85,85,.25)}
-.ft{display:inline-flex;font-size:.65rem;padding:2px 7px;border-radius:5px;white-space:nowrap;background:rgba(240,150,66,.12);color:var(--orange);border:1px solid rgba(240,150,66,.25)}
-.dt{display:inline-flex;font-size:.65rem;padding:2px 7px;border-radius:5px;white-space:nowrap;background:rgba(124,106,247,.12);color:#a99fff;border:1px solid rgba(124,106,247,.25)}
-/* FILTRES */
-.filter-bar{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}
-.filter-group{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
-.filter-label{font-size:.72rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.06em;font-weight:600;white-space:nowrap;min-width:56px}
-.fbt{background:var(--surface2);border:1px solid var(--border2);color:var(--muted2);padding:.35rem .85rem;border-radius:20px;cursor:pointer;font-size:.79rem;transition:all .2s;user-select:none}
-.fbt:hover{border-color:var(--accent);color:var(--text)}
-.fbt.active{background:rgba(124,106,247,.2);border-color:var(--accent);color:#c4baff;font-weight:600}
-/* ERA */
-.era-node{display:flex;align-items:flex-start;margin:2.5rem 0 .6rem;position:relative}
-.era-node-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:3px;z-index:2;margin-right:10px}
-.era-node-dot.sv{background:#90caf9}.era-node-dot.fox{background:#ffb74d}
-.era-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);line-height:1.3}
-.era-label.sv{color:#90caf9}.era-label.fox{color:#ffb74d}
-/* SEGMENTS */
-.segment-box{margin:.4rem 0 1rem;border:1px solid var(--border2);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,var(--surface),var(--surface2));margin-left:40px}
-.segment-header{padding:.7rem 1rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid var(--border2)}
-.segment-header.sv{background:linear-gradient(135deg,rgba(144,202,249,.08),rgba(206,147,216,.05))}
-.segment-header.fox{background:linear-gradient(135deg,rgba(255,183,77,.08),rgba(224,85,85,.05))}
-.segment-icon{font-size:1.2rem}.segment-title{font-weight:800;font-size:.88rem}
-.segment-header.sv .segment-title{color:#90caf9}.segment-header.fox .segment-title{color:#ffb74d}
-.segment-sub{font-size:.72rem;color:var(--muted2);margin-left:auto}.segment-body{padding:.5rem .65rem}
-/* ENTRY */
-.en{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.5rem;display:flex;flex-direction:column;overflow:hidden;transition:border-color .2s,background .2s,box-shadow .2s;cursor:pointer}
-.en:hover{border-color:var(--border2);background:var(--surface2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
-.en.must{border-left:3px solid var(--gold)}.en.imp{border-left:3px solid var(--orange)}
-.en.done{opacity:.5}.en.done .en-name{text-decoration:line-through;text-decoration-color:var(--muted)}
-.en.open{border-color:var(--accent);box-shadow:0 0 0 1px rgba(124,106,247,.2),0 8px 30px rgba(0,0,0,.4)}
-/* Décalage droite pour les non-616 — amplifié */
-.en.deviate{margin-left:40px;border-left-style:dashed}
-.en-top{display:flex;overflow:hidden;min-height:86px}
-.en-check{width:40px;min-width:40px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border);flex-shrink:0;transition:background .2s;cursor:pointer}
-.en-check:hover{background:rgba(124,106,247,.08)}
-.checkmark{width:20px;height:20px;border-radius:6px;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;transition:all .25s;font-size:.75rem;color:#fff;font-weight:700}
-.en-check:hover .checkmark{border-color:var(--accent)}
-.en.done .checkmark{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}
-/* Date badge — grande */
-.en-datebadge{width:100px;min-width:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--border);flex-shrink:0;padding:.4rem .35rem;background:rgba(124,106,247,.04);gap:.12rem}
-.en-level-icon{font-size:1rem;line-height:1;min-height:1rem}
-.date-main{font-size:.82rem;font-weight:900;color:var(--text);text-align:center;line-height:1.2}
-.dim-badge{font-size:.52rem;font-weight:700;color:#a99fff;background:rgba(124,106,247,.15);border:1px solid rgba(124,106,247,.25);border-radius:4px;padding:1px 4px;text-align:center;line-height:1.4;margin-top:.1rem;max-width:92px;word-break:break-word}
-.ep{width:200px;min-width:200px;background:var(--surface2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border-right:1px solid var(--border);cursor:pointer}
-.ep img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .3s}
-.ep:hover img{transform:scale(1.06)}.pp{font-size:1.5rem;opacity:.15}
-.em{flex:1;padding:.7rem .9rem;min-width:0;display:flex;flex-direction:column;gap:.18rem}
-.tr{display:flex;flex-wrap:wrap;gap:.3rem;align-items:center}
-.en-name{font-weight:600;font-size:.92rem;line-height:1.3;color:var(--text)}
-.enote{font-size:.78rem;color:var(--muted2);font-style:italic;line-height:1.5}
-.edetails{font-size:.78rem;color:var(--muted2);line-height:1.5;padding:.25rem .5rem;border-left:2px solid var(--border2);background:rgba(124,106,247,.03);border-radius:0 4px 4px 0;margin-top:.1rem}
-.esub{padding-left:.5rem;border-left:2px solid var(--border2);margin-top:.25rem}
-.si{font-size:.76rem;color:var(--muted2);padding:.07rem 0 .07rem .45rem;line-height:1.4}
-.si strong{color:var(--muted2)}
-/* EXPAND */
-.en-expand{display:none;border-top:1px solid var(--border);background:rgba(0,0,0,.25)}
-.en.open .en-expand{display:block}
-.expand-inner{display:flex;min-height:150px}
-.expand-poster{width:100px;min-width:100px;flex-shrink:0;cursor:pointer;overflow:hidden;position:relative}
-.expand-poster img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
-.expand-poster:hover img{transform:scale(1.04)}
-.expand-poster-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background .2s;font-size:1.6rem;opacity:0}
-.expand-poster:hover .expand-poster-ov{background:rgba(0,0,0,.45);opacity:1}
-.expand-info{flex:1;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.45rem;overflow:hidden}
-.expand-synopsis{font-size:.8rem;color:var(--muted2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
-.expand-meta{display:flex;flex-wrap:wrap;gap:.25rem .6rem;font-size:.74rem;color:var(--muted2)}
-.expand-meta span strong{color:var(--text)}
-.expand-trailer-link{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.25);color:#ff6b6b;padding:.28rem .7rem;border-radius:8px;font-size:.77rem;font-weight:600;text-decoration:none;transition:all .2s;width:fit-content}
-.expand-trailer-link:hover{background:rgba(255,0,0,.2)}
-.expand-loading{padding:1.5rem;color:var(--muted);font-size:.8rem;text-align:center}
-.expand-no-data{padding:1rem;color:var(--muted);font-size:.8rem}
-/* MODAL */
-.pm{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.92);align-items:center;justify-content:center;backdrop-filter:blur(8px);cursor:pointer}
-.pm.o{display:flex}.pm img{max-height:88vh;max-width:88vw;border-radius:14px;box-shadow:0 30px 100px rgba(0,0,0,.9)}
-.pm-x{position:absolute;top:1.25rem;right:1.75rem;color:#fff;font-size:1.8rem;cursor:pointer;opacity:.6}
-/* CS */
-.cs{display:none;text-align:center;padding:6rem 2rem;color:var(--muted2)}.cs.v{display:block}
-.cs h2{font-size:2rem;margin-bottom:1rem;color:var(--text)}
-@media(max-width:700px){
-  .tl-page{padding:1rem .6rem;max-width:100%}
-  .en-top{flex-direction:column;min-height:unset}
-  .ep{width:100%!important;min-width:unset!important;height:120px;border-right:none;border-bottom:1px solid var(--border)}
-  .ep img{object-position:center 25%}
-  .en-check{width:100%;height:34px;border-right:none;border-bottom:1px solid var(--border);justify-content:flex-start;padding-left:1rem}
-  .en-datebadge{width:100%!important;min-width:unset!important;flex-direction:row;gap:.6rem;justify-content:flex-start;border-right:none;border-bottom:1px solid var(--border);padding:.3rem .75rem;background:rgba(124,106,247,.05)}
-  .en-level-icon{min-height:unset}
-  .dim-badge{max-width:none;font-size:.6rem}
-  .em{padding:.6rem .75rem}
-  .en-name{font-size:.88rem}
-  .enote{font-size:.75rem}
-  .b{font-size:.64rem;padding:2px 6px}
-  .nt,.ft,.dt{font-size:.62rem;padding:2px 5px}
-  .expand-poster{width:80px;min-width:80px}
-  nav{gap:.5rem;height:auto;padding:.5rem 0;flex-wrap:wrap}
-  .nav-links{gap:.7rem}
-  .nav-links a{font-size:.78rem}
-  .disc-btn{padding:.3rem .7rem;font-size:.78rem}
-  .en.deviate{margin-left:10px}
-  .segment-box{margin-left:10px}
-  #miss-minute{width:64px;height:64px;bottom:1.25rem;right:1.25rem}
-  .filter-group{gap:.35rem}
-  .fbt{font-size:.73rem;padding:.28rem .65rem}
-  .progress-block{flex-direction:column;align-items:flex-start;gap:.75rem}
-}
-@media(max-width:420px){
-  .ep{height:90px}
-  .en-name{font-size:.82rem}
-}
-@media(max-width:420px){
-  .ep{width:60px;min-width:60px}
-  .en-check{width:28px;min-width:28px}
-  .en-name{font-size:.79rem}
-  .date-main{font-size:.63rem}
-}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem}
+.hero-logo{display:block;height:clamp(48px,8vw,90px);margin:0 auto 1.5rem;filter:drop-shadow(0 0 40px rgba(124,106,247,.4))}
+.hero-tagline{color:var(--muted2);font-size:1.05rem;max-width:520px;margin:0 auto 3.5rem;line-height:1.65}
 
-.expand-faq{padding:.75rem 1rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:.35rem}
-.faq-item{border:1px solid var(--border2);border-radius:8px;overflow:hidden;background:var(--surface)}
-.faq-q{padding:.5rem .85rem;font-size:.82rem;font-weight:600;color:var(--accent);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;user-select:none}
-.faq-q::-webkit-details-marker{display:none}
-.faq-q::after{content:'›';font-size:1.2rem;transition:transform .2s;color:var(--muted2)}
-details[open] .faq-q::after{transform:rotate(90deg)}
-.faq-a{padding:.5rem .85rem .65rem;font-size:.81rem;color:var(--muted2);line-height:1.65;border-top:1px solid var(--border)}
+/* ── GRILLE UNIVERS ── */
+.ugrid{display:flex;gap:1.75rem;justify-content:center;flex-wrap:wrap;max-width:1000px;margin:0 auto}
+.ucard{background:linear-gradient(160deg,var(--surface),var(--surface2));border:1px solid var(--border2);border-radius:18px;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;width:260px;overflow:hidden;text-decoration:none;display:block}
+.ucard:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 60px rgba(124,106,247,.25),0 0 0 1px rgba(124,106,247,.3)}
+.cbanner{height:140px;position:relative;overflow:hidden;background:var(--surface2)}
+.cbanner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;transition:opacity .3s}
+.ucard:hover .cbanner img{opacity:.8}
+.cbanner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 20%,var(--surface) 100%);pointer-events:none}
+.cbody{padding:1.1rem 1.25rem 1.4rem}
+.ctitle{font-size:1.1rem;font-weight:800;margin-bottom:.35rem;letter-spacing:-.3px}
+.csub{font-size:.78rem;color:var(--muted2);line-height:1.5}
+.ctag{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:20px;margin-top:.6rem}
+.tag-live{background:rgba(86,194,122,.15);color:var(--green);border:1px solid rgba(86,194,122,.3)}
+.tag-soon{background:rgba(124,106,247,.12);color:var(--accent);border:1px solid rgba(124,106,247,.25)}
+
+/* ── SOON SECTION ── */
+.soon-section{max-width:960px;margin:0 auto;padding:0 2rem 5rem}
+.soon-title{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;text-align:center}
+.soon-grid{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.soon-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem 1.4rem;display:flex;align-items:center;gap:.9rem;width:220px;opacity:.7;transition:opacity .2s}
+.soon-card:hover{opacity:1}
+.soon-card-img{width:44px;height:44px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--surface2)}
+.soon-card-name{font-size:.88rem;font-weight:700}
+.soon-card-sub{font-size:.72rem;color:var(--muted2);margin-top:.15rem}
 </style>
 </head>
 <body>
 
 <header>
   <nav>
-    <div class="logo" onclick="showHome()">
-      <img id="site-logo" alt="Chronologeek" onload="this.classList.add('loaded');document.getElementById('logo-text').style.display='none'"/>
+    <div class="logo" onclick="window.location.href='index.html'">
+      <img id="site-logo" src="images/logo-chronologeek.png" alt="Chronologeek" onload="this.classList.add('loaded');document.getElementById('logo-text').style.display='none'"/>
       <span class="logo-text" id="logo-text">Chronologeek</span>
     </div>
     <div class="nav-links">
-      <a onclick="showHome()">Accueil</a>
+      <a onclick="window.location.href='index.html'">Accueil</a>
       <a onclick="window.location.href='starwars.html'">Star Wars</a>
       <a onclick="window.location.href='marvel.html'">Marvel</a>
-      <a onclick="showCS()">Dossiers</a>
-      <a onclick="showCS()">Communauté</a>
+      <a href="#">Dossiers</a>
+      <a href="#">Communauté</a>
     </div>
     <div class="nav-sp"></div>
-    <div class="pbn" id="pbn"><span id="pbn-label">0/0</span><div class="pbn-track"><div class="pbn-fill" id="pbn-fill" style="width:0%"></div></div></div>
     <a href="#" class="disc-btn">Discord</a>
   </nav>
 </header>
-<div class="pm" id="pm" onclick="closePM()"><span class="pm-x">✕</span><img id="pmi" src="" alt=""/></div>
-<div id="home-page">
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-rune">✦ La référence française des timelines ✦</div>
-      <h1>Chronologeek</h1>
-      <p class="hero-tagline">Les timelines complètes de tes univers préférés — tous supports, ordre chronologique, 100% canon. Enfin à jour.</p>
-      <div class="ugrid" id="ugrid"></div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">✦ La référence française des timelines ✦</div>
+    <img class="hero-logo" src="images/logo-chronologeek.png" alt="Chronologeek"/>
+    <p class="hero-tagline">Les timelines complètes de tes univers préférés — tous supports, ordre chronologique, 100% canon.</p>
+
+    <div class="ugrid">
+
+      <!-- Star Wars -->
+      <a class="ucard" href="starwars.html">
+        <div class="cbanner">
+          <img src="images/starwars-banner.webp" alt="Star Wars"/>
+        </div>
+        <div class="cbody">
+          <div class="ctitle">Star Wars</div>
+          <div class="csub">Films · Séries · Animés · Jeux vidéo · Timeline chronologique complète</div>
+          <span class="ctag tag-live">Disponible</span>
+        </div>
+      </a>
+
+      <!-- Marvel -->
+      <a class="ucard" href="marvel.html">
+        <div class="cbanner">
+          <img src="images/marvel-banner.webp" alt="Marvel" onerror="this.style.display='none'"/>
+        </div>
+        <div class="cbody">
+          <div class="ctitle">Marvel — MCU</div>
+          <div class="csub">Films · Séries · Animés · Autres réalités · Timeline chronologique complète</div>
+          <span class="ctag tag-live">Disponible</span>
+        </div>
+      </a>
+
+      <!-- Bientôt -->
+      <div class="ucard" style="cursor:default">
+        <div class="cbanner">
+          <img src="images/space-bg.webp" alt="" onerror="this.style.display='none'"/>
+        </div>
+        <div class="cbody">
+          <div class="ctitle" style="color:var(--muted2)">Bientôt…</div>
+          <div class="csub">D'autres univers arrivent. Rejoins le Discord pour suivre l'avancement.</div>
+          <span class="ctag tag-soon">En cours</span>
+        </div>
+      </div>
+
     </div>
-  </section>
-</div>
-<div class="tl-page" id="tl-page">
-  <div class="bc" onclick="showHome()">← Accueil</div>
-  <div class="page-title" id="tl-title"></div>
-  <div class="page-sub" id="tl-sub"></div>
-  <div class="progress-block">
-    <div class="pb-info">
-      <div class="pb-label">Ma progression</div>
-      <div class="pb-track"><div class="pb-fill" id="pb-fill" style="width:0%"></div></div>
-      <div class="pb-counts" id="pb-counts">Coche les entrées que tu as vues</div>
-    </div>
-    <button class="pb-reset" onclick="resetProgress()">À zéro</button>
   </div>
-  <div class="nb" id="tl-notes"></div>
-  <div class="leg" id="tl-legend"></div>
-  <div class="filter-bar" id="filter-bar"></div>
-  <div id="tl-content"></div>
-</div>
-<div class="cs" id="cs-page">
-  <h2>🌿 Bientôt disponible</h2>
-  <p>Cette section est en cours de construction.<br>Rejoins le Discord pour suivre l'avancement !</p>
-</div>
-<script>
-const DATA_SW={
-  id:"sw",title:"Star Wars",subtitle:"Timeline Canonique",description:"Films · Séries · Animés · Jeux vidéo",
-  color:"#ffe81f",glow:"rgba(255,232,31,.3)",spineStyle:"sw-style",
-  tmdb_banner:{type:"tv",id:"82856"},
-  notes:`Il manque des choses mais elles ne sont <strong>pas importantes</strong> pour la compréhension de la saga (<strong>The Acolyte, certains épisodes de The Clone Wars, Résistance, les séries d'animations pour enfants… et bien sûr tous les jeux mobiles, romans et comics</strong>).<br><br>L'an 0 du calendrier est la <strong>Bataille de Yavin</strong> (Star Wars Épisode IV) donc <strong>BBY</strong> = Before Battle of Yavin / <strong>ABY</strong> = After Battle of Yavin<br><br>Certains événements sont mieux à voir en tant que <strong>FLASHBACK</strong> pour comprendre et sont donc indiqués comme tel.<br><br>Si vous ne voulez pas faire les jeux tapez <em>"Nom du jeu film complet"</em> sur YouTube.`,
-  eras:[
-    {title:"Prélogie (32–19 BBY)",entries:[
-      {id:"sw-ep1",type:"film",level:"must",tmdb:"1895",media:"movie",title:"Épisode I : La Menace Fantôme",date:"32 BBY"},
-      {id:"sw-ep2",type:"film",level:"must",tmdb:"1894",media:"movie",title:"Épisode II : L'Attaque des Clones",date:"22 BBY"},
-      {id:"sw-toj2",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 2",date:"~60 BBY",tags:["flashback"]},
-      {id:"sw-toj3",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 3",date:"~50 BBY",tags:["flashback"]},
-      {id:"sw-toj4",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 4",date:"32 BBY",tags:["flashback"]}
-    ]},
-    {title:"The Clone Wars (22–19 BBY)",entries:[
-      {id:"sw-tcw-pre",type:"anime",level:"bonus",tmdb:"4194",media:"tv",title:"The Clone Wars",date:"22 BBY",
-        note:"Les épisodes regroupés sont des arcs narratifs. Regarder dans cet ordre :",
-        subitems:["S2E16 · S1E16 → Tales of the Jedi E1 (FLASHBACK 36-35 BBY)"]},
-      {id:"sw-toj1",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 1",date:"36–35 BBY",tags:["flashback"]},
-      {id:"sw-tcwfilm",type:"filmanim",level:"important",tmdb:"12180",media:"movie",title:"Star Wars : The Clone Wars",date:"22 BBY"},
-      {id:"sw-tcw",type:"anime",level:"bonus",tmdb:"4194",media:"tv",title:"The Clone Wars (suite)",date:"22–19 BBY",
-        subitems:[
-          "<strong>22 BBY :</strong> S3E1 · S3E3 · S1E1-5 · S1E9-10",
-          "<strong>21 BBY :</strong> S1E11-12 · S1E15 · S1E19-21 · S2E1-3 · S2E17 · S2E18-19 · S2E4-8 · S2E9-10 · S2E12-14 · S2E20-22 · S3E5-6 · S3E7 · S3E2 · S3E8 · S1E22 · S3E9-10 · S3E12-14",
-          "<strong>20 BBY :</strong> S3E15-17 · S3E18-20 · S3E21-22 · S4E7-10 · S4E14 · S4E15-18 · S4E19-22 · S5E2-5 · S5E6-9 · S5E12",
-          "<strong>19 BBY :</strong> S5E1 · S5E14-16 · S5E17-20 · S6E1-4 · S6E5-7 · S6E10-13 · S7E5-8 · S7E1-4"
-        ]},
-      {id:"sw-ep3",type:"film",level:"must",tmdb:"1893",media:"movie",title:"Épisode III : La Revanche des Sith",date:"19 BBY"},
-      {id:"sw-tcw-s7",type:"anime",level:"bonus",tmdb:"4194",media:"tv",season:7,title:"The Clone Wars — Saison 7 E9-12",date:"19 BBY",note:"L'épilogue (vers 17 BBY) ne spoile rien d'important."},
-      {id:"sw-toj5",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 5",date:"~22–19 BBY",tags:["flashback"]},
-      {id:"sw-toe4",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 4",date:"19 BBY",note:"Pendant La Revanche des Sith."},
-      {id:"sw-toe5",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 5",date:"19 BBY"}
-    ]},
-    {title:"Ère de l'Empire (19–5 BBY)",entries:[
-      {id:"sw-badbatch1",type:"serie",level:"bonus",tmdb:"105971",media:"tv",season:1,title:"The Bad Batch",date:"19 BBY",note:"Épisode 1 pendant La Revanche des Sith.",subitems:["Saison 1"]},
-      {id:"sw-badbatch23",type:"serie",level:"bonus",tmdb:"105971",media:"tv",season:2,title:"The Bad Batch",date:"18 BBY",subitems:["Saison 2","Saison 3"]},
-      {id:"sw-tou1",type:"anime",level:"bonus",tmdb:"0",media:"tv",title:"Tales of the Underworld — Épisode 1",date:"~17–16 BBY",note:"Prologue avant La Revanche des Sith. La mort du personnage se passe dans le livre Dark Disciple (lisez un résumé si ça vous intéresse)."},
-      {id:"sw-tou23",type:"anime",level:"bonus",tmdb:"0",media:"tv",title:"Tales of the Underworld — Épisodes 2–3",date:"~17–16 BBY"},
-      {id:"sw-toj6",type:"anime",level:"bonus",tmdb:"203085",media:"tv",title:"Tales of the Jedi — Épisode 6",date:"~16–15 BBY",note:"Prologue pendant La Revanche des Sith."},
-      {id:"sw-jfo",type:"jeu",level:"important",tmdb:"0",media:"game",title:"Star Wars Jedi : Fallen Order",date:"14 BBY"},
-      {id:"sw-solo",type:"film",level:"important",tmdb:"348350",media:"movie",title:"Solo : A Star Wars Story",date:"10 BBY"},
-      {id:"sw-obiwan",type:"serie",level:"must",tmdb:"92830",media:"tv",season:1,title:"Obi-Wan Kenobi",date:"9 BBY",subitems:["Saison 1"]},
-      {id:"sw-toe6",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 6",date:"~9–6 BBY"},
-      {id:"sw-jsurvivr",type:"jeu",level:"important",tmdb:"0",media:"game",title:"Star Wars Jedi : Survivor",date:"9 BBY"}
-    ]},
-    {title:"Rébellion — Andor & Rebels (5–1 BBY)",entries:[
-      {id:"sw-andor-s1",type:"serie",level:"must",tmdb:"83867",media:"tv",season:1,title:"Andor",date:"5 BBY",note:"On va alterner entre Andor et Rebels pas mal de fois. Si le changement de ton vous dérange, regardez Rebels d'abord puis Andor. Mais en vrai, ça vaut le coup en termes de narration.",subitems:["Saison 1"]},
-      {id:"sw-rebels-1",type:"anime",level:"must",tmdb:"60554",media:"tv",season:1,title:"Rebels",date:"5–4 BBY",subitems:["Courts-métrages 1–4","Saison 1","Saison 2 épisodes 1-9"]},
-      {id:"sw-andor-s2a",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"4 BBY",subitems:["Saison 2 épisodes 1-2-3"]},
-      {id:"sw-rebels-2",type:"anime",level:"must",tmdb:"60554",media:"tv",season:2,title:"Rebels",date:"4 BBY",subitems:["Saison 2 épisode 10"]},
-      {id:"sw-andor-s2b",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"3 BBY",subitems:["Saison 2 épisodes 4-5-6"]},
-      {id:"sw-rebels-3",type:"anime",level:"must",tmdb:"60554",media:"tv",season:2,title:"Rebels",date:"3–2 BBY",subitems:["Saison 2 épisodes 11-22","Saison 3 épisodes 1-16"]},
-      {id:"sw-andor-s2c",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"2 BBY",subitems:["Saison 2 épisodes 7-8"]},
-      {id:"sw-rebels-4",type:"anime",level:"must",tmdb:"60554",media:"tv",season:3,title:"Rebels",date:"2 BBY",subitems:["Saison 3 épisode 17"]},
-      {id:"sw-andor-s2d",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"2 BBY",subitems:["Saison 2 épisode 9"]},
-      {id:"sw-rebels-5",type:"anime",level:"must",tmdb:"60554",media:"tv",season:3,title:"Rebels",date:"2 BBY",subitems:["Saison 3 épisodes 18-22"]},
-      {id:"sw-rebels-6",type:"anime",level:"must",tmdb:"60554",media:"tv",season:4,title:"Rebels",date:"1 BBY",note:"Arrêtez l'épisode final à 42 min si vous n'avez jamais vu SW IV–V–VI (gros spoil). L'épilogue se passe au début de la série Ahsoka.",subitems:["Saison 4"]},
-      {id:"sw-andor-s2e",type:"serie",level:"must",tmdb:"83867",media:"tv",season:2,title:"Andor",date:"1 BBY",subitems:["Saison 2 épisodes 10-11-12"]},
-      {id:"sw-r1",type:"film",level:"must",tmdb:"330459",media:"movie",title:"Rogue One : A Star Wars Story",date:"1 BBY"}
-    ]},
-    {title:"Trilogie Originale (0–5 ABY)",entries:[
-      {id:"sw-ep4",type:"film",level:"must",tmdb:"11",media:"movie",title:"Épisode IV : Un Nouvel Espoir",date:"1 BBY–0 ABY"},
-      {id:"sw-ep5",type:"film",level:"must",tmdb:"1891",media:"movie",title:"Épisode V : L'Empire Contre-Attaque",date:"3 ABY"},
-      {id:"sw-outlaws",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Outlaws + DLC Wild Card + DLC A Pirate's Fortune",date:"3 ABY"},
-      {id:"sw-bf2pro",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Prologue : The Cleaner",date:"4 ABY"},
-      {id:"sw-ep6",type:"film",level:"must",tmdb:"1892",media:"movie",title:"Épisode VI : Le Retour du Jedi",date:"4 ABY"},
-      {id:"sw-bf2c1",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Missions 1–6",date:"4 ABY"},
-      {id:"sw-squadrons",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Squadrons",date:"4 ABY"},
-      {id:"sw-bf2c2",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Missions 7–11",date:"5 ABY"}
-    ]},
-    {title:"Le Mandalorien & Nouvel Empire (9 ABY)",entries:[
-      {id:"sw-mando1",type:"serie",level:"must",tmdb:"82856",media:"tv",season:1,title:"The Mandalorian",date:"9 ABY",subitems:["Saison 1","Saison 2 épisodes 1-5"]},
-      {id:"sw-toe1",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 1",date:"20 BBY",tags:["flashback"],note:"Pendant The Clone Wars."},
-      {id:"sw-toe2",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 2",date:"~9–5 BBY",tags:["flashback"]},
-      {id:"sw-toe3",type:"anime",level:"bonus",tmdb:"251091",media:"tv",title:"Tales of the Empire — Épisode 3",date:"~8–9 ABY",tags:["flashback"]},
-      {id:"sw-mando2",type:"serie",level:"must",tmdb:"82856",media:"tv",season:2,title:"The Mandalorian",date:"9 ABY",subitems:["Saison 2 épisodes 6-8"]},
-      {id:"sw-boba",type:"serie",level:"must",tmdb:"115036",media:"tv",season:1,title:"The Book of Boba Fett",date:"9 ABY",subitems:["Saison 1"]},
-      {id:"sw-mando3",type:"serie",level:"must",tmdb:"82856",media:"tv",season:3,title:"The Mandalorian",date:"9 ABY",subitems:["Saison 3"]},
-      {id:"sw-mandogrogu",type:"film",level:"must",tmdb:"774752",media:"movie",title:"The Mandalorian and Grogu",date:"9 ABY"},
-      {id:"sw-rebels-ep",type:"anime",level:"bonus",tmdb:"60554",media:"tv",title:"Épilogue de l'épisode final de Rebels",date:"9 ABY"},
-      {id:"sw-ahsoka",type:"serie",level:"must",tmdb:"114461",media:"tv",season:1,title:"Ahsoka",date:"9 ABY",subitems:["Saison 1"]},
-      {id:"sw-skeleton",type:"serie",level:"bonus",tmdb:"202555",media:"tv",season:1,title:"Skeleton Crew",date:"9 ABY",subitems:["Saison 1"]}
-    ]},
-    {title:"Trilogie Sequel (34–35 ABY)",entries:[
-      {id:"sw-bf2c3",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Mission 12",date:"~34 ABY"},
-      {id:"sw-ep7",type:"film",level:"must",tmdb:"140607",media:"movie",title:"Épisode VII : Le Réveil de la Force",date:"34 ABY"},
-      {id:"sw-bf2res",type:"jeu",level:"bonus",tmdb:"0",media:"game",title:"Star Wars Battlefront II Campagne : Résurrection",date:"34 ABY"},
-      {id:"sw-ep8",type:"film",level:"must",tmdb:"181808",media:"movie",title:"Épisode VIII : Les Derniers Jedi",date:"34 ABY"},
-      {id:"sw-ep9",type:"film",level:"must",tmdb:"181812",media:"movie",title:"Épisode IX : L'Ascension de Skywalker",date:"35 ABY"}
-    ]}
-  ]
-};const DATA_MCU={
-  id:"mcu",title:"Marvel",subtitle:"Timeline Canonique",
-  description:"Films · Séries · Spider-Verse · Fox",
-  color:"#e23636",glow:"rgba(226,54,54,.3)",
-  tmdb_banner:{type:"movie",id:"299534"},
-  notes:`Si vous êtes ici c'est que vous souhaitez regarder le Marvel Cinematic Universe dans son ordre le plus optimisé, un mélange d'ordre chronologique et d'ordre de sortie, vous trouverez des détails supplémentaires en cliquant sur chaque média et tout ce site est garanti sans spoil majeur.<br><br>Il manque des choses mais elles ne sont <strong>pas du tout importantes</strong> pour la compréhension (<strong>les vieux films Punisher, la trilogie Blade, Daredevil et Elektra, Les Nouveaux Mutants et les séries X-Men, les anciens 4 Fantastiques, Spider-Noir, I Am Groot, les films du SSU hors Venom, beaucoup de dessins animés sans lien direct, les comics préludes…</strong>)<br><br>La chronologie principale de l'univers se passe sur la <strong>Terre-616</strong>. Si rien n'est précisé c'est que ça se passe bien dans la timeline principale.<br><br>Deux séries sont dans la catégorie <strong>"Canonicité non confirmée"</strong> et n'ont donc pas été officiellement déclarées comme faisant partie de la timeline principale de la Terre-616 par Marvel Studios. Je conseille seulement <strong>Agent Carter</strong> et <strong>Les Agents du S.H.I.E.L.D.</strong> (<strong>Cloak & Dagger, Inhumans, The Runaways</strong> sont dans le même cas mais il ne se passe rien de bien important). <strong>Toute</strong> production audiovisuelle Marvel existante fait bien partie du multivers global donc vous pouvez skip les séries si vous voulez (mais c'est cool, ça ajoute beaucoup de lore et ne contredit rien du canon officiel).<br><br>Certains événements sont mieux à voir en tant que <strong>FLASHBACK</strong> pour comprendre et sont donc indiqués comme tel.<br><br>En regardant dans l'ordre chronologique certaines scènes post-crédits spoilent des éléments plus tard donc j'indique s'il ne faut <strong>pas</strong> les regarder à ce moment et aussi à quel moment on doit les voir.`,
-  eras:[
-    {title:"PHASE I — Saga de l'Infini",entries:[
-      {id:"mcu-cap1",img:"images/captain-america-first-avenger-2011.webp",type:"film",level:"must",tmdb:"1771",media:"movie",title:"Captain America : First Avenger",date:"1942–1945",note:"Prologue et épilogue se passent en 2011–2012 mais important à regarder en premier. Ne pas regarder la scène post-crédits."},
-      {id:"mcu-ac-os",type:"video",level:"bonus",tmdb:"0",img:"images/one-shot-agent-carter.webp",media:"video",title:"One Shot : Agent Carter",date:"1946"},
-      {id:"mcu-ac-serie",img:"images/agent-carter-season-1.webp",type:"serie",level:"bonus",tmdb:"61550",media:"tv",season:1,title:"Agent Carter",date:"1946–1947",tags:["nc"],subitems:["Saison 1","Saison 2"]},
-      {id:"mcu-cm",img:"images/captain-marvel-2019.webp",type:"film",level:"must",tmdb:"299537",media:"movie",title:"Captain Marvel",date:"1995",note:"Ne pas regarder les scènes post-crédits."},
-      {id:"mcu-im1",img:"images/iron-man-2008.webp",type:"film",level:"must",tmdb:"1726",media:"movie",title:"Iron Man",date:"2008"},
-      {id:"mcu-im2",img:"images/iron-man-2-2010.webp",type:"film",level:"must",tmdb:"10138",media:"movie",title:"Iron Man 2",date:"2010"},
-      {id:"mcu-hulk",img:"images/l-incroyable-hulk-2008.webp",type:"film",level:"must",tmdb:"1724",media:"movie",title:"L'Incroyable Hulk",date:"2010"},
-      {id:"mcu-consultant",type:"video",level:"important",tmdb:"0",img:"images/one-shot-the-consultant.webp",media:"video",title:"One Shot : Le Consultant",date:"2010"},
-      {id:"mcu-thor1",img:"images/thor-2011.webp",type:"film",level:"must",tmdb:"10195",media:"movie",title:"Thor",date:"2010"},
-      {id:"mcu-av1",img:"images/the-avengers-2012.webp",type:"film",level:"must",tmdb:"24428",media:"movie",title:"Avengers",date:"2012"},
-      {id:"mcu-item47",type:"video",level:"bonus",tmdb:"0",img:"images/one-shot-item-47.webp",media:"video",title:"One Shot : Article 47",date:"2012"}
-    ]},
-    {title:"PHASE II — Saga de l'Infini",entries:[
-      {id:"mcu-aos-s1a",img:"images/marvels-agents-of-shield-season-1.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2013",tags:["nc"],subitems:["Saison 1 Épisodes 1-7"]},
-      {id:"mcu-thor2",img:"images/thor-the-dark-world-2013.webp",type:"film",level:"must",tmdb:"76338",media:"movie",title:"Thor : Le Monde des Ténèbres",date:"2013"},
-      {id:"mcu-aos-s1b",img:"images/marvels-agents-of-shield-season-1.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2013–2014",tags:["nc"],subitems:["Saison 1 Épisodes 8-15"]},
-      {id:"mcu-im3",img:"images/iron-man-3-2013.webp",type:"film",level:"must",tmdb:"68721",media:"movie",title:"Iron Man 3",date:"2013"},
-      {id:"mcu-roi",type:"video",level:"must",tmdb:"0",img:"images/one-shot-all-hail-the-king.webp",media:"video",title:"One Shot : Longue Vie au Roi",date:"2014"},
-      {id:"mcu-cap2",img:"images/captain-america-le-soldat-de-l-hiver-2014.webp",type:"film",level:"must",tmdb:"100402",media:"movie",title:"Captain America : Le Soldat de l'Hiver",date:"2014"},
-      {id:"mcu-aos-s1c",img:"images/marvels-agents-of-shield-season-1.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:1,title:"Les Agents du S.H.I.E.L.D.",date:"2014",tags:["nc"],subitems:["Saison 1 Épisodes 16-22"]},
-      {id:"mcu-gotg1",img:"images/les-gardiens-de-la-galaxie-2014.webp",type:"film",level:"must",tmdb:"118340",media:"movie",title:"Les Gardiens de la Galaxie",date:"2014"},
-      {id:"mcu-gotg2",img:"images/les-gardiens-de-la-galaxie-2-2017.webp",type:"film",level:"must",tmdb:"283995",media:"movie",title:"Les Gardiens de la Galaxie Vol. 2",date:"2014",note:"La 4e scène post-crédits se passe plusieurs années dans le futur mais ne spoile rien d'important."},
-      {id:"mcu-dd1",img:"images/daredevil-season-1.webp",type:"serie",level:"important",tmdb:"61889",media:"tv",season:1,title:"Daredevil",date:"2014",subitems:["Saison 1"]},
-      {id:"mcu-jj1",img:"images/jessica-jones-season-1.webp",type:"serie",level:"bonus",tmdb:"38472",media:"tv",season:1,title:"Jessica Jones",date:"2015",subitems:["Saison 1"]},
-      {id:"mcu-aos-s2a",img:"images/marvels-agents-of-shield-season-2.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:2,title:"Les Agents du S.H.I.E.L.D.",date:"2014–2015",tags:["nc"],subitems:["Saison 2 Épisodes 1-19"]},
-      {id:"mcu-aou",img:"images/avengers-age-of-ultron-2015.webp",type:"film",level:"must",tmdb:"99861",media:"movie",title:"Avengers : l'Ère d'Ultron",date:"2015"},
-      {id:"mcu-aos-s2b",img:"images/marvels-agents-of-shield-season-2.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:2,title:"Les Agents du S.H.I.E.L.D.",date:"2015",tags:["nc"],subitems:["Saison 2 Épisodes 20-22"]},
-      {id:"mcu-antman1",img:"images/ant-man-2015.webp",type:"film",level:"must",tmdb:"102899",media:"movie",title:"Ant-Man",date:"2015"},
-      {id:"mcu-dd2",img:"images/daredevil-season-2.webp",type:"serie",level:"important",tmdb:"61889",media:"tv",season:2,title:"Daredevil",date:"2015",subitems:["Saison 2"]},
-      {id:"mcu-lc1",img:"images/luke-cage-season-1.webp",type:"serie",level:"bonus",tmdb:"62126",media:"tv",season:1,title:"Luke Cage",date:"2015",subitems:["Saison 1"]},
-      {id:"mcu-if1",img:"images/iron-fist-season-1.webp",type:"serie",level:"bonus",tmdb:"62127",media:"tv",season:1,title:"Iron Fist",date:"2016",subitems:["Saison 1"]},
-      {id:"mcu-aos-s3a",img:"images/marvels-agents-of-shield-season-3.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:3,title:"Les Agents du S.H.I.E.L.D.",date:"2016",tags:["nc"],subitems:["Saison 3 Épisodes 1-18"]},
-      {id:"mcu-defenders",img:"images/the-defenders-season-1.webp",type:"serie",level:"important",tmdb:"62285",media:"tv",season:1,title:"The Defenders",date:"2016",subitems:["Saison 1"]}
-    ]},
-    {title:"PHASE III — Saga de l'Infini",entries:[
-      {id:"mcu-cw",img:"images/captain-america-civil-war-2016.webp",type:"film",level:"must",tmdb:"271110",media:"movie",title:"Captain America : Civil War",date:"2016"},
-      {id:"mcu-aos-s3b",img:"images/marvels-agents-of-shield-season-3.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:3,title:"Les Agents du S.H.I.E.L.D.",date:"2016",tags:["nc"],subitems:["Saison 3 Épisodes 19-22"]},
-      {id:"mcu-bw",img:"images/black-widow-2021.webp",type:"film",level:"must",tmdb:"497698",media:"movie",title:"Black Widow",date:"2016",note:"Ne pas regarder la scène post-crédits."},
-      {id:"mcu-bp1",img:"images/black-panther-2018.webp",type:"film",level:"must",tmdb:"284054",media:"movie",title:"Black Panther",date:"2016"},
-      {id:"mcu-eow",img:"images/eyes-of-wakanda-season-1.webp",type:"anime",level:"bonus",tmdb:"241388",media:"tv",title:"Eyes of Wakanda",date:"1260 BC – 1896",tags:["flashback"]},
-      {id:"mcu-sm1",img:"images/spider-man-homecoming-2017.webp",type:"film",level:"must",tmdb:"315635",media:"movie",title:"Spider-Man : Homecoming",date:"2016"},
-      {id:"mcu-pun1",img:"images/the-punisher-season-1.webp",type:"serie",level:"bonus",tmdb:"67178",media:"tv",season:1,title:"The Punisher",date:"2016",subitems:["Saison 1"]},
-      {id:"mcu-ds1",img:"images/doctor-strange-2016.webp",type:"film",level:"must",tmdb:"284052",media:"movie",title:"Doctor Strange",date:"2016–2017",note:"Ne pas regarder les scènes post-crédits."},
-      {id:"mcu-aos-s4",img:"images/marvels-agents-of-shield-season-4.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:4,title:"Les Agents du S.H.I.E.L.D.",date:"2017",tags:["nc"],subitems:["Saison 4"]},
-      {id:"mcu-jj2",img:"images/jessica-jones-season-2.webp",type:"serie",level:"bonus",tmdb:"38472",media:"tv",season:2,title:"Jessica Jones",date:"2017",subitems:["Saison 2"]},
-      {id:"mcu-lc2",img:"images/luke-cage-season-2.webp",type:"serie",level:"bonus",tmdb:"62126",media:"tv",season:2,title:"Luke Cage",date:"2017",subitems:["Saison 2"]},
-      {id:"mcu-if2",img:"images/iron-fist-season-2.webp",type:"serie",level:"bonus",tmdb:"62127",media:"tv",season:2,title:"Iron Fist",date:"2017",subitems:["Saison 2"]},
-      {id:"mcu-dd3",img:"images/daredevil-season-3.webp",type:"serie",level:"important",tmdb:"61889",media:"tv",season:3,title:"Daredevil",date:"2017",subitems:["Saison 3"]},
-      {id:"mcu-aos-s5a",img:"images/marvels-agents-of-shield-season-5.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:5,title:"Les Agents du S.H.I.E.L.D.",date:"2017",tags:["nc"],subitems:["Saison 5 Épisodes 1-13"]},
-      {id:"mcu-thor3",img:"images/thor-ragnarok-2017.webp",type:"film",level:"must",tmdb:"284053",media:"movie",title:"Thor : Ragnarok",date:"2017",note:"Ne pas regarder les scènes post-crédits."},
-      {id:"mcu-pun2",img:"images/the-punisher-season-2.webp",type:"serie",level:"bonus",tmdb:"67178",media:"tv",season:2,title:"The Punisher",date:"2018",subitems:["Saison 2"]},
-      {id:"mcu-jj3",img:"images/jessica-jones-season-3.webp",type:"serie",level:"bonus",tmdb:"38472",media:"tv",season:3,title:"Jessica Jones",date:"2018",subitems:["Saison 3"]},
-      {id:"mcu-antman2",img:"images/ant-man-and-the-wasp-2018.webp",type:"film",level:"must",tmdb:"363088",media:"movie",title:"Ant-Man et la Guêpe",date:"2018",note:"Ne pas regarder les scènes post-crédits."},
-      {id:"mcu-aos-s5b",img:"images/marvels-agents-of-shield-season-5.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:5,title:"Les Agents du S.H.I.E.L.D.",date:"2018",tags:["nc"],subitems:["Saison 5 Épisodes 14-18"]},
-      {id:"mcu-thor3pc",img:"images/thor-ragnarok-2017.webp",type:"video",level:"must",tmdb:"284053",media:"video",title:"Première scène post-crédits Thor : Ragnarok",date:"2018"},
-      {id:"mcu-iw",img:"images/avengers-infinity-war-2018.webp",type:"film",level:"must",tmdb:"299536",media:"movie",title:"Avengers : Infinity War",date:"2018"},
-      {id:"mcu-antman2pc",img:"images/ant-man-and-the-wasp-2018.webp",type:"video",level:"must",tmdb:"363088",media:"video",title:"Première scène post-crédits Ant-Man et la Guêpe",date:"2018"},
-      {id:"mcu-aos-s5c",img:"images/marvels-agents-of-shield-season-5.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:5,title:"Les Agents du S.H.I.E.L.D.",date:"2018",tags:["nc"],subitems:["Saison 5 Épisodes 19-22"]},
-      {id:"mcu-aos-s6",img:"images/marvels-agents-of-shield-season-6.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:6,title:"Les Agents du S.H.I.E.L.D.",date:"2019",tags:["nc"],subitems:["Saison 6"]},
-      {id:"mcu-aos-s7",img:"images/marvels-agents-of-shield-season-7.webp",type:"serie",level:"bonus",tmdb:"1403",media:"tv",season:7,title:"Les Agents du S.H.I.E.L.D.",date:"2020",tags:["nc"],subitems:["Saison 7"]},
-      {id:"mcu-cmpc",img:"images/captain-marvel-2019.webp",type:"video",level:"must",tmdb:"299537",media:"video",title:"Première scène post-crédits Captain Marvel",date:"2018"},
-      {id:"mcu-eg",img:"images/avengers-endgame-2019.webp",type:"film",level:"must",tmdb:"299534",media:"movie",title:"Avengers : Endgame",date:"2023"}
-    ]},
-    {title:"PHASE IV — Saga du Multivers",entries:[
-      {id:"mcu-loki1",img:"images/loki-season-1.webp",type:"serie",level:"must",tmdb:"84958",media:"tv",season:1,title:"Loki",dim:"HORS DU TEMPS",subitems:["Saison 1"]},
-      {id:"mcu-wi1",img:"images/what-if-season-1.webp",type:"anime",level:"important",tmdb:"91363",media:"tv",season:1,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 1"]},
-      {id:"mcu-wv",img:"images/wanda-vision-season-1.webp",type:"serie",level:"must",tmdb:"85271",media:"tv",season:1,title:"WandaVision",date:"2023",subitems:["Saison 1"]},
-      {id:"mcu-sc",img:"images/shang-chi-2021.webp",type:"film",level:"must",tmdb:"566525",media:"movie",title:"Shang-Chi et la Légende des Dix Anneaux",date:"2024"},
-      {id:"mcu-fatws",img:"images/the-falcon-and-the-winter-soldier-season-1.webp",type:"serie",level:"must",tmdb:"88396",media:"tv",season:1,title:"Falcon et le Soldat de l'Hiver",date:"2024",subitems:["Saison 1"]},
-      {id:"mcu-smffh",img:"images/spider-man-far-from-home-2019.webp",type:"film",level:"must",tmdb:"429617",media:"movie",title:"Spider-Man : Far From Home",date:"2024"},
-      {id:"mcu-eternals",img:"images/eternals-2021.webp",type:"film",level:"must",tmdb:"524434",media:"movie",title:"Les Éternels",date:"2024"}
-    ]},
-    {title:"SEGMENT SPIDER-VERSE — avant No Way Home",special:"sv",entries:[
-      {id:"mcu-smr1",img:"images/spider-man-2002.webp",type:"film",level:"important",tmdb:"557",media:"movie",title:"Spider-Man",date:"2002",dim:"TERRE-96283"},
-      {id:"mcu-smr2",img:"images/spider-man-2-2004.webp",type:"film",level:"important",tmdb:"558",media:"movie",title:"Spider-Man 2",date:"2004",dim:"TERRE-96283"},
-      {id:"mcu-smr3",img:"images/spider-man-3-2007.webp",type:"film",level:"important",tmdb:"559",media:"movie",title:"Spider-Man 3",date:"2005",dim:"TERRE-96283"},
-      {id:"mcu-tasm1",img:"images/the-amazing-spider-man-2012.webp",type:"film",level:"important",tmdb:"1930",media:"movie",title:"The Amazing Spider-Man",date:"2013",dim:"TERRE-120703"},
-      {id:"mcu-tasm2",img:"images/the-amazing-spider-man-2-2014.webp",type:"film",level:"important",tmdb:"102382",media:"movie",title:"The Amazing Spider-Man 2 : Le Destin d'un Héros",date:"2014",dim:"TERRE-120703"},
-      {id:"mcu-itsv",img:"images/spider-man-into-the-spider-verse-2018.webp",type:"filmanim",level:"bonus",tmdb:"569094",media:"movie",title:"Spider-Man : Into the Spider-Verse",date:"2018",dim:"TERRE-1610"},
-      {id:"mcu-venom1",img:"images/venom-2018.webp",type:"film",level:"bonus",tmdb:"335983",media:"movie",title:"Venom",date:"2023",dim:"TERRE-688"},
-      {id:"mcu-venom2",img:"images/venom-let-there-be-carnage-2021.webp",type:"film",level:"bonus",tmdb:"580489",media:"movie",title:"Venom : Let There Be Carnage",date:"2024",dim:"TERRE-688"}
-    ]},
-    {title:"SUITE PHASE IV — Saga du Multivers",entries:[
-      {id:"mcu-nwh",img:"images/spider-man-no-way-home-2021.webp",type:"film",level:"must",tmdb:"634649",media:"movie",title:"Spider-Man : No Way Home",date:"2024"},
-      {id:"mcu-venom3",img:"images/venom-the-last-dance-2024.webp",type:"film",level:"bonus",tmdb:"912649",media:"movie",title:"Venom : The Last Dance",date:"2024",dim:"TERRE-688"},
-      {id:"mcu-atsv",img:"images/spider-man-across-the-spider-verse-2023.webp",type:"filmanim",level:"bonus",tmdb:"569094",media:"movie",title:"Spider-Man : Across the Spider-Verse",date:"2020",dim:"TERRE-1610"},
-      {id:"mcu-mom",img:"images/doctor-strange-in-the-multiverse-of-madness-2022.webp",type:"film",level:"must",tmdb:"453395",media:"movie",title:"Doctor Strange in the Multiverse of Madness",date:"2024"},
-      {id:"mcu-bwpc",img:"images/black-widow-2021.webp",type:"video",level:"important",tmdb:"497698",media:"video",title:"Scène post-crédits Black Widow",date:"2024"},
-      {id:"mcu-hawkeye",img:"images/hawkeye-season-1.webp",type:"serie",level:"important",tmdb:"88329",media:"tv",season:1,title:"Hawkeye",date:"2024",subitems:["Saison 1"]},
-      {id:"mcu-mk",img:"images/moon-knight-season-1.webp",type:"serie",level:"bonus",tmdb:"92749",media:"tv",season:1,title:"Moon Knight",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-bp2",img:"images/black-panther-wakanda-forever-2022.webp",type:"film",level:"must",tmdb:"505642",media:"movie",title:"Black Panther : Wakanda Forever",date:"2025"}
-    ]},
-    {title:"PHASE V — Saga du Multivers",entries:[
-      {id:"mcu-echo",img:"images/echo-season-1.webp",type:"serie",level:"important",tmdb:"122226",media:"tv",season:1,title:"Echo",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-shehulk",img:"images/she-hulk-avocate-season-1.webp",type:"serie",level:"bonus",tmdb:"92783",media:"tv",season:1,title:"She-Hulk : Avocate",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-mm",img:"images/miss-marvel-season-1.webp",type:"serie",level:"must",tmdb:"92782",media:"tv",season:1,title:"Miss Marvel",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-thor4",img:"images/thor-love-and-thunder-2022.webp",type:"film",level:"must",tmdb:"616037",media:"movie",title:"Thor : Love and Thunder",date:"2025"},
-      
-      {id:"mcu-ironheart",img:"images/ironheart-season-1.webp",type:"serie",level:"bonus",tmdb:"114471",media:"tv",season:1,title:"Ironheart",date:"2025",subitems:["Saison 1"]},
-      {id:"mcu-wwbn",img:"images/werewolf-by-night-2022.webp",type:"special",level:"bonus",tmdb:"894205",media:"movie",title:"Werewolf by Night",date:"2025"},
-      {id:"mcu-gotgxmas",img:"images/the-guardians-of-the-galaxy-holiday-special-2022.webp",type:"special",level:"must",tmdb:"774752",media:"movie",title:"Les Gardiens de la Galaxie : Joyeuses Fêtes",date:"2025"},
-      {id:"mcu-antman3",img:"images/ant-man-and-the-wasp-quantumania-2023.webp",type:"film",level:"must",tmdb:"640146",media:"movie",title:"Ant-Man et la Guêpe : Quantumania",date:"2026"},
-      {id:"mcu-gotg3",img:"images/les-gardiens-de-la-galaxie-3-2023.webp",type:"film",level:"must",tmdb:"447365",media:"movie",title:"Les Gardiens de la Galaxie Vol. 3",date:"2026"},
-      {id:"mcu-si",img:"images/secret-invasion-season-1.webp",type:"serie",level:"bonus",tmdb:"114472",media:"tv",season:1,title:"Secret Invasion",date:"2026",subitems:["Saison 1"]},
-      {id:"mcu-marvels",img:"images/the-marvels-2023.webp",type:"film",level:"must",tmdb:"609681",media:"movie",title:"The Marvels",date:"2026",note:"Ne pas regarder la scène post-crédits."},
-      {id:"mcu-loki2",img:"images/loki-season-2.webp",type:"serie",level:"must",tmdb:"84958",media:"tv",season:2,title:"Loki",dim:"HORS DU TEMPS",subitems:["Saison 2"]},
-      {id:"mcu-wi2",img:"images/what-if-season-2.webp",type:"anime",level:"important",tmdb:"91363",media:"tv",season:2,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 2"]}
-    ]},
-    {title:"SEGMENT FOX — avant Deadpool & Wolverine et Avengers Doomsday",special:"fox",entries:[
-      {id:"mcu-xfc",img:"images/x-men-first-class-2011.webp",type:"film",level:"bonus",tmdb:"49538",media:"movie",title:"X-Men : Le Commencement",date:"1962",dim:"TERRE-10005A"},
-      {id:"mcu-xow",img:"images/x-men-origins-wolverine-2009.webp",type:"film",level:"bonus",tmdb:"2080",media:"movie",title:"X-Men Origins : Wolverine",date:"1979",dim:"TERRE-10005A"},
-      {id:"mcu-xm1",img:"images/x-men-2000.webp",type:"film",level:"important",tmdb:"36657",media:"movie",title:"X-Men",date:"1994",dim:"TERRE-10005A"},
-      {id:"mcu-xm2",img:"images/x-men-2-2003.webp",type:"film",level:"important",tmdb:"36658",media:"movie",title:"X-Men 2",date:"1994",dim:"TERRE-10005A"},
-      {id:"mcu-xm3",img:"images/x-men-l-affrontement-final-2006.webp",type:"film",level:"important",tmdb:"36668",media:"movie",title:"X-Men 3 : L'Affrontement Final",date:"1999",dim:"TERRE-10005A"},
-      {id:"mcu-twolv",img:"images/wolverine-le-combat-de-l-immortel-2013.webp",type:"film",level:"important",tmdb:"76170",media:"movie",title:"Wolverine : Le Combat de l'Immortel",date:"2013",dim:"TERRE-10005A"},
-      {id:"mcu-dofp",img:"images/x-men-days-of-future-past-2014.webp",type:"film",level:"important",tmdb:"127585",media:"movie",title:"X-Men : Days of Future Past",date:"2023–1973",dim:"TERRE-10005A/B"},
-      {id:"mcu-xma",img:"images/x-men-apocalypse-2016.webp",type:"film",level:"bonus",tmdb:"246655",media:"movie",title:"X-Men : Apocalypse",date:"1983",dim:"TERRE-10005B"},
-      {id:"mcu-xdp",img:"images/x-men-dark-phoenix-2019.webp",type:"film",level:"bonus",tmdb:"320288",media:"movie",title:"X-Men : Dark Phoenix",date:"1992",dim:"TERRE-10005B"},
-      {id:"mcu-logan",img:"images/logan-2017.webp",type:"film",level:"important",tmdb:"263115",media:"movie",title:"Logan",date:"2029",dim:"TERRE-10005B"},
-      {id:"mcu-dp1",img:"images/deadpool-2016.webp",type:"film",level:"important",tmdb:"293660",media:"movie",title:"Deadpool",date:"2016",dim:"TERRE-10005B",tags:["flashback"]},
-      {id:"mcu-dp2",img:"images/deadpool-2-2018.webp",type:"film",level:"important",tmdb:"383498",media:"movie",title:"Deadpool 2",date:"2018",dim:"TERRE-10005B",tags:["flashback"]}
-    ]},
-    {title:"PHASE V — Suite (Saga du Multivers)",entries:[
-      {id:"mcu-dpw",img:"images/deadpool-and-wolverine-2024.webp",type:"film",level:"must",tmdb:"533535",media:"movie",title:"Deadpool & Wolverine",date:"2024",dim:"TERRE-10005"},
-      {id:"mcu-marvelspc",img:"images/the-marvels-2023.webp",type:"video",level:"important",tmdb:"609681",media:"video",title:"Scène post-crédits The Marvels",date:"2026"},
-      {id:"mcu-agatha",img:"images/agatha-all-along-season-1.webp",type:"serie",level:"bonus",tmdb:"138501",media:"tv",season:1,title:"Agatha All Along",date:"2026",subitems:["Saison 1"]},
-      {id:"mcu-wi3",img:"images/what-if-season-3.webp",type:"anime",level:"important",tmdb:"91363",media:"tv",season:3,title:"What If…?",dim:"AUTRES RÉALITÉS",subitems:["Saison 3"]},
-      {id:"mcu-vfsm",img:"images/your-friendly-neighbourhood-spider-man-season-1.webp",type:"anime",level:"bonus",tmdb:"138503",media:"tv",title:"Votre fidèle serviteur Spider-Man",date:"2016",dim:"TERRE-86445",subitems:["Saison 1"]},
-      {id:"mcu-dba1",img:"images/daredevil-born-again-season-1.webp",type:"serie",level:"important",tmdb:"202555",media:"tv",season:1,title:"Daredevil : Born Again",date:"2027",subitems:["Saison 1"]},
-      {id:"mcu-cabf",img:"images/captain-america-brave-new-world-2025.webp",type:"film",level:"must",tmdb:"822119",media:"movie",title:"Captain America : Brave New World",date:"2027"},
-      {id:"mcu-tb",img:"images/thunderbolts-2025.webp",type:"film",level:"must",tmdb:"986056",media:"movie",title:"Thunderbolts*",date:"2027"}
-    ]},
-    {title:"PHASE VI — Saga du Multivers (en cours)",entries:[
-      {id:"mcu-mz",img:"images/marvel-zombies-season-1.webp",type:"anime",level:"bonus",tmdb:"138505",media:"tv",season:1,title:"Marvel Zombies",date:"2022",dim:"TERRE-89521",note:"Suite de l'épisode 5 de la saison 1 de What If…?",subitems:["Saison 1"]},
-      {id:"mcu-ff",img:"images/the-fantastic-four-first-steps-2025.webp",type:"film",level:"must",tmdb:"617126",media:"movie",title:"Les 4 Fantastiques : Premiers Pas",date:"~1964",dim:"TERRE-828"},
-      {id:"mcu-wm",img:"images/wonder-man-season-1.webp",type:"serie",level:"bonus",tmdb:"198178",media:"tv",season:1,title:"Wonder Man",date:"2027",subitems:["Saison 1"]},
-      {id:"mcu-dba2",img:"images/daredevil-born-again-season-2.webp",type:"serie",level:"important",tmdb:"202555",media:"tv",season:2,title:"Daredevil : Born Again",date:"2027",subitems:["Saison 2"]},
-      {id:"mcu-pun-olk",img:"images/the-punisher-one-last-kill-2026.webp",type:"special",level:"important",tmdb:"1439930",media:"movie",title:"The Punisher : One Last Kill",date:"~2028"}
-    ]}
-  ]
-};
-const UNIVERSES=[
-  {data:DATA_SW,icon:'⚔️'},
-  {data:DATA_MCU,icon:'🦸'},
-  {data:null,id:'soon',icon:'🌙',title:'Bientôt…',description:"D'autres univers arrivent",color:'#7c6af7',soon:true}
-];
-const TMDB_KEY='6257b37bf29ab31357853fce00232314';
-const IMG='https://image.tmdb.org/t/p/';
-const BADGES={
-  film:['bf','FILM'],filmanim:['bfa','FILM ANIMÉ'],
-  serie:['bs','SÉRIE'],anime:['ba','SÉRIE ANIMÉE'],
-  jeu:['bj','JEU VIDÉO'],special:['bsp','SPÉCIAL'],
-  video:['bv','VIDÉO']
-};
-const BADGE_LABELS={
-  film:'Films',filmanim:'Films animés',serie:'Séries',
-  anime:'Séries animées',jeu:'Jeux',special:'Spéciaux',video:'Vidéos'
-};
-let currentData=null;
-let activeFilters=new Set(['film','filmanim','serie','anime','jeu','special','video','must','important','bonus']);
-let showNC=true;
-const posterCache={},detailCache={};
+</section>
 
-function getProgress(uid){try{return JSON.parse(localStorage.getItem('cg_'+uid)||'{}')}catch{return{}}}
-function saveProgress(uid,obj){localStorage.setItem('cg_'+uid,JSON.stringify(obj))}
-function toggleEntry(id,ev){
-  ev.stopPropagation();
-  if(!currentData)return;
-  const prog=getProgress(currentData.id);
-  prog[id]?delete prog[id]:(prog[id]=1);
-  saveProgress(currentData.id,prog);
-  renderProgress();
-}
-function resetProgress(){
-  if(!currentData||!confirm('Réinitialiser ta progression ?'))return;
-  localStorage.removeItem('cg_'+currentData.id);
-  renderProgress();
-}
-function renderProgress(){
-  if(!currentData)return;
-  const prog=getProgress(currentData.id);
-  let total=0,done=0;
-  currentData.eras.forEach(era=>era.entries.forEach(e=>{
-    total++;
-    const el=document.querySelector('.en[data-id="'+e.id+'"]');
-    if(!el)return;
-    const checked=!!prog[e.id];
-    el.classList.toggle('done',checked);
-    el.querySelector('.checkmark').textContent=checked?'✓':'';
-    if(checked)done++;
-  }));
-  const pct=total?Math.round(done/total*100):0;
-  const grad=pct===100?'linear-gradient(90deg,#56c27a,#7c6af7)':'linear-gradient(90deg,var(--accent),var(--accent2))';
-  document.getElementById('pb-fill').style.cssText='width:'+pct+'%;background:'+grad;
-  document.getElementById('pb-counts').innerHTML='<strong>'+done+'</strong> / '+total+' vus · <strong>'+pct+'%</strong>';
-  const pbn=document.getElementById('pbn');
-  pbn.classList.toggle('show',total>0);
-  document.getElementById('pbn-label').textContent=done+'/'+total;
-  document.getElementById('pbn-fill').style.cssText='width:'+pct+'%;background:'+grad;
-}
-
-async function fetchPoster(id,type,season){
-  if(!id||id==='0')return null;
-  const k=type+'-'+id+(season?'-s'+season:'');
-  if(posterCache[k]!==undefined)return posterCache[k];
-  try{
-    const url=season&&type==='tv'
-      ?'https://api.themoviedb.org/3/tv/'+id+'/season/'+season+'?api_key='+TMDB_KEY
-      :'https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+TMDB_KEY;
-    const r=await fetch(url);
-    if(!r.ok){posterCache[k]=null;return null}
-    const d=await r.json();
-    posterCache[k]=d.backdrop_path||d.poster_path||null;
-    return posterCache[k];
-  }catch{posterCache[k]=null;return null}
-}
-function applyPoster(div,path){
-  if(div.querySelector('img'))return;
-  const img=document.createElement('img');
-  img.src=IMG+'w500'+path;
-  img.dataset.full=IMG+'w500'+path;
-  img.loading='lazy';
-  img.onerror=()=>img.remove();
-  div.querySelector('.pp').style.display='none';
-  div.appendChild(img);
-}
-async function loadPosters(){
-  document.querySelectorAll('#tl-content .ep[data-img]').forEach(ep=>{
-    if(ep.querySelector('img'))return;
-    const img=document.createElement('img');
-    img.src=ep.dataset.img;img.loading='lazy';
-    img.onerror=()=>img.remove();
-    ep.querySelector('.pp').style.display='none';
-    ep.appendChild(img);
-  });
-  const entries=[...document.querySelectorAll('#tl-content .en[data-tmdb]')];
-  const seen=new Set();
-  const tasks=entries.filter(e=>{
-    if(e.querySelector('.ep[data-img]'))return false;
-    const k=e.dataset.media+'-'+e.dataset.tmdb+(e.dataset.season?'-s'+e.dataset.season:'');
-    if(seen.has(k)){if(posterCache[k])applyPoster(e.querySelector('.ep'),posterCache[k]);return false}
-    seen.add(k);return true;
-  });
-  for(let i=0;i<tasks.length;i+=5){
-    await Promise.all(tasks.slice(i,i+5).map(async e=>{
-      const id=e.dataset.tmdb,season=e.dataset.season||null;
-      const mt=(e.dataset.media==='movie'||e.dataset.media==='video')?'movie':'tv';
-      if(!id||id==='0')return;
-      const path=await fetchPoster(id,mt,season);
-      if(path)applyPoster(e.querySelector('.ep'),path);
-    }));
-    await new Promise(r=>setTimeout(r,120));
-  }
-}
-
-async function toggleExpand(el,ev){
-  if(ev.target.closest('.en-check'))return;
-  const wasOpen=el.classList.contains('open');
-  document.querySelectorAll('.en.open').forEach(x=>x.classList.remove('open'));
-  if(wasOpen)return;
-  el.classList.add('open');
-  const panel=el.querySelector('.en-expand');
-  if(panel.dataset.loaded)return;
-  panel.dataset.loaded='1';
-  const id=el.dataset.tmdb,media=el.dataset.media;
-  if(!id||id==='0'){panel.innerHTML='<div class="expand-no-data">Pas d\'informations TMDB pour cette entrée.</div>';return}
-  panel.innerHTML='<div class="expand-loading">Chargement…</div>';
-  const type=(media==='movie'||media==='video')?'movie':'tv';
-  const k=type+id;
-  let d=detailCache[k];
-  if(!d){
-    try{
-      const rFr=await fetch('https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+TMDB_KEY+'&language=fr-FR&append_to_response=videos');
-      d=await rFr.json();
-      if(!d.videos||!d.videos.results||!d.videos.results.find(v=>v.type==='Trailer'&&v.site==='YouTube')){
-        const rEn=await fetch('https://api.themoviedb.org/3/'+type+'/'+id+'/videos?api_key='+TMDB_KEY+'&language=en-US');
-        const enV=await rEn.json();
-        if(enV.results)d.videos={results:[...((d.videos&&d.videos.results)||[]),...enV.results]};
-      }
-      detailCache[k]=d;
-    }catch{panel.innerHTML='<div class="expand-loading">Erreur de chargement.</div>';return}
-  }
-  const synopsis=d.overview||'Pas de synopsis disponible.';
-  const runtime=d.runtime?(d.runtime+' min'):(d.episode_run_time&&d.episode_run_time[0]?(d.episode_run_time[0]+' min/ép'):null);
-  const genres=(d.genres||[]).map(g=>g.name).join(', ')||null;
-  const year=(d.release_date||d.first_air_date||'').substring(0,4)||null;
-  const rating=d.vote_average?d.vote_average.toFixed(1):null;
-  const poster=d.poster_path?IMG+'w300'+d.poster_path:null;
-  const trailer=(d.videos&&d.videos.results||[]).find(v=>v.type==='Trailer'&&v.site==='YouTube');
-  const ytUrl=trailer?'https://www.youtube.com/watch?v='+trailer.key:null;
-  let meta='';
-  if(year)meta+='<span><strong>Année</strong> '+year+'</span>';
-  if(runtime)meta+='<span><strong>Durée</strong> '+runtime+'</span>';
-  if(genres)meta+='<span><strong>Genre</strong> '+genres+'</span>';
-  if(rating)meta+='<span><strong>Note</strong> ⭐ '+rating+'/10</span>';
-    const entryObj=currentData&&currentData.eras.flatMap(e=>e.entries).find(e=>e.id===el.dataset.id);
-  const faqHtml=entryObj&&entryObj.faq?entryObj.faq.map(item=>'<details class="faq-item"><summary class="faq-q">'+item.q+'</summary><div class="faq-a">'+item.a+'</div></details>').join(''):'';
-  panel.innerHTML='<div class="expand-inner">'
-    +(poster?'<div class="expand-poster" onclick="openPMurl(\''+IMG+'w500'+d.poster_path+'\')"><img src="'+poster+'" loading="lazy"/><div class="expand-poster-ov">🔍</div></div>':'')
-    +'<div class="expand-info"><div class="expand-synopsis">'+synopsis+'</div>'
-    +(meta?'<div class="expand-meta">'+meta+'</div>':'')
-    +(ytUrl?'<a class="expand-trailer-link" href="'+ytUrl+'" target="_blank" rel="noopener">▶ Bande-annonce YouTube</a>':'')
-    +(faqHtml?'<div class="expand-faq">'+faqHtml+'</div>':'')
-    +'</div></div>';
-}
-function openPMurl(url){document.getElementById('pmi').src=url;document.getElementById('pm').classList.add('o')}
-function closePM(){document.getElementById('pm').classList.remove('o')}
-
-function buildEntry(e,showLevel,inSeg){
-  const [cls,label]=BADGES[e.type]||['bsp','?'];
-  const levelClass=e.level==='must'?'must':e.level==='important'?'imp':'';
-  const prog=getProgress(currentData.id);
-  const isDone=!!prog[e.id];
-  const levelIcon=showLevel?(e.level==='must'?'⭐':e.level==='important'?'🚨':''):'';
-  const isGame=e.media==='game';
-  const isVideo=e.media==='video';
-  const mediaAttr=isGame?'game':isVideo?'video':(e.media==='movie'?'movie':'tv');
-  const seasonAttr=e.season?' data-season="'+e.season+'"':'';
-  const imgAttr=e.img?' data-img="'+e.img+'"':'';
-  const isNC=e.tags&&e.tags.includes('nc');
-  const devClass=(e.dim&&!inSeg)?' deviate':'';
-  const ncClass=isNC?' nc-entry':'';
-  let pre='';
-  if(isNC)pre+='<span class="nt">CANONICITÉ NON CONFIRMÉE</span>';
-  if(e.tags&&e.tags.includes('flashback'))pre+='<span class="ft">FLASHBACK</span>';
-  const dimBadge=e.dim?'<div class="dim-badge">'+e.dim+'</div>':'';
-  const ppIcon=isGame?'🎮':e.type==='video'?'📹':e.type==='special'?'🎊':e.type==='film'||e.type==='filmanim'?'🎬':'📺';
-  let sub='';
-  if(e.subitems&&e.subitems.length)sub='<div class="esub">'+e.subitems.map(s=>'<div class="si">'+s+'</div>').join('')+'</div>';
-  const note=e.note?'<div class="enote">'+e.note+'</div>':'';
-  const details=e.details?'<div class="edetails">'+e.details+'</div>':'';
-  return '<div class="en '+levelClass+devClass+ncClass+(isDone?' done':'')+'" data-id="'+e.id+'" data-type="'+e.type+'" data-level="'+e.level+'" data-tmdb="'+(e.tmdb||'0')+'" data-media="'+mediaAttr+'" data-nc="'+(isNC?'1':'0')+'"'+seasonAttr+' onclick="toggleExpand(this,event)">'
-    +'<div class="en-top">'
-    +'<div class="en-check" onclick="toggleEntry(\''+e.id+'\',event)"><div class="checkmark">'+(isDone?'✓':'')+'</div></div>'
-    +'<div class="en-datebadge"><div class="en-level-icon">'+levelIcon+'</div><div class="date-main">'+(e.date||'—')+'</div>'+dimBadge+'</div>'
-    +'<div class="ep"'+imgAttr+'><div class="pp">'+ppIcon+'</div></div>'
-    +'<div class="em"><div class="tr">'+pre+'<span class="b '+cls+'">'+label+'</span><span class="en-name">'+e.title+'</span></div>'+note+details+sub+'</div>'
-    +'</div>'
-    +'<div class="en-expand"></div></div>';
-}
-
-// Filtrage avancé
-function applyFilters(){
-  const showTypes=new Set();
-  document.querySelectorAll('.type-filter-btn.active').forEach(b=>showTypes.add(b.dataset.type));
-  const showMust=document.getElementById('lvl-must').classList.contains('active');
-  const showImp=document.getElementById('lvl-imp').classList.contains('active');
-  const showBonus=document.getElementById('lvl-bonus').classList.contains('active');
-  const hideNC=document.getElementById('btn-nc').classList.contains('active');
-
-  document.querySelectorAll('#tl-content .en').forEach(e=>{
-    const type=e.dataset.type;
-    const level=e.dataset.level;
-    const nc=e.dataset.nc==='1';
-    const typeOK=showTypes.has(type)||showTypes.size===0;
-    const levelOK=(level==='must'&&showMust)||(level==='important'&&showImp)||(level==='bonus'&&showBonus);
-    const ncOK=!(hideNC&&nc);
-    e.style.display=(typeOK&&levelOK&&ncOK)?'':'none';
-  });
-  document.querySelectorAll('#tl-content .era-node').forEach(h=>{
-    let n=h.nextElementSibling,vis=false;
-    while(n&&!n.dataset.era){
-      if(n.classList.contains('en')&&n.style.display!=='none')vis=true;
-      if(n.classList.contains('segment-box'))vis=true;
-      n=n.nextElementSibling;
-    }
-    h.style.display=vis?'':'none';
-  });
-  document.querySelectorAll('#tl-content .segment-box').forEach(box=>{
-    const ok=[...box.querySelectorAll('.en')].some(e=>e.style.display!=='none');
-    box.style.display=ok?'':'none';
-  });
-}
-
-function toggleTypeFilter(btn){
-  btn.classList.toggle('active');
-  applyFilters();
-}
-function toggleLevelFilter(btn){
-  btn.classList.toggle('active');
-  applyFilters();
-}
-function toggleNCFilter(btn){
-  btn.classList.toggle('active');
-  applyFilters();
-}
-
-function buildTimeline(data){
-  const showLevel=data.id!=='sw';
-  document.documentElement.style.setProperty('--tl-color',data.color||'var(--accent)');
-  const types=[...new Set(data.eras.flatMap(era=>era.entries.map(e=>e.type)))];
-  const hasNC=data.eras.some(era=>era.entries.some(e=>e.tags&&e.tags.includes('nc')));
-  const hasDim=data.eras.some(era=>era.entries.some(e=>e.dim));
-  const hasFB=data.eras.some(era=>era.entries.some(e=>e.tags&&e.tags.includes('flashback')));
-
-  // Légende
-  let leg='<div class="leg-title">Légende</div>';
-  types.forEach(t=>{const[c,l]=BADGES[t]||[];if(c)leg+='<span class="b '+c+'">'+l+'</span>'});
-  leg+='<div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;width:100%;margin-top:.15rem">';
-  if(showLevel)leg+='<span>⭐ Obligatoire</span> <span>🚨 Important</span>';
-  if(hasFB)leg+='<span class="ft">FLASHBACK</span>';
-  if(hasNC)leg+='<span class="nt">CANONICITÉ NON CONFIRMÉE</span>';
-  if(hasDim)leg+='<span class="dt">TERRE-XXXX</span>';
-  leg+='</div>';
-  document.getElementById('tl-legend').innerHTML=leg;
-
-  // Filtres — style décocher
-  let f='<div class="filter-group"><span class="filter-label">Types :</span>';
-  types.forEach(t=>{
-    const[,l]=BADGES[t]||['','?'];
-    f+='<button class="fbt type-filter-btn active" data-type="'+t+'" onclick="toggleTypeFilter(this)">'+l+'</button>';
-  });
-  f+='</div>';
-  if(showLevel){
-    f+='<div class="filter-group"><span class="filter-label">Niveau :</span>';
-    f+='<button class="fbt active" id="lvl-must" onclick="toggleLevelFilter(this)">⭐ Obligatoire</button>';
-    f+='<button class="fbt active" id="lvl-imp" onclick="toggleLevelFilter(this)">🚨 Important</button>';
-    f+='<button class="fbt active" id="lvl-bonus" onclick="toggleLevelFilter(this)">Optionnel</button>';
-    f+='</div>';
-  }
-  if(hasNC){f+='<button class="fbt active" id="btn-nc" onclick="toggleNCFilter(this)">Canonicité non confirmée</button>';}
-  document.getElementById('filter-bar').innerHTML=f;
-
-  // Contenu
-  let html='';
-  data.eras.forEach(era=>{
-    const isSV=era.special==='sv',isFox=era.special==='fox';
-    const nc=isSV?'sv':isFox?'fox':'';
-    html+='<div class="era-node" data-era><div class="era-node-dot '+nc+'"></div><div class="era-label '+nc+'">'+era.title+'</div></div>';
-    if(isSV||isFox){
-      const si=isSV?'🕷️':'🦾';
-      const st=isSV?'Segment Spider-Verse':'Segment Fox — X-Men & Deadpool';
-      const ss=isSV?'Univers alternatifs — avant No Way Home':'Terre-10005 — avant Deadpool & Wolverine';
-      html+='<div class="segment-box"><div class="segment-header '+nc+'"><span class="segment-icon">'+si+'</span><span class="segment-title">'+st+'</span><span class="segment-sub">'+ss+'</span></div><div class="segment-body">';
-      era.entries.forEach(e=>{html+=buildEntry(e,showLevel,true)});
-      html+='</div></div>';
-    } else {
-      era.entries.forEach(e=>{html+=buildEntry(e,showLevel,false)});
-    }
-  });
-  document.getElementById('tl-content').innerHTML=html;
-}
-
-function buildHomeCards(){
-  const grid=document.getElementById('ugrid');
-  grid.innerHTML='';
-  const now=new Date();
-  const months=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-  const dl='À jour — '+months[now.getMonth()]+' '+now.getFullYear();
-  UNIVERSES.forEach(u=>{
-    const d=u.data||u;
-    const prog=u.data?getProgress(u.data.id):{};
-    const total=u.data?u.data.eras.reduce((a,e)=>a+e.entries.length,0):0;
-    const done=u.data?u.data.eras.reduce((a,era)=>a+era.entries.filter(e=>!!prog[e.id]).length,0):0;
-    const pct=total?Math.round(done/total*100):0;
-    const card=document.createElement('div');
-    card.className='ucard'+(u.soon?' soon':'');
-    card.id='card-'+(u.data?u.data.id:u.id);
-    card.onclick=u.soon?showCS:()=>window.location.href=(u.data.id==='mcu'?'marvel.html':'starwars.html');
-    card.innerHTML='<div class="cbanner"><img id="banner-'+(u.data?u.data.id:u.id)+'" src="" alt=""/><span class="cicon">'+u.icon+'</span></div>'
-      +'<div class="cbody"><div class="cname" style="color:'+(d.color||'var(--text)')+'">'+d.title+'</div>'
-      +'<div class="csub">'+(d.description||d.subtitle||'')+'</div>'
-      +(u.soon
-        ?'<span class="cnew" style="background:rgba(124,106,247,.12);color:var(--accent);border:1px solid rgba(124,106,247,.25)">BIENTÔT</span>'
-        :'<div class="cprogress"><div class="cp-track"><div class="cp-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+(d.color||'var(--accent)')+',var(--accent2))"></div></div><span>'+done+' / '+total+' vus</span></div><span class="cnew" style="background:rgba(86,194,122,.12);color:var(--green);border:1px solid rgba(86,194,122,.28)">'+dl+'</span>'
-      )+'</div>';
-    grid.appendChild(card);
-    if(u.data&&u.data.tmdb_banner){
-      const{type,id}=u.data.tmdb_banner;
-      fetch('https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+TMDB_KEY)
-        .then(r=>r.json()).then(dd=>{
-          if(dd.backdrop_path){const img=document.getElementById('banner-'+u.data.id);if(img)img.src=IMG+'w780'+dd.backdrop_path}
-        }).catch(()=>{});
-    }
-  });
-}
-
-function showHome(){
-  document.getElementById('home-page').classList.add('v');
-  document.getElementById('tl-page').classList.remove('v');
-  document.getElementById('cs-page').classList.remove('v');
-  document.getElementById('pbn').classList.remove('show');
-  currentData=null;window.scrollTo(0,0);buildHomeCards();
-}
-function showUniverse(uid){
-  const u=UNIVERSES.find(x=>x.data&&x.data.id===uid);
-  if(!u){showCS();return}
-  currentData=u.data;
-  window._currentUID=uid;
-  document.getElementById('tl-title').textContent=currentData.title+' — '+currentData.subtitle;
-  document.getElementById('tl-title').style.color=currentData.color||'var(--text)';
-  document.getElementById('tl-title').style.textShadow='0 0 40px '+(currentData.glow||'transparent');
-  document.getElementById('tl-sub').textContent=currentData.description||'';
-  document.getElementById('tl-notes').innerHTML=currentData.notes||'';
-  document.getElementById('pb-fill').style.background='linear-gradient(90deg,'+(currentData.color||'var(--accent)')+',var(--accent2))';
-  buildTimeline(currentData);renderProgress();
-  document.getElementById('home-page').classList.remove('v');
-  document.getElementById('tl-page').classList.add('v');
-  document.getElementById('cs-page').classList.remove('v');
-  window.scrollTo(0,0);loadPosters();
-}
-function showCS(){
-  document.getElementById('home-page').classList.remove('v');
-  document.getElementById('tl-page').classList.remove('v');
-  document.getElementById('cs-page').classList.add('v');
-  document.getElementById('pbn').classList.remove('show');
-  window.scrollTo(0,0);
-}
-
-window.addEventListener('scroll',()=>{
-  const mm=document.getElementById('miss-minute');
-  if(!mm)return;
-  const tlActive=document.getElementById('tl-page').classList.contains('v');
-  const isMCU=window._currentUID==='mcu';
-  mm.classList.toggle('visible',tlActive&&isMCU&&window.scrollY>400);
-});
-
-showHome();
-</script>
 </body>
 </html>
