@@ -60,6 +60,21 @@ nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;he
 .soon-card-img{width:44px;height:44px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--surface2)}
 .soon-card-name{font-size:.88rem;font-weight:700}
 .soon-card-sub{font-size:.72rem;color:var(--muted2);margin-top:.15rem}
+
+@media(max-width:700px){
+  nav{flex-wrap:wrap;height:auto;padding:.6rem 0;gap:.5rem}
+  .logo{width:100%;justify-content:center;padding:.2rem 0}
+  .logo img{height:26px}
+  .nav-links{width:100%;justify-content:center;flex-wrap:wrap;gap:.75rem}
+  .nav-links a{font-size:.82rem}
+  .nav-sp{display:none}
+  .disc-btn{margin:0 auto .2rem}
+  .hero{padding:2.5rem 1rem 2rem}
+  .hero-logo{height:clamp(36px,10vw,60px)}
+  .ugrid{flex-direction:column;align-items:center;gap:1.25rem;padding:0 1rem}
+  .ucard{width:100%;max-width:360px}
+  .cbanner{height:120px}
+}
 </style>
 </head>
 <body>
