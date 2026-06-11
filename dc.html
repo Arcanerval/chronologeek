@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DC Multivers — Chronologeek</title>
+<style>
+:root{
+  --bg:#08080f;--surface:#0f0f1a;--surface2:#161625;--border:#1e1e35;--border2:#2a2a48;
+  --accent:#7c6af7;--accent2:#f06292;--gold:#f5c842;--text:#e2e2f0;--muted:#686880;
+  --muted2:#9090b0;--green:#56c27a;--orange:#f09642;--red:#e05555;--radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(124,106,247,.12),transparent 60%),radial-gradient(ellipse 60% 50% at 80% 110%,rgba(240,98,146,.08),transparent 60%);pointer-events:none}
+.nav-maj{font-size:.7rem;color:var(--muted);letter-spacing:.04em;white-space:nowrap}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+header{background:rgba(8,8,15,.88);border-bottom:1px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:200;backdrop-filter:blur(20px)}
+nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;height:62px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:.6rem;cursor:pointer;flex-shrink:0}
+.logo img{height:30px;display:block;object-fit:contain;background:transparent}
+.logo-text{font-size:1.35rem;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:1.25rem;align-items:center}
+.nav-links a{color:var(--muted2);font-size:.88rem;text-decoration:none;cursor:pointer;transition:color .2s;white-space:nowrap}
+.nav-links a:hover{color:var(--text)}
+.nav-sp{flex:1}
+.pbn{display:none;align-items:center;gap:.6rem;font-size:.78rem;color:var(--muted2)}.pbn.show{display:flex}
+.pbn-track{width:100px;height:4px;background:var(--border2);border-radius:2px;overflow:hidden}
+.pbn-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .4s}
+.disc-btn{background:linear-gradient(135deg,#5865f2,#4752c4);color:#fff!important;padding:.4rem 1rem;border-radius:8px;font-size:.82rem;font-weight:600;white-space:nowrap}
+/* HOME */
+#home-page{display:none}#home-page.v{display:block}
+.hero{padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 0%,rgba(124,106,247,.15),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;z-index:1}
+.hero h1{font-size:clamp(2.8rem,7vw,5rem);font-weight:900;letter-spacing:-2px;background:linear-gradient(135deg,#fff 0%,var(--accent) 45%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.25rem;line-height:1}
+.hero-rune{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.hero-tagline{color:var(--muted2);font-size:1.05rem;max-width:540px;margin:0 auto 3.5rem;line-height:1.65}
+.ugrid{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;max-width:960px;margin:0 auto}
+.ucard{background:linear-gradient(160deg,var(--surface),var(--surface2));border:1px solid var(--border2);border-radius:18px;cursor:pointer;transition:all .3s cubic-bezier(.34,1.56,.64,1);width:240px;overflow:hidden}
+.ucard:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 60px rgba(124,106,247,.25),0 0 0 1px rgba(124,106,247,.3)}
+.cbanner{height:130px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
+.cbanner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.cbanner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--surface) 100%);pointer-events:none}
+.cicon{position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.9))}
+.cbody{padding:1.1rem 1.25rem 1.25rem}
+.cname{font-weight:800;font-size:1.05rem;margin-bottom:.3rem}
+.csub{font-size:.78rem;color:var(--muted2);line-height:1.4}
+.cprogress{margin-top:.75rem;display:flex;align-items:center;gap:.6rem;font-size:.72rem;color:var(--muted2)}
+.cp-track{flex:1;height:4px;background:var(--border2);border-radius:2px;overflow:hidden}
+.cp-fill{height:100%;border-radius:2px;transition:width .5s}
+.cnew{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:.6rem}
+/* TIMELINE PAGE */
+.tl-page{display:block;max-width:1200px;margin:0 auto;padding:2.5rem 2rem}
+.bc{font-size:.78rem;color:var(--muted2);margin-bottom:1.25rem;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:color .2s}
+.bc:hover{color:var(--accent)}
+.page-title{font-size:2.1rem;font-weight:900;letter-spacing:-.5px;margin-bottom:.4rem}
+.page-sub{color:var(--muted2);font-size:.9rem;line-height:1.55;margin-bottom:1.5rem}
+.progress-block{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1.25rem}
+.pb-info{flex:1}.pb-label{font-size:.72rem;color:var(--muted2);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em}
+.pb-track{height:6px;background:var(--border2);border-radius:3px;overflow:hidden;margin-bottom:.35rem}
+.pb-fill{height:100%;border-radius:3px;transition:width .5s}
+.pb-counts{font-size:.78rem;color:var(--muted2)}.pb-counts strong{color:var(--text)}
+.pb-reset{background:transparent;border:1px solid var(--border2);color:var(--muted2);padding:.35rem .8rem;border-radius:8px;font-size:.75rem;cursor:pointer;transition:all .2s;white-space:nowrap}
+.pb-reset:hover{border-color:var(--red);color:var(--red)}
+.nb{background:linear-gradient(135deg,rgba(124,106,247,.08),rgba(240,98,146,.05));border:1px solid rgba(124,106,247,.2);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:1.1rem 1.3rem;margin-bottom:1.5rem;font-size:.86rem;line-height:1.75;color:var(--muted2)}
+.nb strong{color:var(--text)}
+.leg{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;font-size:.82rem}
+.leg-title{width:100%;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.1rem}
+/* BADGES */
+.b{display:inline-flex;align-items:center;padding:2px 8px;border-radius:6px;font-size:.69rem;font-weight:700;white-space:nowrap}
+.bf{background:rgba(100,181,246,.12);color:#64b5f6;border:1px solid rgba(100,181,246,.25)}
+.bfa{background:rgba(144,202,249,.10);color:#90caf9;border:1px solid rgba(144,202,249,.2)}
+.bs{background:rgba(129,199,132,.12);color:#81c784;border:1px solid rgba(129,199,132,.25)}
+.ba{background:rgba(206,147,216,.12);color:#ce93d8;border:1px solid rgba(206,147,216,.25)}
+.bj{background:rgba(255,183,77,.12);color:#ffb74d;border:1px solid rgba(255,183,77,.25)}
+.bsp{background:rgba(255,167,38,.12);color:#ffa726;border:1px solid rgba(255,167,38,.25)}
+.bv{background:rgba(239,83,80,.12);color:#ef5350;border:1px solid rgba(239,83,80,.25)}
+.nt{display:inline-flex;font-size:.65rem;padding:2px 7px;border-radius:5px;font-weight:700;white-space:nowrap;background:rgba(224,85,85,.12);color:var(--red);border:1px solid rgba(224,85,85,.25)}
+.ft{display:inline-flex;font-size:.65rem;padding:2px 7px;border-radius:5px;white-space:nowrap;background:rgba(240,150,66,.12);color:var(--orange);border:1px solid rgba(240,150,66,.25)}
+.dt{display:inline-flex;font-size:.65rem;padding:2px 7px;border-radius:5px;white-space:nowrap;background:rgba(124,106,247,.12);color:#a99fff;border:1px solid rgba(124,106,247,.25)}
+/* FILTRES */
+.filter-bar{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}
+.filter-group{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.filter-label{font-size:.72rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.06em;font-weight:600;white-space:nowrap;min-width:56px}
+.fbt{background:var(--surface2);border:1px solid var(--border2);color:var(--muted2);padding:.35rem .85rem;border-radius:20px;cursor:pointer;font-size:.79rem;transition:all .2s;user-select:none}
+.fbt:hover{border-color:var(--accent);color:var(--text)}
+.fbt.active{background:rgba(124,106,247,.2);border-color:var(--accent);color:#c4baff;font-weight:600}
+/* ERA */
+.era-node{display:flex;align-items:flex-start;margin:2.5rem 0 .6rem;position:relative}
+.era-node-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:3px;z-index:2;margin-right:10px}
+.era-node-dot.sv{background:#90caf9}.era-node-dot.fox{background:#ffb74d}
+.era-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);line-height:1.3}
+.era-label.sv{color:#90caf9}.era-label.fox{color:#ffb74d}
+/* SEGMENTS */
+.segment-box{margin:.4rem 0 1rem;border:1px solid var(--border2);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,var(--surface),var(--surface2));margin-left:40px}
+.segment-header{padding:.7rem 1rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid var(--border2)}
+.segment-header.sv{background:linear-gradient(135deg,rgba(144,202,249,.08),rgba(206,147,216,.05))}
+.segment-header.fox{background:linear-gradient(135deg,rgba(255,183,77,.08),rgba(224,85,85,.05))}
+.segment-icon{font-size:1.2rem}.segment-title{font-weight:800;font-size:.88rem}
+.segment-header.sv .segment-title{color:#90caf9}.segment-header.fox .segment-title{color:#ffb74d}
+.segment-sub{font-size:.72rem;color:var(--muted2);margin-left:auto}.segment-body{padding:.5rem .65rem}
+/* ENTRY */
+.en{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.75rem;display:flex;flex-direction:column;overflow:hidden;transition:border-color .2s,background .2s,box-shadow .2s;cursor:pointer}
+.en:hover{border-color:var(--border2);background:var(--surface2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.en.must{border-left:3px solid var(--gold)}.en.imp{border-left:3px solid var(--orange)}
+.en.done{opacity:.5}.en.done .en-name{text-decoration:line-through;text-decoration-color:var(--muted)}
+.en.open{border-color:var(--accent);box-shadow:0 0 0 1px rgba(124,106,247,.2),0 8px 30px rgba(0,0,0,.4)}
+/* Décalage droite pour les non-616 — amplifié */
+.en.deviate{margin-left:40px;border-left-style:dashed}
+.en-top{display:flex;overflow:hidden;min-height:86px}
+.en-check{width:40px;min-width:40px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border);flex-shrink:0;transition:background .2s;cursor:pointer}
+.en-check:hover{background:rgba(124,106,247,.08)}
+.checkmark{width:20px;height:20px;border-radius:6px;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;transition:all .25s;font-size:.75rem;color:#fff;font-weight:700}
+.en-check:hover .checkmark{border-color:var(--accent)}
+.en.done .checkmark{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}
+/* Date badge — grande */
+.en-datebadge{width:100px;min-width:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--border);flex-shrink:0;padding:.4rem .35rem;background:rgba(124,106,247,.04);gap:.12rem}
+.en-level-icon{font-size:1rem;line-height:1;min-height:1rem}
+.date-main{font-size:.82rem;font-weight:900;color:var(--text);text-align:center;line-height:1.2}
+.dim-badge{font-size:.52rem;font-weight:700;color:#a99fff;background:rgba(124,106,247,.15);border:1px solid rgba(124,106,247,.25);border-radius:4px;padding:1px 4px;text-align:center;line-height:1.4;margin-top:.1rem;max-width:92px;word-break:break-word}
+.ep{width:200px;min-width:200px;background:var(--surface2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border-right:1px solid var(--border);cursor:pointer}
+.ep img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .3s}
+.ep:hover img{transform:scale(1.06)}.pp{font-size:1.5rem;opacity:.15}
+.em{flex:1;padding:.7rem .9rem;min-width:0;display:flex;flex-direction:column;gap:.18rem}
+.tr{display:flex;flex-wrap:wrap;gap:.3rem;align-items:center}
+.en-name{font-weight:600;font-size:.92rem;line-height:1.3;color:var(--text)}
+.enote{font-size:.78rem;color:var(--muted2);font-style:italic;line-height:1.5}
+.edetails{font-size:.78rem;color:var(--muted2);line-height:1.5;padding:.25rem .5rem;border-left:2px solid var(--border2);background:rgba(124,106,247,.03);border-radius:0 4px 4px 0;margin-top:.1rem}
+.esub{padding-left:.5rem;border-left:2px solid var(--border2);margin-top:.25rem}
+.si{font-size:.76rem;color:var(--muted2);padding:.07rem 0 .07rem .45rem;line-height:1.4}.si.sep{height:.1rem;margin:.7rem 0 .7rem .45rem;background:rgba(124,106,247,.3);border-radius:2px;padding:0;border:none;display:block}
+.si strong{color:var(--muted2)}
+/* EXPAND */
+.en-expand{display:none;border-top:1px solid var(--border);background:rgba(0,0,0,.25)}
+.en.open .en-expand{display:block}
+.expand-inner{display:flex;min-height:150px}
+.expand-poster{width:100px;min-width:100px;flex-shrink:0;cursor:pointer;overflow:hidden;position:relative}
+.expand-poster img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.expand-poster:hover img{transform:scale(1.04)}
+.expand-poster-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background .2s;font-size:1.6rem;opacity:0}
+.expand-poster:hover .expand-poster-ov{background:rgba(0,0,0,.45);opacity:1}
+.expand-info{flex:1;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.45rem;overflow:hidden}
+.expand-synopsis{font-size:.8rem;color:var(--muted2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.expand-meta{display:flex;flex-wrap:wrap;gap:.25rem .6rem;font-size:.74rem;color:var(--muted2)}
+.expand-meta span strong{color:var(--text)}
+.expand-trailer-link{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.25);color:#ff6b6b;padding:.28rem .7rem;border-radius:8px;font-size:.77rem;font-weight:600;text-decoration:none;transition:all .2s;width:fit-content}
+.expand-trailer-link:hover{background:rgba(255,0,0,.2)}
+.expand-loading{padding:1.5rem;color:var(--muted);font-size:.8rem;text-align:center}
+.expand-no-data{padding:1rem;color:var(--muted);font-size:.8rem}
+/* MODAL */
+.pm{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.92);align-items:center;justify-content:center;backdrop-filter:blur(8px);cursor:pointer}
+.pm.o{display:flex}.pm img{max-height:88vh;max-width:88vw;border-radius:14px;box-shadow:0 30px 100px rgba(0,0,0,.9)}
+.pm-x{position:absolute;top:1.25rem;right:1.75rem;color:#fff;font-size:1.8rem;cursor:pointer;opacity:.6}
+/* CS */
+.cs{display:none;text-align:center;padding:6rem 2rem;color:var(--muted2)}.cs.v{display:block}
+.cs h2{font-size:2rem;margin-bottom:1rem;color:var(--text)}
+@media(max-width:700px){
+  .tl-page{padding:1rem .6rem;max-width:100%}
+  .en-top{flex-direction:column;min-height:unset}
+  .ep{width:100%!important;min-width:unset!important;height:120px;border-right:none;border-bottom:1px solid var(--border)}
+  .ep img{object-position:center 25%}
+  .en-check{width:100%;height:34px;border-right:none;border-bottom:1px solid var(--border);justify-content:flex-start;padding-left:1rem}
+  .en-datebadge{width:100%!important;min-width:unset!important;flex-direction:row;gap:.6rem;justify-content:flex-start;border-right:none;border-bottom:1px solid var(--border);padding:.3rem .75rem;background:rgba(124,106,247,.05)}
+  .en-level-icon{min-height:unset}
+  .dim-badge{max-width:none;font-size:.6rem}
+  .em{padding:.6rem .75rem}
+  .en-name{font-size:.88rem}
+  .enote{font-size:.75rem}
+  .b{font-size:.64rem;padding:2px 6px}
+  .nt,.ft,.dt{font-size:.62rem;padding:2px 5px}
+  .expand-poster{width:80px;min-width:80px}
+  nav{gap:.5rem;height:auto;padding:.5rem 0;flex-wrap:wrap}
+  .nav-links{gap:.7rem}
+  .nav-links a{font-size:.78rem}
+  .disc-btn{padding:.3rem .7rem;font-size:.78rem}
+  .en.deviate{margin-left:10px}
+  .segment-box{margin-left:10px}
+  #miss-minute{width:64px;height:64px;bottom:1.25rem;right:1.25rem}
+  .filter-group{gap:.35rem}
+  .fbt{font-size:.73rem;padding:.28rem .65rem}
+  .progress-block{flex-direction:column;align-items:flex-start;gap:.75rem}
+}
+@media(max-width:420px){
+  .ep{height:90px}
+  .en-name{font-size:.82rem}
+}
+@media(max-width:420px){
+  .ep{width:60px;min-width:60px}
+  .en-check{width:28px;min-width:28px}
+  .en-name{font-size:.79rem}
+  .date-main{font-size:.63rem}
+}
+
+.expand-faq{padding:.75rem 1rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:.35rem}
+.faq-item{border:1px solid var(--border2);border-radius:8px;overflow:hidden;background:var(--surface)}
+.faq-q{padding:.5rem .85rem;font-size:.82rem;font-weight:600;color:var(--accent);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;user-select:none}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q::after{content:'›';font-size:1.2rem;transition:transform .2s;color:var(--muted2)}
+details[open] .faq-q::after{transform:rotate(90deg)}
+.faq-a{padding:.5rem .85rem .65rem;font-size:.81rem;color:var(--muted2);line-height:1.65;border-top:1px solid var(--border)}
+
+#grogu{position:fixed;bottom:2rem;right:2rem;z-index:300;width:88px;height:88px;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1);filter:drop-shadow(0 4px 16px rgba(0,0,0,.6));display:none}
+#grogu.visible{display:block}
+#grogu img{width:100%;height:100%;object-fit:contain}
+#grogu:hover{transform:scale(1.15) rotate(8deg)}
+.grogu-normal{display:block}.grogu-hover{display:none}
+#grogu:hover .grogu-normal{display:none}
+#grogu:hover .grogu-hover{display:block}
+
+/* ── DC 4 colonnes ──────────────────────────────── */
+.tl-page{display:block}
+
+.dc-header{display:flex;gap:6px;position:sticky;top:62px;z-index:100;background:var(--bg);padding:6px 0;border-bottom:1px solid var(--border)}
+.dc-col-head{flex:1;padding:.5rem .6rem;border-radius:8px 8px 0 0;background:var(--surface);display:flex;align-items:center;justify-content:space-between;font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;min-width:0}
+.col-toggle{background:none;border:none;cursor:pointer;font-size:1rem;color:inherit;opacity:.8;padding:0 2px;line-height:1}
+.col-toggle:hover{opacity:1}
+.col-toggle.inactive{opacity:.3}
+
+.dc-body{display:flex;gap:6px;align-items:flex-start}
+.dc-col{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0}
+.dc-section-label{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .4rem .25rem;opacity:.7;border-top:1px solid var(--border);margin-top:.5rem}
+.dc-section-label:first-child{border-top:none;margin-top:0}
+
+/* Entrées DC : plus compactes que SW/Marvel */
+.en{border-radius:8px;margin-bottom:0;cursor:pointer;transition:filter .2s,transform .15s}
+.en:hover{filter:brightness(1.2);transform:translateX(2px)}
+.en-top{display:flex;align-items:flex-start;gap:6px;padding:.45rem .55rem}
+.en-check{width:18px;height:18px;flex-shrink:0;border:1px solid var(--border2);border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:1px}
+.en-check:hover{border-color:var(--accent)}
+.en.done .en-check{background:var(--accent);border-color:var(--accent)}
+.checkmark{font-size:.65rem;color:#fff;font-weight:700}
+.en-datebadge{display:flex;flex-direction:column;gap:2px;flex-shrink:0;min-width:52px}
+.date-main{font-size:.68rem;color:var(--muted2);white-space:nowrap}
+.dim-badge{font-size:.58rem;background:rgba(255,255,255,.06);color:var(--muted);padding:1px 4px;border-radius:3px;white-space:nowrap;border:1px solid var(--border)}
+.em{flex:1;min-width:0}
+.tr{display:flex;align-items:center;flex-wrap:wrap;gap:3px;margin-bottom:2px}
+.en-name{font-size:.78rem;font-weight:600;color:var(--text);line-height:1.3}
+.ft{font-size:.56rem;background:rgba(255,165,0,.2);color:#ffa500;padding:1px 4px;border-radius:3px;font-weight:700;letter-spacing:.05em;flex-shrink:0}
+.imp-badge{font-size:.7rem;flex-shrink:0}
+.soft-badge{font-size:.56rem;background:rgba(150,150,180,.15);color:var(--muted2);padding:1px 4px;border-radius:3px;font-weight:700;letter-spacing:.03em;flex-shrink:0}
+.enote{font-size:.68rem;color:var(--muted2);margin-top:2px;line-height:1.35;font-style:italic}
+.esub{margin-top:3px}
+.si{font-size:.68rem;color:var(--muted2);padding:0 0 0 .3rem;line-height:1.4}
+
+/* Expand panel */
+.en-expand{display:none;border-top:1px solid var(--border);padding:.65rem .75rem}
+.en.open .en-expand{display:block}
+.expand-inner{display:flex;gap:.75rem}
+.expand-poster{width:70px;flex-shrink:0}
+.expand-poster img{width:100%;border-radius:6px}
+.expand-info{flex:1;min-width:0}
+.expand-synopsis{font-size:.78rem;line-height:1.55;color:var(--muted2);margin-bottom:.5rem}
+.expand-meta{display:flex;flex-wrap:wrap;gap:.35rem .75rem;font-size:.72rem;color:var(--muted2);margin-bottom:.5rem}
+.expand-meta strong{color:var(--text)}
+.expand-trailer-link{display:inline-block;font-size:.72rem;color:var(--accent);text-decoration:none;margin-top:.25rem}
+.expand-loading{font-size:.78rem;color:var(--muted);padding:.3rem 0}
+.expand-no-data{font-size:.78rem;color:var(--muted);padding:.3rem 0}
+
+/* Crossover */
+.dc-crossover-marker{border:1px dashed;border-radius:8px;padding:.5rem .7rem;font-size:.75rem;font-weight:700;text-align:center;letter-spacing:.04em;margin:4px 0;grid-column:1/-1}
+
+/* Mobile */
+@media(max-width:700px){
+  .dc-header,.dc-body{flex-direction:column}
+  .dc-col-head,.dc-col{width:100%}
+  nav{flex-wrap:wrap;height:auto;padding:.5rem 0;gap:.3rem}
+  .logo{width:100%;justify-content:center}
+  .nav-links{width:100%;justify-content:center;flex-wrap:wrap;gap:.35rem .7rem}
+  .nav-links a{font-size:.78rem;white-space:nowrap}
+  .nav-sp,.nav-maj,.pbn{display:none}
+  .disc-btn{margin:0 auto .2rem}
+}
+
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer">
+      <img src="images/logo-chronologeek.png" alt="Chronologeek"/>
+    </div>
+    <div class="nav-links">
+      <a onclick="window.location.href='index.html'">Accueil</a>
+      <a onclick="window.location.href='starwars.html'">Star Wars</a>
+      <a onclick="window.location.href='marvel.html'">Marvel</a>
+      <a onclick="window.location.href='dc.html'" style="color:var(--text);font-weight:700">DC</a>
+      <a href="#">Dossiers</a>
+      <a href="#">Communauté</a>
+    </div>
+    <div class="nav-sp"></div>
+    <span class="nav-maj">À jour · juin 2026</span>
+    <div class="pbn" id="pbn"><span id="pbn-label">0/0</span><div class="pbn-track"><div class="pbn-fill" id="pbn-fill" style="width:0%"></div></div></div>
+    <a href="#" class="disc-btn">Discord</a>
+  </nav>
+</header>
+<div class="pm" id="pm" onclick="closePM()"><span class="pm-x">✕</span><img id="pmi" src="" alt=""/></div>
+<div class="tl-page" id="tl-page">
+  <div class="bc" onclick="window.location.href='index.html'">← Accueil</div>
+  <div class="page-title" id="tl-title"></div>
+  <div class="page-sub" id="tl-sub"></div>
+  <div class="progress-block">
+    <div class="pb-info">
+      <div class="pb-label">Ma progression</div>
+      <div class="pb-track"><div class="pb-fill" id="pb-fill" style="width:0%"></div></div>
+      <div class="pb-counts" id="pb-counts">0 / 0 · 0%</div>
+      <div class="pb-hint">Vous pouvez cocher votre progression qui sera sauvegardée sur ce navigateur</div>
+    </div>
+    <button class="pb-reset" onclick="resetProgress()">Reset</button>
+  </div>
+  <div class="nb" id="tl-notes"></div>
+  <div id="tl-content"></div>
+</div>
+<script>
+const DATA_DC={
+  id:"dc",
+  title:"DC Multivers",
+  subtitle:"Timeline Optimisée",
+  description:"Elseworlds · Arrowverse · DCEU · DCU",
+  color:"#1e90ff",
+  glow:"rgba(30,144,255,.3)",
+  notes:`JE COMMENCERAIS PAR VOUS PRÉVENIR QUE CE DOSSIER EST UN ÉNORME BORDEL, BIEN QU'AYANT ENLEVÉ BEAUCOUP DE MÉDIAS, REGARDER TOUT LE RESTE NÉCESSITE BEAUCOUP BEAUCOUP DE TEMPS, SI VOUS ÊTES LÀ SEULEMENT POUR VOIR LE ARROW-VERSE, LE DCEU OU LE DCU VOUS POUVEZ CHOISIR DE LE FAIRE EN MASQUANT LES AUTRES COLONNES<br><br>
+
+<strong>QUESTION LÉGITIME : EN QUOI TOUT CE BORDEL EST RELIÉ ?</strong><br><br>
+
+CET ORDRE PRIVILÉGIE LA DÉCOUVERTE PROGRESSIVE DU MULTIVERS DC. PLUSIEURS SÉRIES ET FILMS SE DÉROULENT DANS DES RÉALITÉS DIFFÉRENTES MAIS FINISSENT PAR PARTAGER DES LIENS. REGARDER LES ŒUVRES DANS CET ORDRE PERMET DE MIEUX COMPRENDRE LES PERSONNAGES, LES RÉFÉRENCES ET LES ÉVÉNEMENTS QUI CONNECTENT CES UNIVERS, TOUT EN PRÉSERVANT LES SURPRISES MAJEURES.<br><br>
+
+IL MANQUE DES CHOSES MAIS ELLES NE SONT <strong>PAS DU TOUT</strong> IMPORTANTES POUR LA COMPRÉHENSION DE LA CHRONOLOGIE DU MULTIVERS ET DES ÉVÉNEMENTS IMPORTANTS (<strong>TOUS LES MÉDIAS SORTIS AVANT 1989, LES SÉRIES FLASH (1990), LOÏS &amp; CLARK, LUCIFER, KRYPTON, PENNYWORTH, WONDER WOMAN (1976), SWAMP-THING, DOOM PATROL, POWERLESS, LES ANGES DE LA NUIT, LE FILM CONSTANTINE (2005), LE FILM ET LA SÉRIE WATCHMEN, LES 2 FILMS JOKER, LE FILM GREEN LANTERN, LE FILM CATWOMAN, PLEIN D'AUTRES FILMS PEU CONNUS, PRESQUE TOUS LES FILMS D'ANIMATION ET DESSINS ANIMÉS, TOUS LES COMICS, TOUS LES JEUX-VIDÉO…</strong>)<br><br>
+
+LES DEUX CHRONOLOGIES PRINCIPALES DE L'UNIVERS SE PASSENT SUR LA <strong>TERRE-PRIME</strong> ET LA <strong>TERRE-1</strong><br><br>
+
+LE TERME <strong>SOFT-CANON</strong> DÉSIGNE UN MÉDIA DONT LES ÉVÉNEMENTS SONT EN PARTIE SURVENUS DE LA MÊME MANIÈRE, PLUS D'INFOS DANS LES DESCRIPTIONS<br><br>
+
+LE MULTIVERS DC FONCTIONNE D'UNE MANIÈRE PARTICULIÈRE, DEUX PERSONNAGES DIFFÉRENTS PEUVENT AVOIR EXACTEMENT LA MÊME TÊTE (EXEMPLES : LE PÈRE DE FLASH (2014) ET FLASH (1990), SUPERGIRL (1984) ET LA MÈRE DE SUPERMAN (SMALLVILLE) MAIS AUSSI LA MÈRE ADOPTIVE DE SUPERGIRL (2015))<br><br>
+
+CERTAINS ÉVÉNEMENTS SONT MIEUX À VOIR EN TANT QUE <strong>FLASHBACK</strong> POUR COMPRENDRE ET SONT DONC INDIQUÉS COMME TEL<br><br>
+
+<strong>TYPES :</strong> FILM / SÉRIE / SÉRIE ANIMÉE / VIDÉO<br>
+<strong>NIVEAUX :</strong> 🚨 = IMPORTANT<br>
+<strong>UNIVERS :</strong> ELSEWORLDS / ARROW-VERSE / DCEU / DCU`,
+  columns:[
+    {
+      id:"elseworlds",
+      label:"Elseworlds",
+      color:"#c084fc",
+      glow:"rgba(192,132,252,.25)",
+      sections:[
+        {
+          label:"Origines de Superman",
+          entries:[
+            {id:"dc-smallville",type:"serie",tmdb:"1078",media:"tv",img:"images/smallville.webp",title:"Smallville",date:"2000–2010",dim:"TERRE-167",subitems:["Saison 1","Saison 2","Saison 3","Saison 4","Saison 5","Saison 6","Saison 7","Saison 8","Saison 9","Saison 10"]},
+            {id:"dc-supermanreturns",type:"film",tmdb:"1452",media:"movie",img:"images/supermanreturns.webp",title:"Superman Returns",date:"2006",dim:"TERRE-96",important:true},
+            {id:"dc-supermanlois",type:"serie",tmdb:"95057",media:"tv",img:"images/supermanlois.webp",title:"Superman et Loïs",date:"2021–2024",dim:"TERRE-TUD25",subitems:["Saison 1","Saison 2","Saison 3","Saison 4"]}
+          ]
+        },
+        {
+          label:"Origines de Batman",
+          entries:[
+            {id:"dc-batman89",type:"film",tmdb:"268",media:"movie",img:"images/batman89.webp",title:"Batman",date:"1989",dim:"TERRE-89",important:true},
+            {id:"dc-batmanreturns",type:"film",tmdb:"364",media:"movie",img:"images/batman89.webp",title:"Batman : Le Défi",date:"1992",dim:"TERRE-89",important:true},
+            {id:"dc-batmanbegins",type:"film",tmdb:"272",media:"movie",img:"images/batmanbegins.webp",title:"Batman Begins",date:"2005",dim:"TERRE-TDK"},
+            {id:"dc-tdk",type:"film",tmdb:"155",media:"movie",img:"images/tdk.webp",title:"The Dark Knight",date:"2008",dim:"TERRE-TDK"},
+            {id:"dc-tdkr",type:"film",tmdb:"49026",media:"movie",img:"images/tdk.webp",title:"The Dark Knight Rises",date:"2012",dim:"TERRE-TDK"},
+            {id:"dc-gotham",type:"serie",tmdb:"60708",media:"tv",img:"images/gotham.webp",title:"Gotham",date:"???",dim:"TERRE-2014",subitems:["Saison 1","Saison 2","Saison 3","Saison 4","Saison 5"]},
+            {id:"dc-thebatman",type:"film",tmdb:"414906",media:"movie",img:"images/thebatman.webp",title:"The Batman",date:"2022",dim:"TERRE-TB",important:true},
+            {id:"dc-thepenguin",type:"serie",tmdb:"119051",media:"tv",img:"images/thebatman.webp",title:"The Penguin",date:"2022",dim:"TERRE-TB",subitems:["Saison 1"]}
+          ]
+        },
+        {
+          label:"Autres",
+          entries:[
+            {id:"dc-titans-s1",type:"serie",tmdb:"73793",media:"tv",img:"images/titans.webp",title:"Titans",date:"2018",dim:"TERRE-9",subitems:["Saison 1"]},
+            {id:"dc-titans-s2",type:"serie",tmdb:"73793",media:"tv",img:"images/titans.webp",title:"Titans",date:"2019",dim:"TERRE-9",subitems:["Saison 2"]},
+            {id:"dc-stargirl-s1",type:"serie",tmdb:"89247",media:"tv",img:"images/stargirl.webp",title:"Stargirl",date:"2020",dim:"TERRE-2",subitems:["Saison 1"]},
+            {id:"dc-stargirl-s2",type:"serie",tmdb:"89247",media:"tv",img:"images/stargirl.webp",title:"Stargirl",date:"2021",dim:"TERRE-2",subitems:["Saison 2"]},
+            {id:"dc-stargirl-s3",type:"serie",tmdb:"89247",media:"tv",img:"images/stargirl.webp",title:"Stargirl",date:"2021",dim:"TERRE-2",subitems:["Saison 3"]},
+            {id:"dc-titans-s3",type:"serie",tmdb:"73793",media:"tv",img:"images/titans.webp",title:"Titans",date:"2021",dim:"TERRE-9",subitems:["Saison 3"]},
+            {id:"dc-titans-s4",type:"serie",tmdb:"73793",media:"tv",img:"images/titans.webp",title:"Titans",date:"2021",dim:"TERRE-9",subitems:["Saison 4"]}
+          ]
+        }
+      ]
+    },
+    {
+      id:"arrowverse",
+      label:"Arrowverse",
+      color:"#22c55e",
+      glow:"rgba(34,197,94,.25)",
+      sections:[{label:"",entries:[
+        {id:"av-arrow-s12",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2012–2014",dim:"TERRE-PRIME",important:true,subitems:["Saison 1","Saison 2"]},
+        {id:"av-arrow-s3e1-3",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2014",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisodes 1-3"]},
+        {id:"av-flash-s1e1-4",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2014",dim:"TERRE-PRIME",important:true,subitems:["Saison 1 épisodes 1-4"]},
+        {id:"av-arrow-s3e4",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2014",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisode 4"]},
+        {id:"av-flash-s1e5",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2014",dim:"TERRE-PRIME",important:true,subitems:["Saison 1 épisode 5"]},
+        {id:"av-arrow-s3e5",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2014",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisode 5"]},
+        {id:"av-flash-s1e6-7",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2014",dim:"TERRE-PRIME",important:true,subitems:["Saison 1 épisodes 6-7"]},
+        {id:"av-arrow-s3e6-7",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2014",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisodes 6-7"]},
+        {id:"av-flash-s1e8",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2014",dim:"TERRE-PRIME",important:true,subitems:["Saison 1 épisode 8"]},
+        {id:"av-arrow-s3e8",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2014",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisode 8"]},
+        {id:"av-flash-s1e9-23",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2014–2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 1 épisodes 9-23"]},
+        {id:"av-arrow-s3e9-23",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2014–2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisodes 9-23"]},
+        {id:"av-constantine",type:"serie",tmdb:"61811",media:"tv",img:"images/constantine.webp",title:"Constantine",date:"2014",dim:"TERRE-PRIME",subitems:["Saison 1"]},
+        {id:"av-arrow-s4e1",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisode 1"]},
+        {id:"av-flash-s2e1-4",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 2 épisodes 1-4"]},
+        {id:"av-arrow-s4e2-4",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisodes 2-4"]},
+        {id:"av-sg-s1e1-4",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2015",dim:"TERRE-38",important:true,subitems:["Saison 1 épisodes 1-4"]},
+        {id:"av-arrow-s4e5",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisode 5"]},
+        {id:"av-flash-s2e5-6",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 2 épisodes 5-6"]},
+        {id:"av-sg-s1e5-7",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2015",dim:"TERRE-38",important:true,subitems:["Saison 1 épisodes 5-7"]},
+        {id:"av-arrow-s4e6",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisode 6"]},
+        {id:"av-flash-s2e7",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 2 épisode 7"]},
+        {id:"av-sg-s1e8-9",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2015",dim:"TERRE-38",important:true,subitems:["Saison 1 épisodes 8-9"]},
+        {id:"av-arrow-s4e7",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisode 7"]},
+        {id:"av-flash-s2e8",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 2 épisode 8"]},
+        {id:"av-arrow-s4e8",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2015",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisode 8"]},
+        {id:"av-sg-s1e10-11",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2015–2016",dim:"TERRE-38",important:true,subitems:["Saison 1 épisodes 10-11"]},
+        {id:"av-arrow-s4e9-10",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2015–2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisodes 9-10"]},
+        {id:"av-flash-s2e9-10",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2015–2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 2 épisodes 9-10"]},
+        {id:"av-sg-s1e12-17",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2015–2016",dim:"TERRE-38",important:true,subitems:["Saison 1 épisodes 12-17"]},
+        {id:"av-arrow-s4e11-17",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2015–2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisodes 11-17"]},
+        {id:"av-flash-s2e11-18",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2015–2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 2 épisodes 11-18"]},
+        {id:"av-sg-s1e18",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2015–2016",dim:"TERRE-38",important:true,subitems:["Saison 1 épisode 18"]},
+        {id:"av-arrow-s4e18-23",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisodes 18-23"]},
+        {id:"av-flash-s2e19-23",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 2 épisodes 19-23"]},
+        {id:"av-sg-s1e19-20",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2016",dim:"TERRE-38",important:true,subitems:["Saison 1 épisodes 19-20"]},
+        {id:"av-lot-s1",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 1"]},
+        {id:"av-sg-s2e1-7",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2016",dim:"TERRE-38",important:true,subitems:["Saison 2 épisodes 1-7"]},
+        {id:"av-flash-s3e1-7",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisodes 1-7"]},
+        {id:"av-arrow-s5e1-7",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 5 épisodes 1-7"]},
+        {id:"av-lot-s2e1-6",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 2 épisodes 1-6"]},
+        {id:"av-bl-s1e1-6",type:"serie",tmdb:"75219",media:"tv",img:"images/blacklightning.webp",title:"Black Lightning",date:"2016",dim:"TERRE-TUD5",subitems:["Saison 1 épisodes 1-6"]},
+        {id:"av-sg-s2e8",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2016",dim:"TERRE-38",important:true,subitems:["Saison 2 épisode 8"]},
+        {id:"av-flash-s3e8",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisode 8"]},
+        {id:"av-arrow-s5e8",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 5 épisode 8"]},
+        {id:"av-lot-s2e7",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2016",dim:"TERRE-PRIME",important:true,subitems:["Saison 2 épisode 7"]},
+        {id:"av-sg-s2e9-22",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2016–2017",dim:"TERRE-38",important:true,subitems:["Saison 2 épisodes 9-22"]},
+        {id:"av-flash-s3e9-23",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2016–2017",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisodes 9-23"]},
+        {id:"av-arrow-s5e9-23",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2016–2017",dim:"TERRE-PRIME",important:true,subitems:["Saison 5 épisodes 9-23"]},
+        {id:"av-lot-s2e8-17",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2016–2017",dim:"TERRE-PRIME",important:true,subitems:["Saison 2 épisodes 8-17"]},
+        {id:"av-bl-s1e7-13",type:"serie",tmdb:"75219",media:"tv",img:"images/blacklightning.webp",title:"Black Lightning",date:"2016–2017",dim:"TERRE-TUD5",subitems:["Saison 1 épisodes 7-13"]},
+        {id:"av-sg-s3e1-7",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2017",dim:"TERRE-38",important:true,subitems:["Saison 3 épisodes 1-7"]},
+        {id:"av-flash-s4e1-7",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2017",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisodes 1-7"]},
+        {id:"av-arrow-s6e1-7",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2017",dim:"TERRE-PRIME",important:true,subitems:["Saison 6 épisodes 1-7"]},
+        {id:"av-lot-s3e1-7",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2017",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisodes 1-7"]},
+        {id:"av-bl-s2e1-7",type:"serie",tmdb:"75219",media:"tv",img:"images/blacklightning.webp",title:"Black Lightning",date:"2017",dim:"TERRE-TUD5",subitems:["Saison 2 épisodes 1-7"]},
+        {id:"av-sg-s3e8",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2017",dim:"TERRE-38",important:true,subitems:["Saison 3 épisode 8"]},
+        {id:"av-flash-s4e8",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2017",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisode 8"]},
+        {id:"av-arrow-s6e8",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2017",dim:"TERRE-PRIME",important:true,subitems:["Saison 6 épisode 8"]},
+        {id:"av-lot-s3e8",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2017",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisode 8"]},
+        {id:"av-sg-s3e9-23",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2017–2018",dim:"TERRE-38",important:true,subitems:["Saison 3 épisodes 9-23"]},
+        {id:"av-flash-s4e9-23",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2017–2018",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisodes 9-23"]},
+        {id:"av-arrow-s6e9-23",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2017–2018",dim:"TERRE-PRIME",important:true,subitems:["Saison 6 épisodes 9-23"]},
+        {id:"av-lot-s3e9-18",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2017–2018",dim:"TERRE-PRIME",important:true,subitems:["Saison 3 épisodes 9-18"]},
+        {id:"av-bl-s2e8-16",type:"serie",tmdb:"75219",media:"tv",img:"images/blacklightning.webp",title:"Black Lightning",date:"2017–2018",dim:"TERRE-TUD5",subitems:["Saison 2 épisodes 8-16"]},
+        {id:"av-sg-s4e1-8",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2018",dim:"TERRE-38",important:true,subitems:["Saison 4 épisodes 1-8"]},
+        {id:"av-flash-s5e1-7",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2018",dim:"TERRE-PRIME",important:true,subitems:["Saison 5 épisodes 1-7"]},
+        {id:"av-arrow-s7e1-8",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2018",dim:"TERRE-PRIME",important:true,subitems:["Saison 7 épisodes 1-8"]},
+        {id:"av-lot-s4e1-7",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2018",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisodes 1-7"]},
+        {id:"av-bl-s3e1-7",type:"serie",tmdb:"75219",media:"tv",img:"images/blacklightning.webp",title:"Black Lightning",date:"2018",dim:"TERRE-TUD5",subitems:["Saison 3 épisodes 1-7"]},
+        {id:"av-bw-s1e1-4",type:"serie",tmdb:"89247",media:"tv",img:"images/batwoman.webp",title:"Batwoman",date:"2018",dim:"TERRE-PRIME",important:true,subitems:["Saison 1 épisodes 1-4"]},
+        {id:"av-flash-s5e8-9",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2018",dim:"TERRE-PRIME",important:true,subitems:["Saison 5 épisodes 8-9"]},
+        {id:"av-arrow-s7e9",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2018",dim:"TERRE-PRIME",important:true,subitems:["Saison 7 épisode 9"]},
+        {id:"av-sg-s4e9-22",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2018",dim:"TERRE-38",important:true,subitems:["Saison 4 épisodes 9-22"]},
+        {id:"av-flash-s5e10-22",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2018–2019",dim:"TERRE-PRIME",important:true,subitems:["Saison 5 épisodes 10-22"]},
+        {id:"av-arrow-s7e10-22",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2018–2019",dim:"TERRE-PRIME",important:true,subitems:["Saison 7 épisodes 10-22"]},
+        {id:"av-lot-s4e8-16",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2018–2019",dim:"TERRE-PRIME",important:true,subitems:["Saison 4 épisodes 8-16"]},
+        {id:"av-bl-s3e8",type:"serie",tmdb:"75219",media:"tv",img:"images/blacklightning.webp",title:"Black Lightning",date:"2018–2019",dim:"TERRE-TUD5",subitems:["Saison 3 épisode 8"]},
+        {id:"av-sg-s5e1-8",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2019",dim:"TERRE-38",important:true,subitems:["Saison 5 épisodes 1-8"]},
+        {id:"av-bw-s1e5-8",type:"serie",tmdb:"89247",media:"tv",img:"images/batwoman.webp",title:"Batwoman",date:"2019",dim:"TERRE-PRIME",important:true,subitems:["Saison 1 épisodes 5-8"]},
+        {id:"av-flash-s6e1-8",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2019",dim:"TERRE-PRIME",important:true,subitems:["Saison 6 épisodes 1-8"]},
+        {id:"av-arrow-s8e1-7",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2019",dim:"TERRE-PRIME",important:true,subitems:["Saison 8 épisodes 1-7"]},
+        {id:"av-bl-s3e9",type:"serie",tmdb:"75219",media:"tv",img:"images/blacklightning.webp",title:"Black Lightning",date:"2019",dim:"TERRE-TUD5",subitems:["Saison 3 épisode 9"]},
+        {id:"av-sg-s5e9",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2019",dim:"TERRE-38",important:true,subitems:["Saison 5 épisode 9"]},
+        {id:"av-bw-s1e9",type:"serie",tmdb:"89247",media:"tv",img:"images/batwoman.webp",title:"Batwoman",date:"2019",dim:"TERRE-PRIME",important:true,subitems:["Saison 1 épisode 9"]},
+        {id:"av-flash-s6e9",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2019",dim:"TERRE-PRIME",important:true,subitems:["Saison 6 épisode 9"]},
+        {id:"av-arrow-s8e8",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2019",dim:"TERRE-PRIME",important:true,subitems:["Saison 8 épisode 8"]},
+        {id:"av-lot-s5e1",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2019",dim:"TERRE-PRIME",important:true,subitems:["Saison 5 épisode 1"]},
+        {id:"av-bl-s3e10-16",type:"serie",tmdb:"75219",media:"tv",img:"images/blacklightning.webp",title:"Black Lightning",date:"2019–2020",dim:"TERRE-PRIME",subitems:["Saison 3 épisodes 10-16"]},
+        {id:"av-crisis",type:"crossover",tmdb:"0",media:"tv",img:"images/crisis.webp",title:"Crisis on Infinite Earths",date:"2019–2020",dim:"TERRE-PRIME",important:true,crossover:true},
+        {id:"av-sg-s5e10-19",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2019–2020",dim:"TERRE-PRIME",important:true,subitems:["Saison 5 épisodes 10-19"]},
+        {id:"av-bw-s1e10-20",type:"serie",tmdb:"89247",media:"tv",img:"images/batwoman.webp",title:"Batwoman",date:"2019–2020",dim:"TERRE-PRIME",important:true,subitems:["Saison 1 épisodes 10-20"]},
+        {id:"av-flash-s6e10-19",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2019–2020",dim:"TERRE-PRIME",important:true,subitems:["Saison 6 épisodes 10-19"]},
+        {id:"av-arrow-s8e9-10",type:"serie",tmdb:"1412",media:"tv",img:"images/arrow.webp",title:"Arrow",date:"2019–2020",dim:"TERRE-PRIME",important:true,subitems:["Saison 8 épisodes 9-10"]},
+        {id:"av-lot-s5e2-15",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2019–2020",dim:"TERRE-PRIME",important:true,subitems:["Saison 5 épisodes 2-15"]},
+        {id:"av-sg-s6",type:"serie",tmdb:"62688",media:"tv",img:"images/supergirl.webp",title:"Supergirl",date:"2020–2021",dim:"TERRE-PRIME",important:true,subitems:["Saison 6"]},
+        {id:"av-bw-s2",type:"serie",tmdb:"89247",media:"tv",img:"images/batwoman.webp",title:"Batwoman",date:"2020–2021",dim:"TERRE-PRIME",important:true,subitems:["Saison 2"]},
+        {id:"av-flash-s7",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2020–2021",dim:"TERRE-PRIME",important:true,subitems:["Saison 7"]},
+        {id:"av-lot-s6",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2020–2021",dim:"TERRE-PRIME",important:true,subitems:["Saison 6"]},
+        {id:"av-bl-s4",type:"serie",tmdb:"75219",media:"tv",img:"images/blacklightning.webp",title:"Black Lightning",date:"2020–2021",dim:"TERRE-PRIME",subitems:["Saison 4"]},
+        {id:"av-bw-s3",type:"serie",tmdb:"89247",media:"tv",img:"images/batwoman.webp",title:"Batwoman",date:"2021",dim:"TERRE-PRIME",important:true,subitems:["Saison 3"]},
+        {id:"av-flash-s8e1-5",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2021",dim:"TERRE-PRIME",important:true,subitems:["Saison 8 épisodes 1-5"]},
+        {id:"av-lot-s7",type:"serie",tmdb:"62643",media:"tv",img:"images/legendsoftomorrow.webp",title:"Legends of Tomorrow",date:"2021–2022",dim:"TERRE-PRIME",important:true,subitems:["Saison 7"]},
+        {id:"av-flash-s8e6-20",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2021–2022",dim:"TERRE-PRIME",important:true,subitems:["Saison 8 épisodes 6-20"]},
+        {id:"av-flash-s9",type:"serie",tmdb:"60735",media:"tv",img:"images/flash.webp",title:"The Flash",date:"2023",dim:"TERRE-PRIME",important:true,subitems:["Saison 9"]}
+      ]}]
+    },
+    {
+      id:"dceu",
+      label:"DCEU",
+      color:"#3b82f6",
+      glow:"rgba(59,130,246,.25)",
+      sections:[{label:"",entries:[
+        {id:"dceu-mos",type:"film",tmdb:"49521",media:"movie",img:"images/manofsteel.webp",title:"Man of Steel",date:"2013",dim:"TERRE-1",important:true},
+        {id:"dceu-bvs",type:"film",tmdb:"209112",media:"movie",img:"images/bvs.webp",title:"Batman V Superman : l'Aube de la Justice",date:"2015",dim:"TERRE-1",important:true,note:"Version Ultimate Edition !!!"},
+        {id:"dceu-ww",type:"film",tmdb:"297762",media:"movie",img:"images/wonderwoman.webp",title:"Wonder Woman",date:"1918",dim:"TERRE-1",important:true,tags:["flashback"]},
+        {id:"dceu-ww84",type:"film",tmdb:"464052",media:"movie",img:"images/ww84.webp",title:"Wonder Woman 1984",date:"1984",dim:"TERRE-1",tags:["flashback"]},
+        {id:"dceu-ss",type:"film",tmdb:"297802",media:"movie",img:"images/suicidesquad.webp",title:"Suicide Squad",date:"2016",dim:"TERRE-1",important:true},
+        {id:"dceu-jl",type:"film",tmdb:"791373",media:"movie",img:"images/justiceleague.webp",title:"Zack Snyder's Justice League",date:"2017",dim:"TERRE-1",important:true},
+        {id:"dceu-aquaman",type:"film",tmdb:"297802",media:"movie",img:"images/aquaman.webp",title:"Aquaman",date:"2017–2018",dim:"TERRE-1",important:true},
+        {id:"dceu-shazam",type:"film",tmdb:"287947",media:"movie",img:"images/shazam.webp",title:"Shazam!",date:"2018",dim:"TERRE-1"},
+        {id:"dceu-bop",type:"film",tmdb:"495764",media:"movie",img:"images/birdsofprey.webp",title:"Birds of Prey",date:"2020",dim:"TERRE-1",important:true},
+        {id:"dceu-tss",type:"film",tmdb:"436969",media:"movie",img:"images/thesuicidesquad.webp",title:"The Suicide Squad",date:"2020–2021",dim:"TERRE-1",important:true},
+        {id:"dceu-peacemaker",type:"serie",tmdb:"114472",media:"tv",img:"images/peacemaker.webp",title:"Peacemaker",date:"2021",dim:"TERRE-1",important:true,subitems:["Saison 1"]},
+        {id:"dceu-blackadam",type:"film",tmdb:"736073",media:"movie",img:"images/blackadam.webp",title:"Black Adam",date:"2021",dim:"TERRE-1",important:true},
+        {id:"dceu-shazam2",type:"film",tmdb:"594767",media:"movie",img:"images/shazam.webp",title:"Shazam 2 : La Rage des Dieux",date:"2022",dim:"TERRE-1"},
+        {id:"dceu-aquaman2",type:"film",tmdb:"572802",media:"movie",img:"images/aquaman.webp",title:"Aquaman et le Royaume Perdu",date:"2022",dim:"TERRE-1",important:true},
+        {id:"dceu-bluebeetle",type:"film",tmdb:"567811",media:"movie",img:"images/bluebeetle.webp",title:"Blue Beetle",date:"2023",dim:"TERRE-1"},
+        {id:"dceu-theflash",type:"film",tmdb:"298618",media:"movie",img:"images/dceuflash.webp",title:"The Flash",date:"2023",dim:"TERRE-1",important:true,note:"Pont DCEU → DCU"}
+      ]}]
+    },
+    {
+      id:"dcu",
+      label:"DCU",
+      color:"#f97316",
+      glow:"rgba(249,115,22,.25)",
+      sections:[{label:"",entries:[
+        {id:"dcu-cc",type:"serie",tmdb:"246063",media:"tv",img:"images/creaturecommandos.webp",title:"Creature Commandos",date:"2016",dim:"TERRE-1",subitems:["Saison 1"]},
+        {id:"dcu-superman",type:"film",tmdb:"986056",media:"movie",img:"images/supermandcu.webp",title:"Superman",date:"2025",dim:"TERRE-1",important:true},
+        {id:"dcu-peacemaker2",type:"serie",tmdb:"114472",media:"tv",img:"images/peacemaker.webp",title:"Peacemaker",date:"2025",dim:"TERRE-1",important:true,subitems:["Saison 2"]},
+        
+        
+        
+        
+        
+      ]}]
+    }
+  ]
+};
+
+const TMDB_KEY='6257b37bf29ab31357853fce00232314';
+const IMG='https://image.tmdb.org/t/p/';
+const BADGES={
+  film:['bf','FILM'],serie:['bs','SÉRIE'],crossover:['bcx','CROSSOVER']
+};
+
+// Couleurs par série pour l'Arrowverse
+const AV_COLORS={
+  'Arrow':        {bg:'rgba(0,200,80,.15)',  border:'rgba(0,200,80,.4)',  dot:'#00c850'},
+  'The Flash':    {bg:'rgba(255,200,0,.12)', border:'rgba(255,200,0,.4)', dot:'#ffc800'},
+  'Supergirl':    {bg:'rgba(120,80,255,.12)',border:'rgba(120,80,255,.4)',dot:'#7850ff'},
+  'Legends of Tomorrow':{bg:'rgba(255,100,0,.12)',border:'rgba(255,100,0,.4)',dot:'#ff6400'},
+  'Batwoman':     {bg:'rgba(255,40,80,.12)', border:'rgba(255,40,80,.4)', dot:'#ff2850'},
+  'Black Lightning':{bg:'rgba(80,180,255,.1)',border:'rgba(80,180,255,.3)',dot:'#50b4ff'},
+  'Constantine':  {bg:'rgba(160,120,255,.1)',border:'rgba(160,120,255,.3)',dot:'#a078ff'},
+  'Crisis on Infinite Earths':{bg:'rgba(255,220,0,.15)',border:'rgba(255,220,0,.5)',dot:'#ffdc00'},
+};
+
+let colVisible={elseworlds:true,arrowverse:true,dceu:true,dcu:true};
+let currentData=null;
+const posterCache={},detailCache={};
+
+function getProgress(uid){try{return JSON.parse(localStorage.getItem('cg_'+uid)||'{}')}catch{return{}}}
+function saveProgress(uid,obj){localStorage.setItem('cg_'+uid,JSON.stringify(obj))}
+
+function toggleEntry(id,ev){
+  ev.stopPropagation();
+  if(!currentData)return;
+  const prog=getProgress(currentData.id);
+  prog[id]?delete prog[id]:(prog[id]=1);
+  saveProgress(currentData.id,prog);
+  renderProgress();
+}
+function resetProgress(){
+  if(!currentData||!confirm('Réinitialiser ta progression ?'))return;
+  localStorage.removeItem('cg_'+currentData.id);
+  renderProgress();
+}
+function renderProgress(){
+  if(!currentData)return;
+  const prog=getProgress(currentData.id);
+  let total=0,done=0;
+  currentData.columns.forEach(col=>
+    col.sections.forEach(sec=>
+      sec.entries.forEach(e=>{
+        total++;
+        const el=document.querySelector('.en[data-id="'+e.id+'"]');
+        if(!el)return;
+        const checked=!!prog[e.id];
+        el.classList.toggle('done',checked);
+        const cm=el.querySelector('.checkmark');
+        if(cm)cm.textContent=checked?'✓':'';
+        if(checked)done++;
+      })
+    )
+  );
+  const pct=total?Math.round(done/total*100):0;
+  const grad='linear-gradient(90deg,var(--accent),var(--accent2))';
+  const pb=document.getElementById('pb-fill');
+  if(pb)pb.style.cssText='width:'+pct+'%;background:'+grad;
+  const pc=document.getElementById('pb-counts');
+  if(pc)pc.innerHTML='<strong>'+done+'</strong> / '+total+' vus · <strong>'+pct+'%</strong>';
+}
+
+async function toggleExpand(el,ev){
+  if(ev.target.closest('.en-check'))return;
+  const wasOpen=el.classList.contains('open');
+  document.querySelectorAll('.en.open').forEach(x=>x.classList.remove('open'));
+  if(wasOpen)return;
+  el.classList.add('open');
+  const panel=el.querySelector('.en-expand');
+  if(panel.dataset.loaded)return;
+  panel.dataset.loaded='1';
+
+  // Trouver l'entrée dans les données
+  let entryObj=null;
+  currentData.columns.forEach(col=>col.sections.forEach(sec=>
+    sec.entries.forEach(e=>{ if(e.id===el.dataset.id)entryObj=e; })
+  ));
+  const mediaName=entryObj?entryObj.title:'ce média';
+
+  const id=el.dataset.tmdb,media=el.dataset.media;
+  if(!id||id==='0'){
+    panel.innerHTML='<div class="expand-no-data">Pas d\'informations TMDB disponibles.</div>';
+    return;
+  }
+  panel.innerHTML='<div class="expand-loading">Chargement…</div>';
+  const type=media==='movie'?'movie':'tv';
+  const k=type+id;
+  let d=detailCache[k];
+  if(!d){
+    try{
+      const rFr=await fetch('https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+TMDB_KEY+'&language=fr-FR&append_to_response=videos');
+      d=await rFr.json();
+      if(!d.videos?.results?.find(v=>v.type==='Trailer'&&v.site==='YouTube')){
+        const rEn=await fetch('https://api.themoviedb.org/3/'+type+'/'+id+'/videos?api_key='+TMDB_KEY+'&language=en-US');
+        const enV=await rEn.json();
+        if(enV.results)d.videos={results:[...((d.videos?.results)||[]),...enV.results]};
+      }
+      detailCache[k]=d;
+    }catch{panel.innerHTML='<div class="expand-loading">Erreur de chargement.</div>';return}
+  }
+  const synopsis=d.overview||'Pas de synopsis disponible.';
+  const runtime=d.runtime?(d.runtime+' min'):(d.episode_run_time?.[0]?(d.episode_run_time[0]+' min/ép'):null);
+  const genres=(d.genres||[]).map(g=>g.name).join(', ')||null;
+  const year=(d.release_date||d.first_air_date||'').substring(0,4)||null;
+  const rating=d.vote_average?d.vote_average.toFixed(1):null;
+  const poster=d.poster_path?IMG+'w300'+d.poster_path:null;
+  const trailer=(d.videos?.results||[]).find(v=>v.type==='Trailer'&&v.site==='YouTube');
+  const ytUrl=trailer?'https://www.youtube.com/watch?v='+trailer.key:null;
+  let meta='';
+  if(year)meta+='<span><strong>Année</strong> '+year+'</span>';
+  if(runtime)meta+='<span><strong>Durée</strong> '+runtime+'</span>';
+  if(genres)meta+='<span><strong>Genre</strong> '+genres+'</span>';
+  if(rating)meta+='<span><strong>Note</strong> ⭐ '+rating+'/10</span>';
+  if(entryObj?.dim)meta+='<span><strong>Univers</strong> '+entryObj.dim+'</span>';
+  panel.innerHTML='<div class="expand-inner">'
+    +(poster?'<div class="expand-poster"><img src="'+poster+'" loading="lazy"/></div>':'')
+    +'<div class="expand-info"><div class="expand-synopsis">'+synopsis+'</div>'
+    +(meta?'<div class="expand-meta">'+meta+'</div>':'')
+    +(ytUrl?'<a class="expand-trailer-link" href="'+ytUrl+'" target="_blank" rel="noopener">▶ Bande-annonce YouTube</a>':'')
+    +'</div></div>';
+}
+
+function openPMurl(url){const pm=document.getElementById('pm');const pmi=document.getElementById('pmi');if(pm&&pmi){pmi.src=url;pm.classList.add('o')}}
+function closePM(){document.getElementById('pm')?.classList.remove('o')}
+
+function buildEntry(e,colId){
+  const prog=getProgress(currentData.id);
+  const isDone=!!prog[e.id];
+  const isImportant=!!e.important;
+  const isSoftCanon=!!e.softcanon;
+  const isCrossover=!!e.crossover;
+
+  // Couleur de l'entrée
+  let bgColor,borderColor;
+  const colDef=currentData.columns.find(c=>c.id===colId);
+  if(colId==='arrowverse'){
+    const c=AV_COLORS[e.title]||{bg:'rgba(34,197,94,.1)',border:'rgba(34,197,94,.3)'};
+    bgColor=c.bg; borderColor=c.border;
+  } else {
+    const col=currentData.columns.find(c=>c.id===colId);
+    const r=col?.color||'#fff';
+    bgColor=r.replace('#','rgba(').replace(/([0-9a-f]{2})/gi,(_,h)=>parseInt(h,16)+',').replace(',','').replace(/,$/,', .1)');
+    // Simplifié
+    bgColor=`rgba(${parseInt(col?.color?.slice(1,3)||'ff',16)},${parseInt(col?.color?.slice(3,5)||'ff',16)},${parseInt(col?.color?.slice(5,7)||'ff',16)},.1)`;
+    borderColor=`rgba(${parseInt(col?.color?.slice(1,3)||'ff',16)},${parseInt(col?.color?.slice(3,5)||'ff',16)},${parseInt(col?.color?.slice(5,7)||'ff',16)},.3)`;
+  }
+  if(isSoftCanon){bgColor='rgba(150,150,180,.08)';borderColor='rgba(150,150,180,.25)'}
+  if(isCrossover){bgColor='rgba(255,215,0,.12)';borderColor='rgba(255,215,0,.5)'}
+
+  const dimBadge=e.dim?`<span class="dim-badge">${e.dim}</span>`:'';
+  const flashBadge=e.tags?.includes('flashback')?'<span class="ft">FLASHBACK</span>':'';
+  const importBadge=isImportant?'<span class="imp-badge">🚨</span>':'';
+  const softBadge=isSoftCanon?'<span class="soft-badge">SOFT-CANON</span>':'';
+  const noteTxt=e.note?`<div class="enote">${e.note}</div>`:'';
+  const subTxt=e.subitems?.length?`<div class="esub">${e.subitems.map(s=>`<div class="si">${s}</div>`).join('')}</div>`:'';
+
+  return `<div class="en${isDone?' done':''}" data-id="${e.id}" data-tmdb="${e.tmdb||'0'}" data-media="${e.media||'tv'}"
+    style="background:${bgColor};border:1px solid ${borderColor}"
+    onclick="toggleExpand(this,event)">
+    <div class="en-top" onclick="toggleExpand(this.closest('.en'),event)">
+      <div class="en-check" onclick="toggleEntry('${e.id}',event)"><div class="checkmark">${isDone?'✓':''}</div></div>
+      <div class="en-datebadge"><div class="date-main">${e.date||'—'}</div>${dimBadge}</div>
+      <div class="em">
+        <div class="tr">${flashBadge}${importBadge}${softBadge}<span class="en-name">${e.title}</span></div>
+        ${noteTxt}${subTxt}
+      </div>
+    </div>
+    <div class="en-expand" onclick="event.stopPropagation()"></div>
+  </div>`;
+}
+
+function toggleColumn(colId){
+  colVisible[colId]=!colVisible[colId];
+  const btn=document.querySelector(`.col-toggle[data-col="${colId}"]`);
+  if(btn)btn.classList.toggle('inactive',!colVisible[colId]);
+  const colEl=document.querySelector(`.dc-col[data-col="${colId}"]`);
+  const headEl=document.querySelector(`.dc-col-head[data-col="${colId}"]`);
+  if(colEl)colEl.style.display=colVisible[colId]?'':'none';
+  if(headEl)headEl.style.display=colVisible[colId]?'':'none';
+  // Rebalancer les colonnes visibles
+  const visCount=Object.values(colVisible).filter(Boolean).length;
+  document.querySelectorAll('.dc-col,.dc-col-head').forEach(el=>{
+    if(el.style.display!=='none')el.style.flex=`1`;
+  });
+}
+
+function buildDCTimeline(data){
+  document.documentElement.style.setProperty('--tl-color',data.color||'#1e90ff');
+  const container=document.getElementById('tl-content');
+
+  // Header colonnes avec boutons toggle
+  let headerHtml='<div class="dc-header">';
+  data.columns.forEach(col=>{
+    headerHtml+=`<div class="dc-col-head" data-col="${col.id}" style="border-top:2px solid ${col.color};color:${col.color}">
+      <span>${col.label}</span>
+      <button class="col-toggle active" data-col="${col.id}" onclick="toggleColumn('${col.id}')" title="Masquer/Afficher">⊙</button>
+    </div>`;
+  });
+  headerHtml+='</div>';
+
+  // Corps des colonnes
+  let bodyHtml='<div class="dc-body">';
+  data.columns.forEach(col=>{
+    bodyHtml+=`<div class="dc-col" data-col="${col.id}">`;
+    col.sections.forEach(sec=>{
+      if(sec.label){
+        bodyHtml+=`<div class="dc-section-label" style="color:${col.color}">${sec.label}</div>`;
+      }
+      sec.entries.forEach(e=>{
+        // Crossover : pleine largeur marqué spécialement
+        if(e.crossover){
+          bodyHtml+=`<div class="dc-crossover-marker" style="border-color:gold;color:gold">
+            ⚡ ${e.title} — ${e.date}
+          </div>`;
+        } else {
+          bodyHtml+=buildEntry(e,col.id);
+        }
+      });
+    });
+    bodyHtml+='</div>';
+  });
+  bodyHtml+='</div>';
+
+  container.innerHTML=headerHtml+bodyHtml;
+  renderProgress();
+}
+
+function applyFilters(){
+  // Pas de filtres de niveaux sur DC, juste les colonnes
+}
+
+function showHome(){window.location.href='index.html';}
+
+function showUniverse(uid){
+  if(uid!=='dc')return;
+  currentData=DATA_DC;
+  const el=id=>document.getElementById(id);
+  if(el('tl-title')){
+    el('tl-title').textContent=currentData.title+' — '+currentData.subtitle;
+    el('tl-title').style.color=currentData.color;
+    el('tl-title').style.textShadow='0 0 40px '+(currentData.glow||'transparent');
+  }
+  if(el('tl-sub'))el('tl-sub').textContent=currentData.description;
+  if(el('tl-notes'))el('tl-notes').innerHTML=currentData.notes;
+  if(el('pb-fill'))el('pb-fill').style.background='linear-gradient(90deg,'+currentData.color+',var(--accent2))';
+  buildDCTimeline(currentData);
+  window.scrollTo(0,0);
+}
+
+showUniverse('dc');
+
+</script>
+</body>
+</html>
