@@ -112,6 +112,9 @@ nav{max-width:100%;display:flex;align-items:center;gap:1.5rem;height:62px}
 .en.done{opacity:.5}
 .en.imp{border-left:3px solid rgba(255,165,0,.6)}
 .en-top{display:flex;align-items:flex-start;gap:.45rem;padding:.55rem .6rem;cursor:pointer}
+.en-datebadge{display:flex;flex-direction:column;gap:2px;flex-shrink:0;min-width:52px}
+.en-level-icon{font-size:.72rem;min-height:12px}
+.date-main{font-size:.68rem;color:var(--muted2);white-space:nowrap}
 .en-check{width:18px;height:18px;flex-shrink:0;border:1px solid var(--border2);border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:1px;transition:background .15s}
 .en-check:hover{border-color:var(--accent)}
 .en.done .en-check{background:var(--accent);border-color:var(--accent)}
@@ -221,11 +224,15 @@ nav{max-width:100%;display:flex;align-items:center;gap:1.5rem;height:62px}
     <button class="pb-reset" onclick="resetProgress()">Reset</button>
   </div>
 
-  <div class="nb">Je commencerai par vous prévenir que ce dossier est un <strong>énorme bordel</strong>. Regarder tout le contenu nécessite beaucoup beaucoup de temps.<br><br>
-  Ce guide est divisé en <strong>3 grandes zones</strong> que vous pouvez ouvrir et fermer. La première est optionnelle et peut être lue quand vous voulez. La deuxième est le cœur du guide. La troisième arrive après un événement majeur qui connecte tous les univers.<br><br>
-  Les deux chronologies principales se passent sur la <strong>Terre-Prime</strong> (Arrowverse) et la <strong>Terre-1</strong> (DCEU/DCU). Il manque des choses non importantes : séries et films pré-1989, Constantine (2005), Watchmen, les 2 Joker, Green Lantern, Catwoman, l'animation, les comics et jeux-vidéo.</div>
+  <div class="nb" id="tl-notes"></div>
 
   <div class="filter-row">
+    <span style="font-size:.7rem;color:var(--muted)">Univers :</span>
+    <button class="fbt active" data-zone="elseworlds" onclick="toggleZoneFilter(this)" style="border-color:var(--c-else);color:var(--c-else)">Elseworlds</button>
+    <button class="fbt active" data-zone="arrowverse" onclick="toggleZoneFilter(this)" style="border-color:var(--c-av);color:var(--c-av)">Arrowverse</button>
+    <button class="fbt active" data-zone="dceu" onclick="toggleZoneFilter(this)" style="border-color:var(--c-dceu);color:var(--c-dceu)">DCEU</button>
+    <button class="fbt active" data-zone="dcu" onclick="toggleZoneFilter(this)" style="border-color:var(--c-dcu);color:var(--c-dcu)">DCU</button>
+    <span style="width:1px;height:16px;background:var(--border2);margin:0 .3rem;flex-shrink:0"></span>
     <span style="font-size:.7rem;color:var(--muted)">Niveaux :</span>
     <button class="fbt active" id="fbt-imp" onclick="this.classList.toggle('active');applyFilters()">🚨 Important</button>
     <button class="fbt active" id="fbt-bonus" onclick="this.classList.toggle('active');applyFilters()">Bonus</button>
@@ -236,8 +243,8 @@ nav{max-width:100%;display:flex;align-items:center;gap:1.5rem;height:62px}
     <div class="zone-head" onclick="toggleZone('z-optional')">
       <div class="zone-icon">🌐</div>
       <div class="zone-label-wrap">
-        <div class="zone-name">Origines &amp; Elseworlds — Optionnel</div>
-        <div class="zone-desc">Des histoires indépendantes dans des univers parallèles. Aucun crossover avec le reste. Regardez quand vous voulez, avant, pendant ou après.</div>
+        <div class="zone-name">Origines &amp; Elseworlds</div>
+        <div class="zone-desc">Des histoires dans des univers parallèles. Certains ont des connexions avec les autres colonnes. Regardez quand vous voulez, avant ou pendant les autres zones.</div>
       </div>
       <div class="zone-toggle" id="toggle-z-optional">▼</div>
     </div>
@@ -253,13 +260,8 @@ nav{max-width:100%;display:flex;align-items:center;gap:1.5rem;height:62px}
         </div>
         <div class="zcol zcol-else">
           <div class="zcol-head">Origines de Batman</div>
-          <div class="zcol-hint">Univers totalement indépendants — aucune connexion avec le reste</div>
+          <div class="zcol-hint">Univers parallèles — certains ont des connexions avec les autres colonnes</div>
           <div id="col-batman"></div>
-        </div>
-        <div class="zcol zcol-else">
-          <div class="zcol-head">Gotham</div>
-          <div class="zcol-hint">Série indépendante — aucune connexion avec le reste</div>
-          <div id="col-gotham"></div>
         </div>
       </div>
     </div>
@@ -281,7 +283,7 @@ nav{max-width:100%;display:flex;align-items:center;gap:1.5rem;height:62px}
       <span class="zbadge zbadge-else">Titans · Stargirl</span>
     </div>
     <div class="zone-body open" id="z-pre">
-      <div class="zone-grid zg-3">
+      <div class="zone-grid zg-2">
         <div class="zcol zcol-av">
           <div class="zcol-head">Arrowverse</div>
           <div class="zcol-hint">Lisez dans l'ordre — ces séries s'entrelacent épisode par épisode</div>
@@ -292,11 +294,7 @@ nav{max-width:100%;display:flex;align-items:center;gap:1.5rem;height:62px}
           <div class="zcol-hint">Univers indépendant de l'Arrowverse — lisez quand vous voulez, certains persos apparaissent dans l'événement</div>
           <div id="col-dceu-pre"></div>
         </div>
-        <div class="zcol zcol-else">
-          <div class="zcol-head">Titans &amp; Stargirl</div>
-          <div class="zcol-hint">Univers parallèles dont les persos participent à l'événement — lisez avant l'événement</div>
-          <div id="col-titans-pre"></div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -376,18 +374,18 @@ const AV_C={'Arrow':'#00c850','The Flash':'#ffc800','Supergirl':'#a78bfa','Legen
 // ── DONNÉES ──────────────────────────────────────────
 const DATA={
   superman:[
-    {id:'dc-smallville',type:'serie',level:'bonus',tmdb:'1078',media:'tv',title:'Smallville',date:'2000–2010',dim:'TERRE-167',subitems:['Saison 1','Saison 2','Saison 3','Saison 4','Saison 5','Saison 6','Saison 7','Saison 8','Saison 9','Saison 10']},
-    {id:'dc-supermanreturns',type:'film',level:'bonus',tmdb:'1452',media:'movie',title:'Superman Returns',date:'2006',dim:'TERRE-96'},
+    {id:'dc-smallville',type:'serie',level:'imp',tmdb:'1078',media:'tv',title:'Smallville',date:'2000–2010',dim:'TERRE-167',subitems:['Saison 1','Saison 2','Saison 3','Saison 4','Saison 5','Saison 6','Saison 7','Saison 8','Saison 9','Saison 10']},
+    {id:'dc-supermanreturns',type:'film',level:'imp',tmdb:'1452',media:'movie',title:'Superman Returns',date:'2006',dim:'TERRE-96'},
   ],
   batman:[
-    {id:'dc-batman89',type:'film',level:'bonus',tmdb:'268',media:'movie',title:'Batman',date:'1989',dim:'TERRE-89'},
-    {id:'dc-batmanreturns',type:'film',level:'bonus',tmdb:'364',media:'movie',title:'Batman : Le Défi',date:'1992',dim:'TERRE-89'},
+    {id:'dc-batman89',type:'film',level:'imp',tmdb:'268',media:'movie',title:'Batman',date:'1989',dim:'TERRE-89'},
+    {id:'dc-batmanreturns',type:'film',level:'imp',tmdb:'364',media:'movie',title:'Batman : Le Défi',date:'1992',dim:'TERRE-89'},
     {id:'dc-batmanbegins',type:'film',level:'bonus',tmdb:'272',media:'movie',title:'Batman Begins',date:'2005',dim:'TERRE-TDK'},
     {id:'dc-tdk',type:'film',level:'bonus',tmdb:'155',media:'movie',title:'The Dark Knight',date:'2008',dim:'TERRE-TDK'},
     {id:'dc-tdkr',type:'film',level:'bonus',tmdb:'49026',media:'movie',title:'The Dark Knight Rises',date:'2012',dim:'TERRE-TDK'},
-  ],
-  gotham:[
     {id:'dc-gotham',type:'serie',level:'bonus',tmdb:'60708',media:'tv',title:'Gotham',date:'???',dim:'TERRE-2014',subitems:['Saison 1','Saison 2','Saison 3','Saison 4','Saison 5']},
+    {id:'dc-titans-s1',type:'serie',level:'bonus',tmdb:'73793',media:'tv',title:'Titans',date:'2018',dim:'TERRE-9',subitems:['Saison 1']},
+    {id:'dc-titans-s2',type:'serie',level:'bonus',tmdb:'73793',media:'tv',title:'Titans',date:'2019',dim:'TERRE-9',subitems:['Saison 2']},
   ],
   av_pre:[
     {id:'av-arrow-s12',type:'serie',level:'imp',tmdb:'1412',media:'tv',title:'Arrow',date:'2012–2014',dim:'TERRE-PRIME',subitems:['Saison 1','Saison 2']},
@@ -464,10 +462,7 @@ const DATA={
     {id:'dceu-shazam',type:'film',level:'bonus',tmdb:'287947',media:'movie',title:'Shazam!',date:'2018',dim:'TERRE-1'},
     {id:'dceu-bop',type:'film',level:'imp',tmdb:'495764',media:'movie',title:'Birds of Prey',date:'2020',dim:'TERRE-1'},
   ],
-  titans_pre:[
-    {id:'dc-titans-s1',type:'serie',level:'bonus',tmdb:'73793',media:'tv',title:'Titans',date:'2018',dim:'TERRE-9',subitems:['Saison 1']},
-    {id:'dc-titans-s2',type:'serie',level:'bonus',tmdb:'73793',media:'tv',title:'Titans',date:'2019',dim:'TERRE-9',subitems:['Saison 2']},
-  ],
+
   av_post:[
     {id:'av-sg-s5e10-19',type:'serie',level:'imp',tmdb:'62688',media:'tv',title:'Supergirl',date:'2019–2020',dim:'TERRE-PRIME',subitems:['Saison 5 ép. 10-19']},
     {id:'av-bw-s1e10-20',type:'serie',level:'imp',tmdb:'89247',media:'tv',title:'Batwoman',date:'2019–2020',dim:'TERRE-PRIME',subitems:['Saison 1 ép. 10-20']},
@@ -482,8 +477,6 @@ const DATA={
     {id:'av-flash-s9',type:'serie',level:'imp',tmdb:'60735',media:'tv',title:'The Flash',date:'2023',dim:'TERRE-PRIME',subitems:['Saison 9 (finale)']},
   ],
   dceu_post:[
-    {id:'dceu-tss',type:'film',level:'imp',tmdb:'436969',media:'movie',title:'The Suicide Squad',date:'2021',dim:'TERRE-1'},
-    {id:'dceu-peacemaker',type:'serie',level:'imp',tmdb:'114472',media:'tv',title:'Peacemaker',date:'2021',dim:'TERRE-1',subitems:['Saison 1']},
     {id:'dceu-blackadam',type:'film',level:'imp',tmdb:'736073',media:'movie',title:'Black Adam',date:'2021',dim:'TERRE-1'},
     {id:'dceu-shazam2',type:'film',level:'bonus',tmdb:'594767',media:'movie',title:'Shazam 2',date:'2022',dim:'TERRE-1'},
     {id:'dceu-aquaman2',type:'film',level:'imp',tmdb:'572802',media:'movie',title:'Aquaman et le Royaume Perdu',date:'2022',dim:'TERRE-1'},
@@ -500,6 +493,8 @@ const DATA={
     {id:'dc-supermanlois',type:'serie',level:'bonus',tmdb:'95057',media:'tv',title:'Superman et Loïs',date:'2021–2024',dim:'TERRE-TUD25',subitems:['Saison 1','Saison 2','Saison 3','Saison 4 (finale)']},
   ],
   dcu:[
+    {id:'dceu-tss',type:'film',level:'imp',tmdb:'436969',media:'movie',title:'The Suicide Squad',date:'2020–2021',dim:'TERRE-1',note:'Soft-canon DCU — ces événements ont eu lieu dans une forme similaire dans le DCU'},
+    {id:'dceu-peacemaker',type:'serie',level:'imp',tmdb:'114472',media:'tv',title:'Peacemaker',date:'2021',dim:'TERRE-1',note:'Soft-canon DCU — Peacemaker S2 est canonique DCU',subitems:['Saison 1']},
     {id:'dcu-cc',type:'serie',level:'bonus',tmdb:'246063',media:'tv',title:'Creature Commandos',date:'2024',dim:'TERRE-1',subitems:['Saison 1']},
     {id:'dcu-superman',type:'film',level:'imp',tmdb:'986056',media:'movie',title:'Superman',date:'2025',dim:'TERRE-1'},
     {id:'dcu-peacemaker2',type:'serie',level:'imp',tmdb:'114472',media:'tv',title:'Peacemaker',date:'2025',dim:'TERRE-1',subitems:['Saison 2']},
@@ -556,17 +551,17 @@ function buildEntry(e,borderColor){
   return `<div class="en${isDone?' done':''}${e.level==='imp'?' imp':''}" data-id="${e.id}" data-type="${e.type}" data-level="${e.level}" data-tmdb="${e.tmdb||'0'}" data-media="${e.media||'tv'}" style="${bc}">
   <div class="en-top" onclick="toggleExpand(this.closest('.en'),event)">
     <div class="en-check" onclick="toggleEntry('${e.id}',event)"><span class="checkmark">${isDone?'✓':''}</span></div>
+    <div class="en-datebadge">
+      <div class="en-level-icon">${e.level==='imp'?'🚨':''}</div>
+      <div class="date-main">${e.date||'—'}</div>
+      ${e.dim?'<div class="dim-badge">'+e.dim+'</div>':''}
+    </div>
     <div class="ep"><div class="pp">${e.type==='film'?'🎬':'📺'}</div><img alt="" loading="lazy"/></div>
     <div class="em">
       <div class="tr">
         ${isFB?'<span class="ft">FLASHBACK</span>':''}
-        ${e.level==='imp'?'<span style="font-size:.65rem">🚨</span>':''}
         <span class="b ${e.type==='film'?'bf':'bs'}">${e.type==='film'?'FILM':'SÉRIE'}</span>
         <span class="en-name">${e.title}</span>
-      </div>
-      <div style="display:flex;gap:.3rem;flex-wrap:wrap;align-items:center">
-        <span class="en-date">${e.date||'—'}</span>
-        ${e.dim?'<span class="dim-badge">'+e.dim+'</span>':''}
       </div>
     </div>
   </div>
@@ -677,13 +672,41 @@ function applyThumb(el,src){
   if(img&&!img.classList.contains('ldd')){img.src=src;img.onload=()=>{img.classList.add('ldd');if(pp)pp.style.display='none'}}
 }
 
+// Filtres univers
+function toggleZoneFilter(btn){
+  btn.classList.toggle('active');
+  const zone=btn.dataset.zone;
+  const visible=btn.classList.contains('active');
+  // Elseworlds = zone-optional
+  if(zone==='elseworlds'){
+    const z=document.querySelector('.zone-optional');
+    if(z)z.style.display=visible?'':'none';
+  }
+  // Arrowverse = col-av-pre et col-av-post
+  if(zone==='arrowverse'){
+    document.querySelectorAll('#col-av-pre .en,#col-av-post .en').forEach(el=>el.style.display=visible?'':'none');
+    document.querySelectorAll('#col-av-pre,#col-av-post').forEach(el=>{
+      el.closest('.zcol').style.display=visible?'':'none';
+    });
+  }
+  // DCEU
+  if(zone==='dceu'){
+    document.querySelectorAll('#col-dceu-pre,#col-dceu-post').forEach(el=>{
+      el.closest('.zcol').style.display=visible?'':'none';
+    });
+  }
+  // DCU
+  if(zone==='dcu'){
+    const el=document.getElementById('col-dcu');
+    if(el)el.closest('.zcol').style.display=visible?'':'none';
+  }
+}
+
 // INIT
 render('col-superman',DATA.superman,'var(--c-else)');
 render('col-batman',DATA.batman,'var(--c-else)');
-render('col-gotham',DATA.gotham,'var(--c-else)');
 render('col-av-pre',DATA.av_pre,null); // couleur par série via AV_C ci-dessous
 render('col-dceu-pre',DATA.dceu_pre,'var(--c-dceu)');
-render('col-titans-pre',DATA.titans_pre,'var(--c-else)');
 render('col-av-post',DATA.av_post,null);
 render('col-dceu-post',DATA.dceu_post,'var(--c-dceu)');
 render('col-else-post',DATA.else_post,'var(--c-else)');
